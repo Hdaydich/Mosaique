@@ -97,6 +97,51 @@ export function Reading() {
         </Col>
       </Row>
 
+            {isMobile && (
+        <Row>
+          <Col xs={12} lg={6} className="d-flex justify-content-center">
+            <Row
+              className="w-100 justify-content-center"
+              style={{ paddingTop: "10px" }}
+            >
+              <Col xs={3}>
+                <Chakel
+                  name="الفَتْحَة"
+                  color="#ff0073"
+                  img={fatha}
+                  size="12px"
+                />
+              </Col>
+              <Col xs={3}>
+                <Chakel
+                  name="الكَسْرَة"
+                  color="#009bee"
+                  img={kasra}
+                  size="12px"
+                />
+              </Col>
+              <Col xs={3}>
+                <Chakel
+                  name="الضَمَّة"
+                  color="#04cf1f"
+                  img={dhamma}
+                  size="12px"
+                />
+              </Col>
+              <Col xs={3}>
+                <Chakel
+                  name="السُّكُون"
+                  color="#962dc0"
+                  img={soukoun}
+                  size="12px"
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      )}
+
+
       {/* Zone principale */}
       <Row className="justify-content-center">
         <Col xs={12} lg={7} className="text-center">
@@ -144,3 +189,4 @@ export function Reading() {
     </Container>
   );
 }
+
