@@ -147,7 +147,7 @@
   }
   .outputDiv {
     width: 100%;
-    margin: 20px auto;
+    margin: 0px auto;
   max-height: 100%;
   
     height: auto;          /* <-- prend la taille du texte */
