@@ -3,14 +3,37 @@
   background-color: #ffffff;
   max-height: 100vh;
 }
+  .ChakelContainer {
+    padding-right: 30px;
+    padding-top: 30px;
 
+  }
 .textContainer {
   background-color: #a5f3fca1;
   border-radius: 20px;
   margin:0px;
   padding: 20px;
 }
-/* Animation container */
+
+/* Ligne principale quand le texte est saisi et textarea disparu */
+.outputFullRow {
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.outputFull {
+  width: 100%;
+  min-height: 60vh; /* la div prend presque toute la page */
+  transition: all 0.5s ease;
+}
+
+/* Ligne principale avant texte */
+.inputRow {
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
 .rowContainer {
   display: flex;
   justify-content: center; /* textarea centré par défaut */
@@ -76,7 +99,17 @@
   transform: translateY(-10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+.emptyTextarea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh; /* prends au moins 60% de la fenêtre */
+  transition: all 0.5s ease;
+}
 
+.rowContainer.withOutput {
+  justify-content: flex-start; /* textarea glisse à gauche */
+}
 .outputDiv.show {
   opacity: 1;
   transform: translateY(0);
