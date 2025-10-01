@@ -2,7 +2,7 @@ import { Card, CardImg, CardSubtitle, CardTitle } from "react-bootstrap";
 import s from "./style.module.css";
 import * as Icon from "react-bootstrap-icons";
 
-export function Chakel({ name, color, img, size }) {
+export function Chakel({ name, color, img }) {
   return (
     <Card className={`${s.CardContainer} border-0`}>
       <CardImg variant="bottom" src={img} fluid></CardImg>
@@ -14,7 +14,7 @@ export function Chakel({ name, color, img, size }) {
           textAlign: "center",
           margin: "0px",
           marginTop: "10px",
-          fontSize: size,
+          fontSize: "19px",
         }}
       >
         {name}
@@ -26,3 +26,4 @@ export function Chakel({ name, color, img, size }) {
     </Card>
   );
 }
+
