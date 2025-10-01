@@ -10,12 +10,15 @@ import soukoun from "../../assets/skoun.png";
 import fatha from "../../assets/fatha.png";
 import s from "./style.module.css";
 import { Logo } from "../../components/Logo/Logo";
+import stories from "../../data/stories";
 
 export function Reading() {
   const [inputText, setInputText] = useState("");
   const [coloredSegments, setColoredSegments] = useState([]);
   const [finished, setFinished] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [carouselStart, setCarouselStart] = useState(0);
+  const cardsPerPage = 5;
 
   const textareaRef = useRef(null);
   const outputRef = useRef(null);
@@ -30,7 +33,7 @@ export function Reading() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Ajuste dynamique de la hauteur
+  // Hauteur automatique textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -39,6 +42,7 @@ export function Reading() {
     }
   }, [inputText]);
 
+  // Hauteur automatique outputDiv
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.style.height = "auto";
@@ -46,19 +50,40 @@ export function Reading() {
     }
   }, [coloredSegments]);
 
+  const chakels = [
+    { name: "الفَتْحَة", color: "#ff0073", img: fatha },
+    { name: "الكَسْرَة", color: "#009bee", img: kasra },
+    { name: "الضَمَّة", color: "#04cf1f", img: dhamma },
+    { name: "السُّكُون", color: "#962dc0", img: soukoun },
+  ];
+
   const reset = () => {
     setInputText("");
     setFinished(false);
   };
 
+  const handleCarouselNext = () => {
+    if (carouselStart + cardsPerPage < stories.length)
+      setCarouselStart(carouselStart + 1);
+  };
+  const handleCarouselPrev = () => {
+    if (carouselStart > 0) setCarouselStart(carouselStart - 1);
+  };
+
+  const visibleStories = stories.slice(
+    carouselStart,
+    carouselStart + cardsPerPage
+  );
+
   return (
     <Container fluid>
-      {/* Header logo + chakl */}
+      {/* Header: Logo + Carousel */}
       <Row
-        className="align-items-center justify-content-center"
-        style={{ marginBottom: "20px", height: "150px" }}
+        className="align-items-center justify-content-center mb-3"
+        style={{ height: isMobile ? "auto" : "150px" }}
       >
-        <Col xs={12} lg={6} className="text-center text-lg-start">
+        {/* Logo */}
+        <Col xs={12} lg={2} className="text-center text-lg-start">
           <Logo
             subtitle="Chaque enfant, une pièce unique"
             width={110}
@@ -67,32 +92,45 @@ export function Reading() {
             marg="0px"
           />
         </Col>
-        {!isMobile && (
-          <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row
-              className="w-100 justify-content-center"
-              style={{ paddingTop: "10px" }}
-            >
-              <Col xs={3}>
-                <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
-              </Col>
-            </Row>
-          </Col>
-        )}
+
+        {/* Carousel */}
+        <Col xs={12} lg={10} className={s.carouselWrapper}>
+          <div
+            className={`${s.carouselArrow} ${s.left}`}
+            onClick={handleCarouselPrev}
+          >
+            <Icon.ChevronLeft />
+          </div>
+          <div
+            className={`${s.carouselArrow} ${s.right}`}
+            onClick={handleCarouselNext}
+          >
+            <Icon.ChevronRight />
+          </div>
+
+          <div className={s.carouselAutoContainer}>
+            <div className={s.carouselAutoTrack}>
+              {visibleStories.map((story, idx) => (
+                <div
+                  key={idx}
+                  className={s.carouselCard}
+                  onClick={() => {
+                    setInputText(story.text);
+                    setFinished(true);
+                  }}
+                >
+                  <div className={s.carouselIcon}>{story.icon}</div>
+                  <div className={s.carouselTitle}>{story.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Col>
       </Row>
 
       {/* Titre */}
       <Row className="justify-content-center">
-        <Col className="text-center">
+        <Col lg={7} className="text-center">
           <h5
             style={{
               display: "flex",
@@ -113,49 +151,28 @@ export function Reading() {
         </Col>
       </Row>
 
-      {isMobile && (
-        <Row>
-          <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row
-              className="w-100 justify-content-center"
-              style={{ paddingTop: "10px" }}
-            >
-              <Col xs={3}>
-                <Chakel
-                  name="الفَتْحَة"
-                  color="#ff0073"
-                  img={fatha}
-                  size="12px"
-                />
-              </Col>
-              <Col xs={3}>
-                <Chakel
-                  name="الكَسْرَة"
-                  color="#009bee"
-                  img={kasra}
-                  size="12px"
-                />
-              </Col>
-              <Col xs={3}>
-                <Chakel
-                  name="الضَمَّة"
-                  color="#04cf1f"
-                  img={dhamma}
-                  size="12px"
-                />
-              </Col>
-              <Col xs={3}>
-                <Chakel
-                  name="السُّكُون"
-                  color="#962dc0"
-                  img={soukoun}
-                  size="12px"
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      )}
+      {/* Row Chakels */}
+      <Row className="justify-content-center mb-3">
+        <Col
+          xs={12}
+          className="d-flex align-items-center justify-content-center"
+          style={{
+            overflowX: isMobile ? "auto" : "visible",
+            gap: "15px",
+            padding: "10px",
+          }}
+        >
+          {chakels.map((c) => (
+            <Chakel
+              key={c.name}
+              name={c.name}
+              color={c.color}
+              img={c.img}
+              size={isMobile ? "14px" : "20px"}
+            />
+          ))}
+        </Col>
+      </Row>
 
       {/* Zone principale */}
       <Row className="justify-content-center">
@@ -175,7 +192,7 @@ export function Reading() {
             <div>
               <div
                 ref={outputRef}
-                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill  mt-3 ${s.show}`}
+                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill mt-3 ${s.show}`}
                 contentEditable={false}
               >
                 {coloredSegments.length > 0 ? coloredSegments : "أدخل نص هنا"}
@@ -184,7 +201,10 @@ export function Reading() {
           )}
 
           {finished && (
-            <div className="mt-1 d-flex justify-content-center">
+            <div
+              className="mt-2 d-flex justify-content-center"
+              style={{ gap: "10px" }}
+            >
               <Icon.ArrowCounterclockwise
                 onClick={reset}
                 className={s.downloadIcon}

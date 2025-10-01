@@ -53,24 +53,24 @@
 
 /* Chaque syllabe dans un span */
 .rtl-text span {
-  display: inline;          
-  unicode-bidi: plaintext;  
+  display: inline;
+  unicode-bidi: plaintext;
   white-space: pre-wrap;
 }
 
 /* Textarea */
 .textarea {
   width: 100%;
-  min-height: 100px;
-  font-size: 18px;
-  line-height: 2;
-  padding: 20px;
+  min-height: 100%;
+  font-size: 28px;
+    line-height: 3;
+    padding: 30px;
   border: 2px solid white;
   resize: none;
   background-color: rgb(254 251 244);
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 0 auto;
-  overflow-y: hidden; /* pour scroll automatique géré par JS */
+  overflow-y: hidden; /* pas de scroll auto */
 }
 
 .textarea:focus {
@@ -81,16 +81,16 @@
 
 /* Output div texte coloré */
 .outputDiv {
-  font-size: 32px;
-  line-height: 2;
-  padding: 20px 20px 40px 20px;
+  font-size: 28px;
+    line-height: 3;
+    padding: 30px;
   border: 2px solid white;
   background-color: rgb(254 251 244);
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 0 auto;
   width: 100%;
   min-height: 100px;
-  overflow-y: hidden;
+  overflow-y: hidden; /* pas de scroll */
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -120,6 +120,95 @@
   color: #ff6b81;
 }
 
+/* === Carrousel avec flèches PC === */
+.carouselWrapper {
+  position: relative;
+  width: 100%;/* espace pour les flèches */
+}
+
+.carouselAutoContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.carouselAutoContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselAutoTrack {
+  display: flex;
+  gap: 15px;
+}
+
+.carouselCard {
+  flex: 0 0 calc(20% - 15px);
+  min-width: 120px;
+  max-width: 140px;
+  cursor: pointer;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  padding: 12px;
+  background: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carouselCard:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.carouselIcon {
+  font-size: 38px;
+  margin: 10px 0;
+  transition: transform 0.3s ease;
+}
+
+.carouselCard:hover .carouselIcon {
+  transform: scale(1.15);
+}
+
+.carouselTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Flèches gauche/droite */
+.carouselArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+.carouselArrow:hover {
+  color: #76d6f3;
+  font-size: 18px;
+}
+
+.carouselArrow.left {
+  left: 5px;
+}
+
+.carouselArrow.right {
+  right: 5px;
+}
+
 /* Responsive */
 @media only screen and (max-width: 991px) {
   .ChakelContainer {
@@ -129,13 +218,48 @@
   .textarea,
   .outputDiv {
     font-size: 26px;
-    line-height: 1.6;
-    padding: 15px 15px 30px 15px;
+    line-height: 3;
+    padding: 30px;
     max-height: 80vh;
     overflow-y: auto;
   }
 
   .whitespace {
     display: none;
+  }
+
+  .carouselWrapper {
+    padding: 0; /* pas de place pour les flèches */
+  }
+
+  .carouselArrow {
+    display: none; /* cache les flèches */
+  }
+
+  .carouselCard {
+    flex: 0 0 calc(33% - 10px); /* 3 cartes visibles tablette */
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .carouselCard {
+    flex: 0 0 calc(50% - 10px); /* 2 cartes visibles mobile */
+  }
+  .carouselIcon {
+    font-size: 30px;
+  }
+  .carouselTitle {
+    font-size: 12px;
+  }
+}
+
+/* Masquer le scroll horizontal sur mobile */
+@media only screen and (max-width: 767px) {
+  .d-flex.overflow-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .d-flex.overflow-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
