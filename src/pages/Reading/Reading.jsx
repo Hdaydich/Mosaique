@@ -20,27 +20,25 @@ export function Reading() {
   const textareaRef = useRef(null);
   const outputRef = useRef(null);
 
-  // Mettre à jour les segments colorés
   useEffect(() => {
     setColoredSegments(SegmentColor(inputText));
   }, [inputText]);
 
-  // Détecter la taille de l'écran
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Ajuster la hauteur de la textarea dynamiquement
+  // Ajuste dynamique de la hauteur
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
     }
   }, [inputText]);
 
-  // Ajuster la hauteur de la div output dynamiquement
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.style.height = "auto";
@@ -55,8 +53,11 @@ export function Reading() {
 
   return (
     <Container fluid>
-      {/* Header avec logo + chakls */}
-      <Row className="align-items-center justify-content-center" style={{ marginBottom: "20px", height: "150px" }}>
+      {/* Header logo + chakl */}
+      <Row
+        className="align-items-center justify-content-center"
+        style={{ marginBottom: "20px", height: "150px" }}
+      >
         <Col xs={12} lg={6} className="text-center text-lg-start">
           <Logo
             subtitle="Chaque enfant, une pièce unique"
@@ -68,11 +69,22 @@ export function Reading() {
         </Col>
         {!isMobile && (
           <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row className="w-100 justify-content-center" style={{ paddingTop: "10px" }}>
-              <Col xs={3}><Chakel name="الفَتْحَة" color="#ff0073" img={fatha} /></Col>
-              <Col xs={3}><Chakel name="الكَسْرَة" color="#009bee" img={kasra} /></Col>
-              <Col xs={3}><Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} /></Col>
-              <Col xs={3}><Chakel name="السُّكُون" color="#962dc0" img={soukoun} /></Col>
+            <Row
+              className="w-100 justify-content-center"
+              style={{ paddingTop: "10px" }}
+            >
+              <Col xs={3}>
+                <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
+              </Col>
             </Row>
           </Col>
         )}
@@ -80,7 +92,7 @@ export function Reading() {
 
       {/* Titre */}
       <Row className="justify-content-center">
-        <Col xs={12} lg={8} className="text-center">
+        <Col className="text-center">
           <h5
             style={{
               display: "flex",
@@ -88,16 +100,20 @@ export function Reading() {
               justifyContent: "center",
               gap: "10px",
               color: "#0e0e0eff",
-              padding: "10px 0",
+              padding: "10px",
+              margin: "10px",
+              background: "#a5f3fcce",
+              borderRadius: "20px",
               textTransform: "uppercase",
             }}
           >
-            <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en couleur
+            <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en
+            couleur
           </h5>
         </Col>
       </Row>
 
-            {isMobile && (
+      {isMobile && (
         <Row>
           <Col xs={12} lg={6} className="d-flex justify-content-center">
             <Row
@@ -141,34 +157,25 @@ export function Reading() {
         </Row>
       )}
 
-
       {/* Zone principale */}
       <Row className="justify-content-center">
         <Col xs={12} lg={7} className="text-center">
           {!finished ? (
-            <div className={`${s.textContainer} shadow border-0`}>
-              <textarea
-                ref={textareaRef}
-                className={`${s.textarea} rtl-text shadow border-0 flex-fill`}
-                value={inputText}
-                onChange={(e) => {
-                  setInputText(e.target.value);
-                  if (e.target.value.length > 0) setFinished(true);
-                }}
-                placeholder="اكتب نصًا هنا..."
-              />
-            </div>
+            <textarea
+              ref={textareaRef}
+              className={`${s.textarea} rtl-text shadow border-0 flex-fill mt-3`}
+              value={inputText}
+              onChange={(e) => {
+                setInputText(e.target.value);
+                if (e.target.value.length > 0) setFinished(true);
+              }}
+              placeholder="اكتب نصًا هنا..."
+            />
           ) : (
-            <div className={`${s.textContainer} shadow border-0`}>
-              <Icon.ArrowCounterclockwise
-                onClick={reset}
-                className={s.downloadIcon}
-                style={{ color: "#ff4d4d", marginTop: "-10px" }}
-                title="Réinitialiser"
-              />
+            <div>
               <div
                 ref={outputRef}
-                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill ${s.show}`}
+                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill  mt-3 ${s.show}`}
                 contentEditable={false}
               >
                 {coloredSegments.length > 0 ? coloredSegments : "أدخل نص هنا"}
@@ -177,7 +184,13 @@ export function Reading() {
           )}
 
           {finished && (
-            <div className="mt-3 d-flex justify-content-center">
+            <div className="mt-1 d-flex justify-content-center">
+              <Icon.ArrowCounterclockwise
+                onClick={reset}
+                className={s.downloadIcon}
+                style={{ color: "#ff4d4d" }}
+                title="Réinitialiser"
+              />
               <Icon.ArrowDownCircleFill
                 onClick={() => exportToWord(coloredSegments)}
                 className={s.downloadIcon}
@@ -189,4 +202,3 @@ export function Reading() {
     </Container>
   );
 }
-

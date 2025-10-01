@@ -13,7 +13,6 @@
 
 /* Zone texte (textarea ou output) */
 .textContainer {
-  background-color: #a5f3fca1;
   border-radius: 20px;
   margin: 0;
   padding: 20px;
@@ -30,12 +29,7 @@
 }
 
 .rowContainer.withOutput {
-  justify-content: flex-start; /* textarea glisse à gauche quand output visible */
-}
-
-.textareaCol,
-.outputCol {
-  transition: all 0.5s ease;
+  justify-content: flex-start;
 }
 
 /* Placeholder invisible */
@@ -44,7 +38,7 @@
   color: transparent;
 }
 
-/* Texte arabe (textarea et output) */
+/* Texte arabe */
 .rtl-text {
   font-family: 'Amiri', serif !important;
   direction: rtl;
@@ -52,18 +46,16 @@
   letter-spacing: 0;
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   word-break: break-word;
-
-  -webkit-font-smoothing: antialiased; /* lisse les polices sur iOS */
-  text-rendering: optimizeLegibility;  /* ligatures correctes */
 }
 
-/* Chaque syllabe dans un span, pas chaque lettre */
+/* Chaque syllabe dans un span */
 .rtl-text span {
-  display: inline-block;         /* essentiel pour les ligatures arabes sur mobile */
-  unicode-bidi: plaintext;       /* permet la liaison des lettres */
+  display: inline;          
+  unicode-bidi: plaintext;  
   white-space: pre-wrap;
-  word-break: break-word;
 }
 
 /* Textarea */
@@ -75,13 +67,10 @@
   padding: 20px;
   border: 2px solid white;
   resize: none;
-  scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
   background-color: rgb(254 251 244);
   border-radius: 10px;
   margin: 0 auto;
-  overflow: hidden; /* pour que le height auto fonctionne */
-  box-sizing: border-box;
+  overflow-y: hidden; /* pour scroll automatique géré par JS */
 }
 
 .textarea:focus {
@@ -92,26 +81,17 @@
 
 /* Output div texte coloré */
 .outputDiv {
-  width: 100%;
-  min-height: 100px;
-  height: auto; /* auto pour prendre la hauteur du contenu */
-  font-size: 28px;
+  font-size: 32px;
   line-height: 2;
-  padding: 20px 20px 40px 20px; /* padding-bottom pour dernière ligne */
+  padding: 20px 20px 40px 20px;
   border: 2px solid white;
   background-color: rgb(254 251 244);
   border-radius: 10px;
   margin: 0 auto;
-  flex-grow: 1;
-  overflow-y: visible;
-  word-break: break-word;
-  scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
-
-  opacity: 0;
-  transform: translateY(-10px);
+  width: 100%;
+  min-height: 100px;
+  overflow-y: hidden;
   transition: opacity 0.4s ease, transform 0.4s ease;
-  box-sizing: border-box;
 }
 
 .outputDiv.show {
@@ -140,7 +120,7 @@
   color: #ff6b81;
 }
 
-/* Responsive : mobile */
+/* Responsive */
 @media only screen and (max-width: 991px) {
   .ChakelContainer {
     display: none;
@@ -148,16 +128,11 @@
 
   .textarea,
   .outputDiv {
-    width: 100%;
-    margin: 20px auto;
-    min-height: 80px;
-    height: auto;       /* auto pour que le contenu définisse la hauteur */
-    max-height: 80vh;   /* scroll si texte long */
-    overflow-y: auto;
-    font-size: 20px;
+    font-size: 26px;
     line-height: 1.6;
     padding: 15px 15px 30px 15px;
-    box-sizing: border-box;
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   .whitespace {
