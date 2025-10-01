@@ -37,7 +37,12 @@ export function SpecificLearn() {
   const [level, setLevel] = useState("facile");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // Met à jour isMobile lors du resize
+  // ---- SCROLL EN HAUT AU MONTAGE ----
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
+  // ---- DETECTION MOBILE ----
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
@@ -75,7 +80,7 @@ export function SpecificLearn() {
               </Card.Header>
 
               {!selectedTheme ? (
-                // Affichage des thèmes
+                // ---- AFFICHAGE DES THEMES ----
                 <Card.Body style={{ backgroundColor: "#fefbf4" }}>
                   <Row className="justify-content-center mt-3 mb-3">
                     {themes.map((theme, index) => (
@@ -101,7 +106,7 @@ export function SpecificLearn() {
                   </Row>
                 </Card.Body>
               ) : (
-                // Affichage du jeu
+                // ---- AFFICHAGE DU JEU ----
                 <Card.Body
                   style={{
                     display: "flex",
@@ -109,10 +114,11 @@ export function SpecificLearn() {
                     gap: "10px",
                     alignItems: "flex-start",
                     backgroundColor: "#fefbf4",
-                    position: "relative", // pour les cercles de niveau PC
+                    position: "relative",
+                    minHeight: "400px", // force un espace suffisant
                   }}
                 >
-                  {/* Colonne gauche : bouton retour */}
+                  {/* Bouton retour */}
                   <div
                     style={{
                       flex: "0 0 40px",
@@ -131,7 +137,7 @@ export function SpecificLearn() {
                     </button>
                   </div>
 
-                  {/* Colonne centrale : jeu + niveaux */}
+                  {/* Zone centrale */}
                   <div
                     style={{
                       flex: "1 1 auto",
@@ -142,9 +148,10 @@ export function SpecificLearn() {
                       width: "100%",
                       gap: "10px",
                       position: "relative",
+                      padding: isMobile ? "20px 0" : "0",
                     }}
                   >
-                    {/* Cercles de niveau en haut pour mobile */}
+                    {/* Cercles niveaux pour mobile */}
                     {isMobile && (
                       <div
                         style={{
@@ -179,13 +186,14 @@ export function SpecificLearn() {
                       </div>
                     )}
 
+                    {/* Jeu */}
                     <selectedTheme.component.type
                       {...selectedTheme.component.props}
                       level={level}
                       isMobile={isMobile}
                     />
 
-                    {/* Cercles de niveau à droite pour PC */}
+                    {/* Cercles niveaux pour PC */}
                     {!isMobile && (
                       <div
                         style={{
