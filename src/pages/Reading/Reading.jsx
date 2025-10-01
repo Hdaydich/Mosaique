@@ -25,7 +25,7 @@ export function Reading() {
     setColoredSegments(SegmentColor(inputText));
   }, [inputText]);
 
-  // Listener pour resize
+  // Listener resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -56,44 +56,60 @@ export function Reading() {
     setFinished(false);
   };
 
+  const outputStyle = {
+    marginTop: finished ? (isMobile ? "160px" : "0px") : "0px",
+  };
+
   return (
     <Container fluid>
       {/* Header avec logo + chakls */}
-      <Row
-        className="align-items-center justify-content-center"
-        style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
-      >
-        <Col xs={12} lg={6} className="text-center text-lg-start">
-          <Logo
-            subtitle="Chaque enfant, une pièce unique"
-            width={110}
-            police={8}
-            align="left"
-            marg="0px"
-          />
-        </Col>
-        <Col xs={12} lg={6} className="d-flex justify-content-center">
-          <Row
-            className="w-100 justify-content-center"
-            style={{
-              marginTop: finished ? (isMobile ? "140px" : "20px") : "0px",
-            }}
-          >
-            <Col xs={3}>
-              <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
-            </Col>
-            <Col xs={3}>
-              <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
-            </Col>
-            <Col xs={3}>
-              <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
-            </Col>
-            <Col xs={3}>
-              <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      {!isMobile ? (
+        <Row
+          className="align-items-center justify-content-center"
+          style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
+        >
+          <Col xs={12} lg={6} className="text-center text-lg-start">
+            <Logo
+              subtitle="Chaque enfant, une pièce unique"
+              width={110}
+              police={8}
+              align="left"
+              marg="0px"
+            />
+          </Col>
+          <Col xs={12} lg={6} className="d-flex justify-content-center">
+            <Row className="w-100 justify-content-center" style={{}}>
+              <Col xs={3}>
+                <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      ) : (
+        <Row
+          className="align-items-center justify-content-center"
+          style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
+        >
+          <Col xs={12} className="text-center text-lg-start">
+            <Logo
+              subtitle="Chaque enfant, une pièce unique"
+              width={110}
+              police={8}
+              align="left"
+              marg="0px"
+            />
+          </Col>
+        </Row>
+      )}
 
       {/* Titre */}
       <Row className="justify-content-center">
@@ -105,7 +121,8 @@ export function Reading() {
               justifyContent: "center",
               gap: "10px",
               color: "#0e0e0eff",
-              paddingBottom: "20px",
+              paddingBottom: "10px",
+              paddingTop: "10px",
               textTransform: "uppercase",
             }}
           >
@@ -114,6 +131,30 @@ export function Reading() {
           </h5>
         </Col>
       </Row>
+
+      {isMobile && (
+        <Row
+          className="align-items-center justify-content-center"
+          style={{ marginTop: "10px", marginBottom: "10px", height: "130px" }}
+        >
+          <Col xs={12} lg={6} className="d-flex justify-content-center">
+            <Row className="w-100 justify-content-center" style={{}}>
+              <Col xs={3}>
+                <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
+              </Col>
+              <Col xs={3}>
+                <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      )}
 
       {/* Zone principale (textarea ou output) */}
       <Row className="justify-content-center">
@@ -145,9 +186,7 @@ export function Reading() {
           ) : (
             <div
               className={`${s.textContainer} ${s.paddingBottom} shadow border-0`}
-              style={{
-                marginTop: finished ? (isMobile ? "140px" : "20px") : "0px",
-              }}
+              style={outputStyle}
             >
               {/* Bouton reset */}
               <Icon.ArrowCounterclockwise
