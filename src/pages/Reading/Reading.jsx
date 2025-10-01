@@ -15,16 +15,17 @@ export function Reading() {
   const [inputText, setInputText] = useState("");
   const [coloredSegments, setColoredSegments] = useState([]);
   const [finished, setFinished] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
   const textareaRef = useRef(null);
   const outputRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // Met à jour les segments colorés
   useEffect(() => {
     setColoredSegments(SegmentColor(inputText));
   }, [inputText]);
 
-  // Resize listener
+  // Listener pour resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -57,61 +58,42 @@ export function Reading() {
 
   return (
     <Container fluid>
-      {/* Header avec logo + chakel */}
-
-      {!finished ? (
-        <Row
-          className="align-items-center justify-content-center"
-          style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
-        >
-          <Col xs={12} lg={6} className="text-center text-lg-start">
-            <Logo
-              subtitle="Chaque enfant, une pièce unique"
-              width={110}
-              police={8}
-              align="left"
-              marg="0px"
-            />
-          </Col>
-          <Col xs={12} lg={6} className="text-center text-lg-start"></Col>
-        </Row>
-      ) : (
-        <Row
-          className="align-items-center justify-content-center"
-          style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
-        >
-          <Col xs={12} lg={6} className="text-center text-lg-start">
-            <Logo
-              subtitle="Chaque enfant, une pièce unique"
-              width={110}
-              police={8}
-              align="left"
-              marg="0px"
-            />
-          </Col>
-          <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row
-              className="w-100 justify-content-center"
-              style={{
-                marginTop: finished && isMobile ? "120px" : "0px",
-              }}
-            >
-              <Col xs={3}>
-                <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      )}
+      {/* Header avec logo + chakls */}
+      <Row
+        className="align-items-center justify-content-center"
+        style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
+      >
+        <Col xs={12} lg={6} className="text-center text-lg-start">
+          <Logo
+            subtitle="Chaque enfant, une pièce unique"
+            width={110}
+            police={8}
+            align="left"
+            marg="0px"
+          />
+        </Col>
+        <Col xs={12} lg={6} className="d-flex justify-content-center">
+          <Row
+            className="w-100 justify-content-center"
+            style={{
+              marginTop: finished ? (isMobile ? "140px" : "20px") : "0px",
+            }}
+          >
+            <Col xs={3}>
+              <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
+            </Col>
+            <Col xs={3}>
+              <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
+            </Col>
+            <Col xs={3}>
+              <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
+            </Col>
+            <Col xs={3}>
+              <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
       {/* Titre */}
       <Row className="justify-content-center">
@@ -163,8 +145,11 @@ export function Reading() {
           ) : (
             <div
               className={`${s.textContainer} ${s.paddingBottom} shadow border-0`}
-              style={{ marginTop: finished && isMobile ? "140px" : "0px" }}
+              style={{
+                marginTop: finished ? (isMobile ? "140px" : "20px") : "0px",
+              }}
             >
+              {/* Bouton reset */}
               <Icon.ArrowCounterclockwise
                 onClick={reset}
                 className={s.downloadIcon}
