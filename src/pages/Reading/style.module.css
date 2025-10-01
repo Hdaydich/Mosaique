@@ -29,7 +29,7 @@
 }
 
 .rowContainer.withOutput {
-  justify-content: flex-start; /* textarea glisse à gauche quand output visible */
+  justify-content: flex-start;
 }
 
 .textareaCol,
@@ -41,7 +41,6 @@
 .whitespace {
   text-align: center;
   color: transparent;
-  /* text-transform removed for Arabic */
 }
 
 /* Texte arabe (textarea et output) */
@@ -54,11 +53,11 @@
   overflow-wrap: break-word;
 }
 
-/* Assure que les lettres restent attachées même avec des spans colorés */
+/* ⚡ Corrigé : lettres attachées avec ligatures préservées */
 .rtl-text span {
-  unicode-bidi: isolate;
+  display: inline-block;       /* conserve les lettres attachées */
   direction: rtl;
-  display: inline;
+  unicode-bidi: plaintext;     /* clé pour ligatures arabes */
   white-space: pre-wrap;
 }
 
@@ -88,15 +87,19 @@
 .outputDiv {
   font-size: 28px;
   line-height: 2;
-  padding: 20px;
+  padding: 20px 20px 40px 20px; /* padding-bottom augmenté */
   border: 2px solid white;
   background-color: rgb(254 251 244);
   border-radius: 10px;
   margin: 0 auto;
-  height: 400px;
-  overflow-y: auto;
   width: 100%;
   flex-grow: 1;
+
+  /* Hauteur automatique selon le contenu */
+  height: auto;
+  min-height: 100px; /* optionnel */
+  overflow-y: visible;
+
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
 
@@ -142,9 +145,12 @@
   .outputDiv {
     width: 100%;
     margin: 20px auto;
-    max-height: 100%;
-    height: auto;  /* prend la taille du texte */
-    overflow-y: visible;
+    max-height: 80vh;       /* limite la hauteur sur mobile */
+    height: auto;
+    overflow-y: auto;       /* scroll si contenu dépasse */
+    font-size: 20px;        /* réduit la police sur petit écran */
+    line-height: 1.8;       /* réduit l’espacement entre lignes */
+    padding: 15px 15px 30px 15px; /* padding ajusté */
   }
 
   .whitespace {
