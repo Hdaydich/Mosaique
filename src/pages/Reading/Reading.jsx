@@ -25,16 +25,14 @@ export function Reading() {
     setColoredSegments(SegmentColor(inputText));
   }, [inputText]);
 
-  // Listener resize
+  // Détecte le redimensionnement
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Ajuste la hauteur de la textarea automatiquement
+  // Ajuste la hauteur du textarea
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -43,7 +41,7 @@ export function Reading() {
     }
   }, [inputText]);
 
-  // Ajuste la hauteur de la div de sortie
+  // Ajuste la hauteur de l'output
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.style.height = "auto";
@@ -63,20 +61,20 @@ export function Reading() {
   return (
     <Container fluid>
       {/* Header avec logo + chakls */}
-      {!isMobile ? (
-        <Row
-          className="align-items-center justify-content-center"
-          style={{ marginBottom: "20px", height: "150px" }}
-        >
-          <Col xs={12} lg={6} className="text-center text-lg-start">
-            <Logo
-              subtitle="Chaque enfant, une pièce unique"
-              width={110}
-              police={8}
-              align="left"
-              marg="0px"
-            />
-          </Col>
+      <Row
+        className="align-items-center justify-content-center"
+        style={{ marginBottom: "20px", height: "150px" }}
+      >
+        <Col xs={12} lg={6} className="text-center text-lg-start">
+          <Logo
+            subtitle="Chaque enfant, une pièce unique"
+            width={110}
+            police={8}
+            align="left"
+            marg="0px"
+          />
+        </Col>
+        {!isMobile && (
           <Col xs={12} lg={6} className="d-flex justify-content-center">
             <Row
               className="w-100 justify-content-center"
@@ -96,23 +94,8 @@ export function Reading() {
               </Col>
             </Row>
           </Col>
-        </Row>
-      ) : (
-        <Row
-          className="align-items-center justify-content-center"
-          style={{ marginBottom: "20px", height: "150px" }}
-        >
-          <Col xs={12} className="text-center text-lg-start">
-            <Logo
-              subtitle="Chaque enfant, une pièce unique"
-              width={110}
-              police={8}
-              align="left"
-              marg="0px"
-            />
-          </Col>
-        </Row>
-      )}
+        )}
+      </Row>
 
       {/* Titre */}
       <Row className="justify-content-center">
@@ -124,8 +107,7 @@ export function Reading() {
               justifyContent: "center",
               gap: "10px",
               color: "#0e0e0eff",
-              paddingBottom: "10px",
-              paddingTop: "10px",
+              padding: "10px 0",
               textTransform: "uppercase",
             }}
           >
@@ -135,57 +117,11 @@ export function Reading() {
         </Col>
       </Row>
 
-      {isMobile && (
-        <Row
-          className="align-items-center justify-content-center"
-          style={{ marginTop: "10px", marginBottom: "10px", height: "130px" }}
-        >
-          <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row className="w-100 justify-content-center">
-              <Col xs={3}>
-                <Chakel
-                  name="الفَتْحَة"
-                  color="#ff0073"
-                  img={fatha}
-                  size="14px"
-                />
-              </Col>
-              <Col xs={3}>
-                <Chakel
-                  name="الكَسْرَة"
-                  color="#009bee"
-                  img={kasra}
-                  size="14px"
-                />
-              </Col>
-              <Col xs={3}>
-                <Chakel
-                  name="الضَمَّة"
-                  color="#04cf1f"
-                  img={dhamma}
-                  size="14px"
-                />
-              </Col>
-              <Col xs={3}>
-                <Chakel
-                  name="السُّكُون"
-                  color="#962dc0"
-                  img={soukoun}
-                  size="14px"
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      )}
-
-      {/* Zone principale (textarea ou output) */}
+      {/* Zone principale */}
       <Row className="justify-content-center">
         <Col xs={12} lg={7} className="text-center">
           {!finished ? (
-            <div
-              className={`${s.textContainer} ${s.paddingBottom} shadow border-0`}
-            >
+            <div className={`${s.textContainer} shadow border-0`}>
               <textarea
                 ref={textareaRef}
                 className={`${s.textarea} rtl-text shadow border-0 flex-fill`}
@@ -199,10 +135,9 @@ export function Reading() {
             </div>
           ) : (
             <div
-              className={`${s.textContainer} ${s.paddingBottom} shadow border-0`}
+              className={`${s.textContainer} shadow border-0`}
               style={outputStyle}
             >
-              {/* Bouton reset */}
               <Icon.ArrowCounterclockwise
                 onClick={reset}
                 className={s.downloadIcon}
@@ -211,7 +146,7 @@ export function Reading() {
               />
               <div
                 ref={outputRef}
-                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill pb-2 ${s.show}`}
+                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill ${s.show}`}
                 contentEditable={false}
               >
                 {coloredSegments.length > 0 ? coloredSegments : "أدخل نص هنا"}
@@ -219,7 +154,6 @@ export function Reading() {
             </div>
           )}
 
-          {/* Bouton Word */}
           {finished && (
             <div className="mt-3 d-flex justify-content-center">
               <Icon.ArrowDownCircleFill
