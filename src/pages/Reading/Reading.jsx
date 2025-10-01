@@ -66,7 +66,7 @@ export function Reading() {
       {!isMobile ? (
         <Row
           className="align-items-center justify-content-center"
-          style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
+          style={{ marginBottom: "20px", height: "150px" }}
         >
           <Col xs={12} lg={6} className="text-center text-lg-start">
             <Logo
@@ -78,7 +78,10 @@ export function Reading() {
             />
           </Col>
           <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row className="w-100 justify-content-center" style={{}}>
+            <Row
+              className="w-100 justify-content-center"
+              style={{ paddingTop: "10px" }}
+            >
               <Col xs={3}>
                 <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
               </Col>
@@ -97,7 +100,7 @@ export function Reading() {
       ) : (
         <Row
           className="align-items-center justify-content-center"
-          style={{ marginTop: "20px", marginBottom: "30px", height: "150px" }}
+          style={{ marginBottom: "20px", height: "150px" }}
         >
           <Col xs={12} className="text-center text-lg-start">
             <Logo
@@ -180,6 +183,7 @@ export function Reading() {
                   fontFamily: "'Amiri', serif",
                   fontSize: "20px",
                   lineHeight: "2",
+                  letterSpacing: "0", // très important pour éviter les lettres détachées
                 }}
               />
             </div>
@@ -207,6 +211,7 @@ export function Reading() {
                   fontFamily: "'Amiri', serif",
                   fontSize: "22px",
                   lineHeight: "2.2",
+                  letterSpacing: "0", // très important pour éviter les lettres détachées
                 }}
               >
                 {coloredSegments.length > 0 ? coloredSegments : "أدخل نص هنا"}
