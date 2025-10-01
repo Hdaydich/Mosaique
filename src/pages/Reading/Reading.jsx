@@ -147,7 +147,7 @@ export function Reading() {
                   name="الفَتْحَة"
                   color="#ff0073"
                   img={fatha}
-                  size="16px"
+                  size="14px"
                 />
               </Col>
               <Col xs={3}>
@@ -155,7 +155,7 @@ export function Reading() {
                   name="الكَسْرَة"
                   color="#009bee"
                   img={kasra}
-                  size="16px"
+                  size="14px"
                 />
               </Col>
               <Col xs={3}>
@@ -163,7 +163,7 @@ export function Reading() {
                   name="الضَمَّة"
                   color="#04cf1f"
                   img={dhamma}
-                  size="16px"
+                  size="14px"
                 />
               </Col>
               <Col xs={3}>
@@ -171,7 +171,7 @@ export function Reading() {
                   name="السُّكُون"
                   color="#962dc0"
                   img={soukoun}
-                  size="16px"
+                  size="14px"
                 />
               </Col>
             </Row>
@@ -508,3 +508,4 @@ export function Reading() {
     </Container>
   );
 }
+
