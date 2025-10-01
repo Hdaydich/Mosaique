@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { Logo } from "../../components/Logo/Logo";
@@ -35,8 +35,14 @@ const themes = [
 export function SpecificLearn() {
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [level, setLevel] = useState("facile");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const isMobile = window.innerWidth < 768;
+  // Met à jour isMobile lors du resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <Container fluid>
@@ -103,6 +109,7 @@ export function SpecificLearn() {
                     gap: "10px",
                     alignItems: "flex-start",
                     backgroundColor: "#fefbf4",
+                    position: "relative", // pour les cercles de niveau PC
                   }}
                 >
                   {/* Colonne gauche : bouton retour */}
@@ -134,6 +141,7 @@ export function SpecificLearn() {
                       alignItems: "center",
                       width: "100%",
                       gap: "10px",
+                      position: "relative",
                     }}
                   >
                     {/* Cercles de niveau en haut pour mobile */}
