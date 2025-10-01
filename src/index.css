@@ -1,0 +1,7 @@
+Body {
+  /* background-color :rgb(254 251 244); */
+}
+textarea:focus {
+  outline: none;
+  border-color: transparent; /* Facultatif, si tu veux enlever un changement de couleur */
+}
