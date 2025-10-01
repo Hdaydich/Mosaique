@@ -18,7 +18,7 @@ export function Reading() {
   const [finished, setFinished] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [carouselStart, setCarouselStart] = useState(0);
-  const cardsPerPage = 5;
+  const cardsPerPage = 4;
 
   const textareaRef = useRef(null);
   const outputRef = useRef(null);
@@ -76,75 +76,79 @@ export function Reading() {
   );
 
   return (
-    <Container fluid>
+    <Container fluid className={s.logoContainer}>
       {/* Header: Logo + Carousel */}
-      <Row
-        className="align-items-center justify-content-center mb-3"
-        style={{ height: isMobile ? "auto" : "150px" }}
-      >
+      <Row className="  mb-3 mt-1">
         {/* Logo */}
-        <Col xs={12} lg={2} className="text-center text-lg-start">
+        <Col xs={12} lg={2}>
           <Logo
             subtitle="Chaque enfant, une pièce unique"
-            width={110}
-            police={8}
-            align="left"
-            marg="0px"
+            width={100}
+            police={5}
           />
         </Col>
 
         {/* Carousel */}
         <Col xs={12} lg={10} className={s.carouselWrapper}>
-          <div
-            className={`${s.carouselArrow} ${s.left}`}
-            onClick={handleCarouselPrev}
-          >
-            <Icon.ChevronLeft />
-          </div>
-          <div
-            className={`${s.carouselArrow} ${s.right}`}
-            onClick={handleCarouselNext}
-          >
-            <Icon.ChevronRight />
-          </div>
-
-          <div className={s.carouselAutoContainer}>
-            <div className={s.carouselAutoTrack}>
-              {visibleStories.map((story, idx) => (
+          <div className={s.carouselFlex}>
+            <Row>
+              <Col lg={1}>
+                {/* Flèche gauche */}
                 <div
-                  key={idx}
-                  className={s.carouselCard}
-                  onClick={() => {
-                    setInputText(story.text);
-                    setFinished(true);
-                  }}
+                  className={s.carouselArrow}
+                  onClick={handleCarouselPrev}
+                  style={{ paddingLeft: "50px" }}
                 >
-                  <div className={s.carouselIcon}>{story.icon}</div>
-                  <div className={s.carouselTitle}>{story.title}</div>
+                  <Icon.ChevronLeft size={16} />
                 </div>
-              ))}
-            </div>
+              </Col>
+              <Col lg={8}>
+                {" "}
+                {/* Conteneur scrollable */}
+                <div className={s.carouselCenterContainer}>
+                  <div className={s.carouselAutoTrack}>
+                    {visibleStories.map((story, idx) => (
+                      <div
+                        key={idx}
+                        className={s.carouselCard}
+                        onClick={() => {
+                          setInputText(story.text);
+                          setFinished(true);
+                        }}
+                      >
+                        <div className={s.carouselIcon}>{story.icon}</div>
+                        <div className={s.carouselTitle}>{story.title}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Col>
+              <Col lg={3}>
+                {" "}
+                {/* Flèche droite */}
+                <div
+                  className={s.carouselArrow}
+                  onClick={handleCarouselNext}
+                  style={{ paddingRight: "200px" }}
+                >
+                  <Icon.ChevronRight size={16} />
+                </div>
+              </Col>
+            </Row>
           </div>
         </Col>
       </Row>
 
       {/* Titre */}
-      <Row className="justify-content-center">
-        <Col lg={7} className="text-center">
-          <h5
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              color: "#0e0e0eff",
-              padding: "10px",
-              margin: "10px",
-              background: "#a5f3fcce",
-              borderRadius: "20px",
-              textTransform: "uppercase",
-            }}
-          >
+      <Row
+        className="justify-content-center mt-2"
+        style={{
+          background: "#a5f3fcb4",
+          borderradius: "10px",
+        }}
+      >
+        <Col lg={7} className="text-center ">
+          <h5>
             <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en
             couleur
           </h5>
@@ -152,7 +156,7 @@ export function Reading() {
       </Row>
 
       {/* Row Chakels */}
-      <Row className="justify-content-center mb-3">
+      <Row className="justify-content-center mb-1">
         <Col
           xs={12}
           className="d-flex align-items-center justify-content-center"

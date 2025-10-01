@@ -11,7 +11,7 @@ export function Logo({
 }) {
   const navigate = useNavigate();
   return (
-    <div className={s.logoContainer}>
+    <div className={s.logoContainer} style={{ alignItems: align }}>
       <img
         src={logo}
         style={{
@@ -23,10 +23,7 @@ export function Logo({
         alt="Mosaique"
       />
       {subtitle && (
-        <span
-          className={s.subtitle}
-          style={{ fontSize: police, alignItems: align }}
-        >
+        <span className={s.subtitle} style={{ fontSize: police }}>
           <i>{subtitle}</i>
         </span>
       )}

@@ -38,7 +38,7 @@ export function Shapes({
   const common = {
     stroke: "#000000ff",
     strokeWidth: stroke,
-    fill: "#129cffff",
+    fill: "#15344aff",
   };
 
   return (

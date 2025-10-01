@@ -3,6 +3,9 @@
   padding-left: 30px;
   background-color: #ffffff;
   max-height: 100vh;
+  text-align: center;
+  align-items: center;
+
 }
 
 /* Container chakl */
@@ -122,9 +125,27 @@
 
 /* === Carrousel avec flèches PC === */
 .carouselWrapper {
-  position: relative;
-  width: 100%;/* espace pour les flèches */
 }
+
+
+
+.carouselAutoTrack {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.carouselCenterContainer {
+  overflow-x: auto;                 /* scroll horizontal activé */
+  -webkit-overflow-scrolling: touch; /* scroll fluide iOS */
+  white-space: nowrap;               /* cartes alignées sur une ligne */
+  scrollbar-width: none;             /* Firefox : cacher scrollbar */
+}
+
+/* Chrome, Edge, Safari */
+.carouselCenterContainer::-webkit-scrollbar {
+  display: none;
+}
+
 
 .carouselAutoContainer {
   overflow-x: auto;
@@ -141,22 +162,24 @@
 }
 
 .carouselAutoTrack {
+  padding-left: 10px;
   display: flex;
   gap: 15px;
 }
 
 .carouselCard {
   flex: 0 0 calc(20% - 15px);
-  min-width: 120px;
-  max-width: 140px;
+  min-height: 80px;
+  max-height: 100px;
   cursor: pointer;
   border: 1px solid #eee;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   text-align: center;
   padding: 12px;
-  background: white;
+  background: rgb(254 251 244);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 10px;
 }
 
 .carouselCard:hover {
@@ -165,8 +188,7 @@
 }
 
 .carouselIcon {
-  font-size: 38px;
-  margin: 10px 0;
+  font-size: 28px;
   transition: transform 0.3s ease;
 }
 
@@ -175,38 +197,24 @@
 }
 
 .carouselTitle {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   color: #333;
 }
 
 /* Flèches gauche/droite */
 .carouselArrow {
-  position: absolute;
-  top: 50%;
   transform: translateY(-50%);
-  font-size: 16px;
   font-weight: bold;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   transition: background 0.3s ease;
   z-index: 2;
+  margin-top: 50px;
 }
 
 .carouselArrow:hover {
   color: #76d6f3;
   font-size: 18px;
-}
-
-.carouselArrow.left {
-  left: 5px;
-}
-
-.carouselArrow.right {
-  right: 5px;
 }
 
 /* Responsive */
@@ -239,6 +247,14 @@
   .carouselCard {
     flex: 0 0 calc(33% - 10px); /* 3 cartes visibles tablette */
   }
+  .carouselAutoTrack {
+  padding-left: 0px;
+}
+.carouselCard {
+  min-width: 80px;
+  max-width: 120px;
+}
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -251,6 +267,10 @@
   .carouselTitle {
     font-size: 12px;
   }
+  
+.carouselAutoTrack {
+  padding-left: 0px;
+}
 }
 
 /* Masquer le scroll horizontal sur mobile */

@@ -24,7 +24,7 @@ export function Home(props) {
               title="Lecture en couleur"
               subtitle="Apprends à lire... facilement et joyeusement"
               content="القراءة ممتعة وسهلة بالألوان"
-              bgc="#A5F3FC" // bleu pastel
+              bgc="#a5f3fcff" // bleu pastel
               img={dys}
               direction="/reading"
             />
@@ -35,7 +35,7 @@ export function Home(props) {
               title="Apprentissage"
               subtitle="Lettres, chiffres et quantités… un apprentissage facile et amusant"
               content="ألوان + حروف + أرقام = مرح"
-              bgc="#FFF59D" // jaune pastel
+              bgc="#fffeb4ff" // jaune pastel
               img={livre}
               direction="/SpecificLearn"
             />
@@ -46,7 +46,7 @@ export function Home(props) {
               title="Logique"
               subtitle="Jeux et défis pour stimuler ton raisonnement"
               content="ألغاز + تفكير = ذكاء"
-              bgc="#A7F3D0" // vert pastel
+              bgc="#bbfddeff" // vert pastel
               img={jeux}
               direction="/Logic"
             />
@@ -57,7 +57,7 @@ export function Home(props) {
               title="Parent/Enfant"
               subtitle="Un espace collaboratif et éducatif"
               content="تعلم ومرح مع العائلة"
-              bgc="#F9A8D4" // rose pastel
+              bgc="#ffc3e4ff" // rose pastel
               img={caring}
               direction="/Parent"
             />

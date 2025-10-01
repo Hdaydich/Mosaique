@@ -1,72 +1,39 @@
-/* Conteneur principal */
-.typeContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  flex-direction: column;
-  margin-top: 30px;
-  width: 90%;
-}
 
-/* Cartes des thèmes */
 .itemContainer {
   border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
-  height: 220px;         /* hauteur fixe mais flexible selon le contenu */
-  width: 250px;          /* largeur fixe pour la cohérence */
-  max-width: 80vw;       /* s’adapte aux petits écrans */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
+  width: 300px;
+  min-height: 200px;
 }
 
-/* Effet hover */
 .itemContainer:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Titre et icône à l'intérieur des cartes */
-.itemContainer h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
+.h5 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 30px;
 }
 
-.itemContainer .mb-3 {
-  margin-bottom: 15px !important;
+.topButton {
+  transition: transform 0.2s;
 }
 
-/* Texte description */
-.itemContainer p,
-.itemContainer .card-text {
-  font-size: 0.9rem;
-  line-height: 1.3;
+.topButton:hover {
+  transform: scale(1.1);
 }
 
-/* Bouton retour */
-button.btn-outline-primary {
-  margin-top: 30px;
+.shapeItem {
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.2s;
 }
 
-/* Responsive */
-@media only screen and (max-width: 991px) {
-  .typeContainer {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    min-height: auto;
-    margin: 20px auto;
-  }
-  .itemContainer {
-    width: 90%;
-    height: auto;
-    padding: 10px;
-  }
+.shapeItem:hover {
+  transform: scale(1.05);
 }
