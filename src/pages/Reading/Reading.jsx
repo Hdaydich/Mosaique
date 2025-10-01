@@ -20,28 +20,27 @@ export function Reading() {
   const textareaRef = useRef(null);
   const outputRef = useRef(null);
 
-  // Met à jour les segments colorés
+  // Mettre à jour les segments colorés
   useEffect(() => {
     setColoredSegments(SegmentColor(inputText));
   }, [inputText]);
 
-  // Détecte le redimensionnement
+  // Détecter la taille de l'écran
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Ajuste la hauteur du textarea
+  // Ajuster la hauteur de la textarea dynamiquement
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
     }
   }, [inputText]);
 
-  // Ajuste la hauteur de l'output
+  // Ajuster la hauteur de la div output dynamiquement
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.style.height = "auto";
@@ -54,17 +53,10 @@ export function Reading() {
     setFinished(false);
   };
 
-  const outputStyle = {
-    marginTop: finished ? (isMobile ? "10px" : "0px") : "0px",
-  };
-
   return (
     <Container fluid>
       {/* Header avec logo + chakls */}
-      <Row
-        className="align-items-center justify-content-center"
-        style={{ marginBottom: "20px", height: "150px" }}
-      >
+      <Row className="align-items-center justify-content-center" style={{ marginBottom: "20px", height: "150px" }}>
         <Col xs={12} lg={6} className="text-center text-lg-start">
           <Logo
             subtitle="Chaque enfant, une pièce unique"
@@ -76,22 +68,11 @@ export function Reading() {
         </Col>
         {!isMobile && (
           <Col xs={12} lg={6} className="d-flex justify-content-center">
-            <Row
-              className="w-100 justify-content-center"
-              style={{ paddingTop: "10px" }}
-            >
-              <Col xs={3}>
-                <Chakel name="الفَتْحَة" color="#ff0073" img={fatha} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="الكَسْرَة" color="#009bee" img={kasra} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} />
-              </Col>
-              <Col xs={3}>
-                <Chakel name="السُّكُون" color="#962dc0" img={soukoun} />
-              </Col>
+            <Row className="w-100 justify-content-center" style={{ paddingTop: "10px" }}>
+              <Col xs={3}><Chakel name="الفَتْحَة" color="#ff0073" img={fatha} /></Col>
+              <Col xs={3}><Chakel name="الكَسْرَة" color="#009bee" img={kasra} /></Col>
+              <Col xs={3}><Chakel name="الضَمَّة" color="#04cf1f" img={dhamma} /></Col>
+              <Col xs={3}><Chakel name="السُّكُون" color="#962dc0" img={soukoun} /></Col>
             </Row>
           </Col>
         )}
@@ -111,8 +92,7 @@ export function Reading() {
               textTransform: "uppercase",
             }}
           >
-            <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en
-            couleur
+            <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en couleur
           </h5>
         </Col>
       </Row>
@@ -134,10 +114,7 @@ export function Reading() {
               />
             </div>
           ) : (
-            <div
-              className={`${s.textContainer} shadow border-0`}
-              style={outputStyle}
-            >
+            <div className={`${s.textContainer} shadow border-0`}>
               <Icon.ArrowCounterclockwise
                 onClick={reset}
                 className={s.downloadIcon}
