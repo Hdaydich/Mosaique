@@ -125,14 +125,10 @@
 
 /* === Carrousel avec flèches PC === */
 .carouselWrapper {
+  margin: 0px auto;
 }
 
 
-
-.carouselAutoTrack {
-  display: inline-flex;
-  gap: 5px;
-}
 
 .carouselCenterContainer {
   overflow-x: auto;                 /* scroll horizontal activé */
@@ -176,7 +172,7 @@
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   text-align: center;
-  padding: 12px;
+  padding: 19px;
   background: rgb(254 251 244);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 10px;

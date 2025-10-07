@@ -1,7 +1,8 @@
 .logoContainer {
   display: flex;
   flex-direction: column; /* logo au-dessus du texte */
-  padding: 0px;
+  padding: 10px;
+  padding-bottom: 10px;
 }
 
 .subtitle {

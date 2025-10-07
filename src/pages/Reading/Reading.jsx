@@ -11,6 +11,7 @@ import fatha from "../../assets/fatha.png";
 import s from "./style.module.css";
 import { Logo } from "../../components/Logo/Logo";
 import stories from "../../data/stories";
+import { NavBar } from "../../components/NavBar/NavBar";
 
 export function Reading() {
   const [inputText, setInputText] = useState("");
@@ -18,7 +19,7 @@ export function Reading() {
   const [finished, setFinished] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [carouselStart, setCarouselStart] = useState(0);
-  const cardsPerPage = 4;
+  const cardsPerPage = 5;
 
   const textareaRef = useRef(null);
   const outputRef = useRef(null);
@@ -77,82 +78,72 @@ export function Reading() {
 
   return (
     <Container fluid className={s.logoContainer}>
-      {/* Header: Logo + Carousel */}
-      <Row className="  mb-3 mt-1">
-        {/* Logo */}
-        <Col xs={12} lg={2}>
-          <Logo
-            subtitle="Chaque enfant, une pièce unique"
-            width={100}
-            police={5}
-          />
-        </Col>
+      <NavBar logoWidth="80px" police="5px"></NavBar>
 
+      <Row className="  mb-3 mt-1">
         {/* Carousel */}
-        <Col xs={12} lg={10} className={s.carouselWrapper}>
-          <div className={s.carouselFlex}>
-            <Row>
-              <Col lg={1}>
-                {/* Flèche gauche */}
-                <div
-                  className={s.carouselArrow}
-                  onClick={handleCarouselPrev}
-                  style={{ paddingLeft: "50px" }}
-                >
-                  <Icon.ChevronLeft size={16} />
+        <Col xs={12} lg={12}>
+          <Row className={s.carouselWrapper}>
+            <Col lg={1}>
+              {/* Flèche gauche */}
+              <div
+                className={s.carouselArrow}
+                onClick={handleCarouselPrev}
+                style={{ paddingLeft: "50px" }}
+              >
+                <Icon.ChevronLeft size={16} />
+              </div>
+            </Col>
+            <Col lg={10}>
+              {" "}
+              {/* Conteneur scrollable */}
+              <div className={s.carouselCenterContainer}>
+                <div className={s.carouselAutoTrack}>
+                  {visibleStories.map((story, idx) => (
+                    <div
+                      key={idx}
+                      className={s.carouselCard}
+                      onClick={() => {
+                        setInputText(story.text);
+                        setFinished(true);
+                      }}
+                    >
+                      <div className={s.carouselIcon}>{story.icon}</div>
+                      <div className={s.carouselTitle}>{story.title}</div>
+                    </div>
+                  ))}
                 </div>
-              </Col>
-              <Col lg={8}>
-                {" "}
-                {/* Conteneur scrollable */}
-                <div className={s.carouselCenterContainer}>
-                  <div className={s.carouselAutoTrack}>
-                    {visibleStories.map((story, idx) => (
-                      <div
-                        key={idx}
-                        className={s.carouselCard}
-                        onClick={() => {
-                          setInputText(story.text);
-                          setFinished(true);
-                        }}
-                      >
-                        <div className={s.carouselIcon}>{story.icon}</div>
-                        <div className={s.carouselTitle}>{story.title}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Col>
-              <Col lg={3}>
-                {" "}
-                {/* Flèche droite */}
-                <div
-                  className={s.carouselArrow}
-                  onClick={handleCarouselNext}
-                  style={{ paddingRight: "200px" }}
-                >
-                  <Icon.ChevronRight size={16} />
-                </div>
-              </Col>
-            </Row>
-          </div>
+              </div>
+            </Col>
+            <Col lg={1}>
+              {" "}
+              {/* Flèche droite */}
+              <div
+                className={s.carouselArrow}
+                onClick={handleCarouselNext}
+                style={{ paddingRight: "200px" }}
+              >
+                <Icon.ChevronRight size={16} />
+              </div>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
       {/* Titre */}
       <Row
-        className="justify-content-center mt-2"
+        className="justify-content-center "
         style={{
           background: "#a5f3fcb4",
-          borderradius: "10px",
+          borderRadius: "20px",
+          width: isMobile ? "80%" : "30%",
+          margin: "0px auto",
         }}
       >
-        <Col lg={7} className="text-center ">
-          <h5>
-            <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en
-            couleur
-          </h5>
-        </Col>
+        <h5>
+          <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en
+          couleur
+        </h5>
       </Row>
 
       {/* Row Chakels */}
@@ -190,7 +181,7 @@ export function Reading() {
                 setInputText(e.target.value);
                 if (e.target.value.length > 0) setFinished(true);
               }}
-              placeholder="اكتب نصًا هنا..."
+              placeholder="انسخ نصًا هنا..."
             />
           ) : (
             <div>

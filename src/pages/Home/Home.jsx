@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import { Item } from "../../components/Item/Item";
 import s from "./style.module.css";
 import livre from "../../assets/livre.png";
@@ -7,11 +7,13 @@ import caring from "../../assets/caring.png";
 import jeux from "../../assets/jeux.png";
 import dys from "../../assets/dys.png";
 import { Logo } from "../../components/Logo/Logo";
+import { NavBar } from "../../components/NavBar/NavBar";
 
 export function Home(props) {
   return (
     <>
       <Container className={s.mainContainer}>
+        <NavBar></NavBar>
         <Logo
           subtitle="Chaque enfant, une pièce unique"
           width={150}

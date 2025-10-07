@@ -1,0 +1,35 @@
+.navbar {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  height: 90px; /* réduire la hauteur */
+  min-height: 50px;
+  padding:0px;
+}
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+
+.icon {
+  color: #555;
+  margin: 0 8px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.icon:hover {
+  color: #008cba;
+  transform: scale(1.2);
+}
+
+.logo{
+  margin-top: 15px;
+}
+

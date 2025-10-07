@@ -1,0 +1,204 @@
+.title {
+  font-size: 2rem;
+  color: #ff4081;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* --- Carousel --- */
+.CarouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carouselItems {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 10px ;
+  justify-content: space-evenly;
+}
+.carouselItems::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.navButton {
+  padding-bottom: 10px;
+  background: #323232;
+  color: #fff;
+  border: none;
+  font-size: 26px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.navButton:hover {
+  background: #ffb400;
+  transform: scale(1.05);
+}
+
+/* --- Mini Grids --- */
+.miniGridContainer {
+  flex: 0 0 auto;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  scroll-snap-align:start;
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+.miniGridContainer:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 10px #ffc8da;
+}
+
+
+.miniGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 15px);
+  grid-gap: 2px;
+  justify-content: center;
+}
+.miniTile {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+/* --- Game Area --- */
+.gameArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -20px;
+}
+.objectiveBoard {
+  background: #fffaf0;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 0 8px #96969680;
+  margin-bottom: 1rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-gap: 6px;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 15px;
+  background: #fffaf0;
+  box-shadow: 0 0 8px #96969680;
+}
+.tile {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.tile:hover {
+  transform: scale(1.05);
+}
+.colorPalette {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+.colorSwatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.selectedColor {
+  border: 3px solid #ff4081;
+}
+.confirmButton,
+.newGameButton {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.confirmButton:hover,
+.newGameButton:hover {
+  background-color: #e91e63;
+}
+
+/* --- Modal --- */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalBox {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 15px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+.backButton {
+  background-color: transparent;
+  color: #19013b;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 10;
+  font-size: 22px;
+}
+.backButton:hover {
+  color: rgba(123, 123, 123, 0.42);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Mobile --- */
+@media only screen and (max-width: 767px) {
+  .grid {
+    justify-content: space-evenly;
+  }
+  .tile {
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+  }
+  .colorSwatch {
+    width: 35px;
+    height: 35px;
+  }
+  .navButton {
+    display: none;
+  }
+  .gameArea {
+    margin-top: 20px;
+  }
+
+
+}
