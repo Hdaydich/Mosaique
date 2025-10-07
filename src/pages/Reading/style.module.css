@@ -41,28 +41,19 @@
   color: transparent;
 }
 
-/* Texte arabe */
-.rtl-text {
-  font-family: 'Amiri', serif !important;
-  direction: rtl;
-  text-align: right;
+
+
+/* Textarea */
+.textarea {
+  
   letter-spacing: 0;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   word-break: break-word;
-}
-
-/* Chaque syllabe dans un span */
-.rtl-text span {
-  display: inline;
-  unicode-bidi: plaintext;
-  white-space: pre-wrap;
-}
-
-/* Textarea */
-.textarea {
+  direction: rtl;
+  text-align: right;
   width: 100%;
   min-height: 100%;
   font-size: 28px;
@@ -84,6 +75,15 @@
 
 /* Output div texte coloré */
 .outputDiv {
+    letter-spacing: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  word-break: break-word;
+  direction: rtl;
+  text-align: right;
+  
   font-size: 28px;
     line-height: 3;
     padding: 30px;

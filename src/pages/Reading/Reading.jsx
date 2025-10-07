@@ -9,7 +9,6 @@ import kasra from "../../assets/kasra.png";
 import soukoun from "../../assets/skoun.png";
 import fatha from "../../assets/fatha.png";
 import s from "./style.module.css";
-import { Logo } from "../../components/Logo/Logo";
 import stories from "../../data/stories";
 import { NavBar } from "../../components/NavBar/NavBar";
 
@@ -175,7 +174,7 @@ export function Reading() {
           {!finished ? (
             <textarea
               ref={textareaRef}
-              className={`${s.textarea} rtl-text shadow border-0 flex-fill mt-3`}
+              className={`${s.textarea} shadow border-0 flex-fill mt-3`}
               value={inputText}
               onChange={(e) => {
                 setInputText(e.target.value);
@@ -187,7 +186,7 @@ export function Reading() {
             <div>
               <div
                 ref={outputRef}
-                className={`${s.outputDiv} rtl-text shadow border-0 flex-fill mt-3 ${s.show}`}
+                className={`${s.outputDiv}  shadow border-0 flex-fill mt-3 ${s.show}`}
                 contentEditable={false}
               >
                 {coloredSegments.length > 0 ? coloredSegments : "أدخل نص هنا"}
