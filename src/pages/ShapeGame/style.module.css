@@ -18,13 +18,12 @@
 @media only screen and (max-width: 767px) {
 
   .title {
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 
 .gameContainer{
   margin: 20px auto;
-  width:95%;
 
 }
 

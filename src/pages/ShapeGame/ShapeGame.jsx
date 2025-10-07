@@ -166,14 +166,14 @@ export function ShapeGame({
     margin: "0 auto",
     padding: "10px",
     borderRadius: "15px",
-    backgroundColor: "#f7f0a2a1",
-    width: isMobile ? `${containerWidth + 80}px` : `${containerWidth + 10}px`,
+    backgroundColor: "#f9f4c0a1",
+    width: `${containerWidth}px`,
   };
 
   return (
     <Container fluid style={{ margin: "0 auto" }}>
-      <Row className="mb-3">
-        <h2 className={s.title}>🎨 Jeu d'attention</h2>
+      <Row className="mb-1">
+        <h2 className={s.title}>Jeu d'attention</h2>
       </Row>
 
       <Row className="align-items-center mb-3">
