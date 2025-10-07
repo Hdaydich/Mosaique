@@ -18,10 +18,15 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="/" element={<Home />} />
           <Route path="/Logic" element={<Logic />}>
+          </Route>
           <Route path="/Parent" element={<Parent />} />
           <Route path="/Reading" element={<Reading />} />
           <Route path="/SpecificLearn" element={<SpecificLearn />} >
+          </Route>
+          
+             <Route path="ShapeGame" element={<ShapeGame />} />
           <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </BrowserRouter>
 );
