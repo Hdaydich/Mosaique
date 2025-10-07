@@ -95,7 +95,7 @@ export function PuzzleGame() {
   };
 
   return (
-    <Container fluid>
+    <Container fluid style={{ margin: "0 auto", width: "700px" }}>
       <Row>
         <h2 className={s.title}>🎨 Jeu de mosaïque</h2>
       </Row>

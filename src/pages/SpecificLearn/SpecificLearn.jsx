@@ -130,7 +130,7 @@ export function SpecificLearn() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: "30px",
+            marginTop: "10px",
             width: "100%",
             textAlign: "center",
           }}
@@ -139,10 +139,12 @@ export function SpecificLearn() {
 
           <div
             style={{
-              width: "100%",
-              maxWidth: "800px",
-              display: "flex",
-              justifyContent: "center",
+              width: isMobile ? "100%" : "auto",
+              maxWidth: "95vw",
+              margin: "0 auto",
+              overflow: "hidden",
+              borderRadius: "18px",
+              padding: isMobile ? "10px" : "20px",
             }}
           >
             {React.cloneElement(selectedTheme.component, { level, isMobile })}

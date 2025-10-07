@@ -167,7 +167,7 @@ export function ShapeGame({
     padding: "10px",
     borderRadius: "15px",
     backgroundColor: "#f9f4c0a1",
-    width: `${containerWidth}px`,
+    width: isMobile ? `${containerWidth}px` : `${containerWidth + 10}px`,
   };
 
   return (
