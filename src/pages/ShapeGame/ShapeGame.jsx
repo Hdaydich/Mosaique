@@ -1,8 +1,7 @@
-// ShapeGame.jsx
-import React, { useState, useEffect, useRef } from "react";
-import { Shapes } from "./Shapes";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { CheckCircle, XCircle } from "react-bootstrap-icons";
+import { Shapes } from "./Shapes";
 import s from "./style.module.css";
 
 const SHAPES = ["circle", "square", "triangle", "star", "hexagon", "diamond"];
@@ -49,15 +48,11 @@ export function ShapeGame({
   // Timer
   useEffect(() => {
     if (!timerActive) return;
-
-    const interval = setInterval(() => {
-      setTime((t) => t + 1);
-    }, 1000);
-
+    const interval = setInterval(() => setTime((t) => t + 1), 1000);
     return () => clearInterval(interval);
   }, [timerActive]);
 
-  // Rebuild grid when level changes
+  // Rebuild grid on level change
   useEffect(() => {
     const newTarget = randomFrom(SHAPES);
     setTarget(newTarget);
@@ -74,7 +69,7 @@ export function ShapeGame({
     const key = `${rowIndex}-${colIndex}`;
     setClickedPositions((prev) => ({
       ...prev,
-      [key]: prev[key] ? null : "#445abeff", // toggle couleur
+      [key]: prev[key] ? null : "#1536c7a2",
     }));
   };
 
@@ -92,7 +87,7 @@ export function ShapeGame({
     setChecked(true);
     if (correct) setScore((s) => s + 1);
     else setFailScore((f) => f + 1);
-    setTimerActive(false); // stop timer après confirmation
+    setTimerActive(false);
   };
 
   const nextLevel = () => {
@@ -116,7 +111,7 @@ export function ShapeGame({
         display: "flex",
         alignItems: "center",
         gap: "6px",
-        marginBottom: isMobile ? "0px" : "20px",
+        marginBottom: isMobile ? "0px" : "0px",
       }}
     >
       {["facile", "medium", "hard"].map((lvl) => {
@@ -148,40 +143,41 @@ export function ShapeGame({
     </div>
   );
 
-  // Grille
-  const { cols: colCount, size: shapeSize } = LEVEL_STYLE[level];
+  // Responsive container and shapes
+  const { cols: colCount, size: baseShapeSize } = LEVEL_STYLE[level];
   const gap = 6;
-  const containerMaxWidth = isMobile ? window.innerWidth - 40 : 700;
+  const containerMaxWidth = isMobile
+    ? window.innerWidth - 20
+    : window.innerWidth - 100;
   const maxShapeSize = Math.min(
-    shapeSize,
-    (containerMaxWidth - (colCount - 1) * gap) / colCount
+    baseShapeSize,
+    Math.floor((containerMaxWidth - (colCount - 1) * gap) / colCount)
   );
-  const containerWidth = maxShapeSize * colCount + (colCount - 1) * gap;
 
   const gridContainerStyle = {
     display: "grid",
     gridTemplateColumns: `repeat(${colCount}, ${maxShapeSize}px)`,
     gap: `${gap}px`,
     justifyContent: "center",
-    margin: "0 auto",
-    padding: "10px",
-    borderRadius: "15px",
-    backgroundColor: "#f9f4c0a1",
-    width: isMobile ? `${containerWidth}px` : `${containerWidth + 10}px`,
+    maxWidth: containerMaxWidth + "px",
+    margin: "20px auto",
   };
 
   return (
-    <Container fluid style={{ margin: "0 auto" }}>
-      <Row className="mb-1">
+    <Container>
+      <Row>
         <h2 className={s.title}>Jeu d'attention</h2>
       </Row>
 
       <Row className="align-items-center mb-3">
-        <Col xs={6} md={8}>
-          {renderLevels()}
-        </Col>
-        <Col xs={6} md={4}>
-          <div className="d-flex justify-content-end gap-3 fw-bold">
+        <div
+          className="d-flex justify-content-between align-items-center flex-wrap gap-3"
+          style={{
+            minWidth: isMobile ? "auto" : "500px",
+          }}
+        >
+          <div className="d-flex first">{renderLevels()}</div>
+          <div className="d-flex last fw-bold gap-3">
             <div>
               <CheckCircle color="green" size={22} /> : {score}
             </div>
@@ -190,59 +186,58 @@ export function ShapeGame({
             </div>
             <div>⏱️ {time}s</div>
           </div>
-        </Col>
+        </div>
       </Row>
 
       <Row className="justify-content-center mb-4">
         <Col>
-          <div
-            style={{
-              marginBottom: "20px",
-              marginTop: isMobile ? "-10px" : "-60px",
-            }}
-          >
-            <Shapes shape={target} size={maxShapeSize} color="#445abeff" />
-          </div>
-          <div style={gridContainerStyle}>
-            {rows.map((row, rowIndex) =>
-              row.map((item, colIndex) => {
-                const key = `${rowIndex}-${colIndex}`;
-                const clickedColor = clickedPositions[key];
-
-                return (
-                  <div
-                    key={key}
-                    onClick={() => handleClick(rowIndex, colIndex)}
-                    style={{
-                      borderRadius: "12px",
-                      cursor: "pointer",
-                      transition: "all 0.2s",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: maxShapeSize,
-                      height: maxShapeSize,
-                    }}
-                  >
-                    <Shapes
-                      shape={item.shape}
-                      size={maxShapeSize - 1}
-                      color={clickedColor || "#ffffffff"}
-                    />
-                  </div>
-                );
-              })
-            )}
-          </div>
+          <Row className={s.gameContainer}>
+            <div
+              style={{
+                marginBottom: "0px",
+                marginTop: "10px",
+              }}
+            >
+              <Shapes shape={target} size={maxShapeSize} color="#0224bcff" />
+            </div>
+            <div style={gridContainerStyle}>
+              {" "}
+              {rows.map((row, rowIndex) =>
+                row.map((item, colIndex) => {
+                  const key = `${rowIndex}-${colIndex}`;
+                  const clickedColor = clickedPositions[key];
+                  return (
+                    <div
+                      key={key}
+                      onClick={() => handleClick(rowIndex, colIndex)}
+                      style={{
+                        borderRadius: "12px",
+                        cursor: "pointer",
+                        transition: "all 0.2s",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: maxShapeSize,
+                        height: maxShapeSize,
+                      }}
+                    >
+                      <Shapes
+                        shape={item.shape}
+                        size={maxShapeSize - 1}
+                        color={clickedColor || "#ffffffff"}
+                      />
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </Row>
         </Col>
       </Row>
 
       <div className="d-flex flex-wrap justify-content-center gap-3 mt-4">
         {!checked ? (
-          <button
-            className="btn btn-success rounded-pill px-4 py-2"
-            onClick={checkAnswers}
-          >
+          <button className={s.confirmButton} onClick={checkAnswers}>
             ✅ Confirmer
           </button>
         ) : isCorrect ? (
@@ -259,7 +254,7 @@ export function ShapeGame({
               onClick={() => {
                 setChecked(false);
                 setClickedPositions({});
-                setTimerActive(true); // relance le timer si on rejoue
+                setTimerActive(true);
               }}
             >
               🔄 Rejouer

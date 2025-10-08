@@ -1,3 +1,10 @@
+.title {
+  font-size: 2rem;
+  color: #09b4f7;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
 /* Container logo */
 .logoContainer {
   padding-left: 30px;
@@ -278,4 +285,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+  .outputDiv {
+    min-height: auto; /* supprime la min-height fixe */
+    height: auto;     /* prend la hauteur du contenu */
+    overflow-y: visible; /* permet à la div de s'adapter */
+  }
+
 }

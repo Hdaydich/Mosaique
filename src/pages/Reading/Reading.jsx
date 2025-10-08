@@ -130,19 +130,8 @@ export function Reading() {
       </Row>
 
       {/* Titre */}
-      <Row
-        className="justify-content-center "
-        style={{
-          background: "#a5f3fcb4",
-          borderRadius: "20px",
-          width: isMobile ? "80%" : "30%",
-          margin: "0px auto",
-        }}
-      >
-        <h5>
-          <span style={{ fontSize: "26px" }}>📖</span> Apprendre à lire en
-          couleur
-        </h5>
+      <Row className={s.title}>
+        <div>📖 Apprendre à lire en couleur</div>
       </Row>
 
       {/* Row Chakels */}

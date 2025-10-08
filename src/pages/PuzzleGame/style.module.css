@@ -1,6 +1,6 @@
 .title {
   font-size: 2rem;
-  color: #ff4081;
+  color: #06b4c4;
   font-weight: 700;
   margin-bottom: 10px;
   text-align: center;
@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 30px;
+  margin-top: 20px;
   width: 700px;
 }
 
@@ -28,7 +28,7 @@
 
 .navButton {
   padding-bottom: 10px;
-  background: #323232;
+  background: #4bd2df;
   color: #fff;
   border: none;
   font-size: 26px;
@@ -78,7 +78,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -20px;
+  margin-top: 0px;
 }
 .objectiveBoard {
   background: #fffaf0;
@@ -86,6 +86,7 @@
   padding: 10px;
   box-shadow: 0 0 8px #96969680;
   margin-bottom: 1rem;
+  margin-top: 20px;
 }
 .grid {
   display: grid;
@@ -96,6 +97,7 @@
   border-radius: 15px;
   background: #fffaf0;
   box-shadow: 0 0 8px #96969680;
+  margin: 20px 0;
 }
 .tile {
   width: 60px;
@@ -122,11 +124,11 @@
   transition: 0.3s;
 }
 .selectedColor {
-  border: 3px solid #ff4081;
+  border: 3px solid #06b4c4;
 }
 .confirmButton,
 .newGameButton {
-  background-color: #ff4081;
+  background-color: #06b4c4;
   color: white;
   border: none;
   border-radius: 12px;
@@ -134,6 +136,7 @@
   font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
+  margin: 20px 0;
 }
 .confirmButton:hover,
 .newGameButton:hover {
@@ -179,13 +182,10 @@
 
 /* --- Mobile --- */
 @media only screen and (max-width: 767px) {
-  .grid {
-    justify-content: space-evenly;
-  }
+
   .tile {
     width: 50px;
     height: 50px;
-    margin-top: 20px;
   }
   .colorSwatch {
     width: 35px;
@@ -198,9 +198,6 @@
     margin-top: 20px;
   }
 
-
-}
-@media only screen and (max-width: 767px) {
   .CarouselContainer {
     width: 100%;
     justify-content: flex-start;
@@ -212,17 +209,18 @@
   }
 
   .grid {
-    grid-template-columns: repeat(4, 45px);
+    grid-template-columns: repeat(4, 50px);
     gap: 5px;
-  }
-
-  .tile {
-    width: 45px;
-    height: 45px;
+    justify-content: space-evenly;
   }
 
   .objectiveBoard {
     max-width: 90vw;
-    margin: 0 auto 1rem;
+    margin: 10px auto;
   }
+
+  .title {
+  margin-bottom: 20px;
+}
+
 }

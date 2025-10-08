@@ -11,7 +11,7 @@ import { Col, Container, Row } from "react-bootstrap";
 const colors = ["#FF6347", "#32CD32", "#1E90FF", "#FFD700"];
 const NUM_PLATEAUX = 25;
 
-export function PuzzleGame() {
+export function PuzzleGame(isMobile) {
   const generateGrid = () =>
     Array(16)
       .fill(null)
@@ -95,44 +95,44 @@ export function PuzzleGame() {
   };
 
   return (
-    <Container fluid style={{ margin: "0 auto", width: "700px" }}>
+    <Container>
       <Row>
-        <h2 className={s.title}>🎨 Jeu de mosaïque</h2>
+        <h2 className={s.title}>Jeu d'attention</h2>
       </Row>
 
-      {/* Header score + retour */}
-      <Row className="align-items-center" style={{ minHeight: "40px" }}>
-        <Col xs={1} className="text-start">
-          {selectedPlateau && (
-            <button
-              className={s.backButton}
-              onClick={() => {
-                setSelectedPlateau(null);
-                setTimerActive(false);
-                setTime(0);
-              }}
-              title="Retour aux plateaux"
-            >
-              <ArrowLeft />
-            </button>
-          )}
-        </Col>
-
-        <Col xs={11}>
-          <Row className="text-end d-flex justify-content-end align-items-center">
-            <div className="d-flex justify-content-end gap-3 fw-bold mt-1" mt-1>
-              <div>
-                <CheckCircle color="green" size={22} /> : {score}
-              </div>
-              <div>
-                <XCircle color="red" size={22} /> : {failScore}
-              </div>
-              <div>⏱️ {time}s</div>
+      <Row className="align-items-center mb-3">
+        <div
+          className="d-flex justify-content-between align-items-center flex-wrap gap-3"
+          style={{
+            minWidth: isMobile ? "auto" : "500px",
+          }}
+        >
+          <div className="d-flex first">
+            {selectedPlateau && (
+              <button
+                className={s.backButton}
+                onClick={() => {
+                  setSelectedPlateau(null);
+                  setTimerActive(false);
+                  setTime(0);
+                }}
+                title="Retour aux plateaux"
+              >
+                <ArrowLeft />
+              </button>
+            )}
+          </div>
+          <div className="d-flex last fw-bold gap-3">
+            <div>
+              <CheckCircle color="green" size={22} /> : {score}
             </div>
-          </Row>
-        </Col>
+            <div>
+              <XCircle color="red" size={22} /> : {failScore}
+            </div>
+            <div>⏱️ {time}s</div>
+          </div>
+        </div>
       </Row>
-
       {/* === title === */}
       {!selectedPlateau && (
         <Row>

@@ -9,25 +9,29 @@ import { PuzzleGame } from "../PuzzleGame/PuzzleGame";
 const themes = [
   {
     title: "Attention",
-    icon: <Icon.EyeFill size={26} color="#E74C3C" />,
+    subtitle: "Ameliorer la concentration et le repère.",
+    icon: <Icon.EyeFill size={36} color="#E74C3C" />,
     component: <ShapeGame />,
     bgc: "#ffd6edff",
   },
   {
     title: "Logique",
-    icon: <Icon.PuzzleFill size={26} color="#06b4c4ff" />,
+    subtitle: "Stimuler l'esprit logique.",
+    icon: <Icon.PuzzleFill size={36} color="#06b4c4ff" />,
     component: <PuzzleGame />,
     bgc: "#98f7f0ff",
   },
   {
     title: "Chiffres",
-    icon: <Icon.CalculatorFill size={26} color="#27AE60" />,
+    subtitle: "Joue avec les chiffres et améliore tes calculs mentaux.",
+    icon: <Icon.CalculatorFill size={36} color="#27AE60" />,
     component: <p>Jeu des chiffres 🔢</p>,
     bgc: "#f9ffccff",
   },
   {
     title: "Lettres",
-    icon: <Icon.TypeBold size={26} color="#F1C40F" />,
+    subtitle: "Amuse-toi avec les lettres et améliore ton vocabulaire.",
+    icon: <Icon.TypeBold size={36} color="#F1C40F" />,
     component: <p>Jeu des lettres ✍️</p>,
     bgc: "#EAD6FF",
   },
@@ -98,26 +102,30 @@ export function SpecificLearn() {
         <div
           style={{
             width: isMobile ? "90%" : "50%",
-            margin: "80px auto",
+            margin: "50px auto",
             textAlign: "center",
           }}
         >
-          <h4 style={{ marginBottom: "30px" }}>📚 Choisis un thème</h4>
+          <h4 style={{ marginBottom: "50px" }}>📚 Choisis un thème</h4>
           <Row className="justify-content-center">
             {themes.map((t, i) => (
-              <Col key={i} xs={12} sm={6} md={6} lg={6} className="mb-3">
+              <Col key={i} xs={6} sm={6} md={6} lg={6} className="mb-3">
                 <Card
                   style={{
                     backgroundColor: t.bgc,
                     cursor: "pointer",
                     border: "none",
                     boxShadow: "0 3px 8px rgba(0,0,0,0.15)",
+                    minHeight: isMobile ? "200px" : "150px",
                   }}
                   onClick={() => handleThemeSelect(t)}
                 >
                   <Card.Body className="text-center">
+                    <h4 className="mt-2">{t.title}</h4>
                     <div style={{ fontSize: "26px" }}>{t.icon}</div>
-                    <h6 className="mt-2">{t.title}</h6>
+                    <p style={{ fontSize: "14px", marginTop: "4px" }}>
+                      {t.subtitle}
+                    </p>
                   </Card.Body>
                 </Card>
               </Col>
@@ -136,18 +144,20 @@ export function SpecificLearn() {
           }}
         >
           {renderSidebar()}
-
           <div
             style={{
               width: isMobile ? "100%" : "auto",
-              maxWidth: "95vw",
+              maxWidth: "100%",
               margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               overflow: "hidden",
               borderRadius: "18px",
-              padding: isMobile ? "10px" : "20px",
+              padding: isMobile ? "10px" : "10px",
             }}
           >
-            {React.cloneElement(selectedTheme.component, { level, isMobile })}
+            {React.cloneElement(selectedTheme.component, { isMobile })}
           </div>
         </div>
       )}

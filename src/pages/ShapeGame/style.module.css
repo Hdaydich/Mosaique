@@ -2,29 +2,43 @@
   font-size: 2rem;
   color: #ff4081;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center;
 }
-.gameContainer{
-  background-color: #FFF5CC ;
-  border-Radius: 20px ;
-  text-Align: center;
-  padding: 15px;
+
+
+.gameContainer {
+  text-align: center;
+  margin: 0px auto;
+  border-top: 1px solid #aaaaaa93;
+  border-bottom: 1px solid #aaaaaa93;
 
 }
 
+.confirmButton,
+.newGameButton {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 10px 0;
+}
+.confirmButton:hover,
+.newGameButton:hover {
+  background-color: #e91e63;
+}
 
-/* --- Mobile --- */
+/* Mobile */
 @media only screen and (max-width: 767px) {
 
   .title {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-
-.gameContainer{
-  margin: 20px auto;
-
+  margin-bottom: 20px;
+}
 }
 
-}
+
+
