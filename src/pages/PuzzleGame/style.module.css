@@ -2,8 +2,9 @@
   font-size: 2rem;
   color: #06b4c4;
   font-weight: 700;
-  margin-bottom: 10px;
+  padding-bottom: 30px;
   text-align: center;
+  border-bottom: 1px solid #aaaaaa93;
 }
 
 /* --- Carousel --- */
@@ -180,6 +181,11 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+@media only screen and (max-width: 989px) {
+   .navButton {
+    display: none;
+  }
+}
 /* --- Mobile --- */
 @media only screen and (max-width: 767px) {
 

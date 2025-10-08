@@ -94,7 +94,6 @@ export function Reading() {
               </div>
             </Col>
             <Col lg={10}>
-              {" "}
               {/* Conteneur scrollable */}
               <div className={s.carouselCenterContainer}>
                 <div className={s.carouselAutoTrack}>

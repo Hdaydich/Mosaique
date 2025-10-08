@@ -13,7 +13,14 @@ export function Item({ title, subtitle, content, bgc, img, direction }) {
       onClick={() => handleRedirect(direction)}
     >
       <Card.Header style={{ backgroundColor: bgc }}>
-        <Card.Title style={{ paddingTop: "10px", textTransform: "uppercase" }}>
+        <Card.Title
+          className={s.title}
+          style={{
+            paddingTop: "10px",
+            textTransform: "uppercase",
+            fontSize: "18px",
+          }}
+        >
           {title}
         </Card.Title>
       </Card.Header>

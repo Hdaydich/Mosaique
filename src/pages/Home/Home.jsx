@@ -21,7 +21,7 @@ export function Home(props) {
           align="center"
         />
         <Row>
-          <Col xs={12} sm={6} md={4} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <Item
               title="Lecture en couleur"
               subtitle="Apprends à lire... facilement et joyeusement"
@@ -32,7 +32,7 @@ export function Home(props) {
             />
           </Col>
 
-          <Col xs={12} sm={6} md={4} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <Item
               title="Apprentissage"
               subtitle="Lettres, chiffres et quantités… un apprentissage facile et amusant"
@@ -43,7 +43,7 @@ export function Home(props) {
             />
           </Col>
 
-          <Col xs={12} sm={6} md={4} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <Item
               title="Logique"
               subtitle="Jeux et défis pour stimuler ton raisonnement"
@@ -54,7 +54,7 @@ export function Home(props) {
             />
           </Col>
 
-          <Col xs={12} sm={6} md={4} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <Item
               title="Parent/Enfant"
               subtitle="Un espace collaboratif et éducatif"

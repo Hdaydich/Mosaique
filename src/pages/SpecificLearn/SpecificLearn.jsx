@@ -9,21 +9,21 @@ import { PuzzleGame } from "../PuzzleGame/PuzzleGame";
 const themes = [
   {
     title: "Attention",
-    subtitle: "Ameliorer la concentration et le repère.",
+    subtitle: "Ameliorer la concentration",
     icon: <Icon.EyeFill size={36} color="#E74C3C" />,
     component: <ShapeGame />,
     bgc: "#ffd6edff",
   },
   {
     title: "Logique",
-    subtitle: "Stimuler l'esprit logique.",
+    subtitle: "Stimuler l'esprit logique",
     icon: <Icon.PuzzleFill size={36} color="#06b4c4ff" />,
     component: <PuzzleGame />,
     bgc: "#98f7f0ff",
   },
   {
     title: "Chiffres",
-    subtitle: "Joue avec les chiffres et améliore tes calculs mentaux.",
+    subtitle: "Joue avec les chiffres et améliore tes calculs mentaux",
     icon: <Icon.CalculatorFill size={36} color="#27AE60" />,
     component: <p>Jeu des chiffres 🔢</p>,
     bgc: "#f9ffccff",
@@ -101,7 +101,7 @@ export function SpecificLearn() {
       {!selectedTheme ? (
         <div
           style={{
-            width: isMobile ? "90%" : "50%",
+            width: isMobile ? "90%" : "60%",
             margin: "50px auto",
             textAlign: "center",
           }}
@@ -116,13 +116,16 @@ export function SpecificLearn() {
                     cursor: "pointer",
                     border: "none",
                     boxShadow: "0 3px 8px rgba(0,0,0,0.15)",
-                    minHeight: isMobile ? "200px" : "150px",
+                    minHeight: isMobile ? "200px" : "200px",
                   }}
                   onClick={() => handleThemeSelect(t)}
                 >
-                  <Card.Body className="text-center">
-                    <h4 className="mt-2">{t.title}</h4>
-                    <div style={{ fontSize: "26px" }}>{t.icon}</div>
+                  <Card.Body>
+                    <div style={{ fontSize: "26px", margin: "10px auto" }}>
+                      {t.icon}
+                    </div>
+                    <h4 className="mt-4">{t.title}</h4>
+
                     <p style={{ fontSize: "14px", marginTop: "4px" }}>
                       {t.subtitle}
                     </p>

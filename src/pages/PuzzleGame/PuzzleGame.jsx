@@ -11,7 +11,7 @@ import { Col, Container, Row } from "react-bootstrap";
 const colors = ["#FF6347", "#32CD32", "#1E90FF", "#FFD700"];
 const NUM_PLATEAUX = 25;
 
-export function PuzzleGame(isMobile) {
+export function PuzzleGame({ isMobile }) {
   const generateGrid = () =>
     Array(16)
       .fill(null)
@@ -97,14 +97,22 @@ export function PuzzleGame(isMobile) {
   return (
     <Container>
       <Row>
-        <h2 className={s.title}>Jeu d'attention</h2>
+        <h2 className={s.title}>Jeu de Logique</h2>
       </Row>
 
-      <Row className="align-items-center mb-3">
+      <Row
+        className="align-items-center mb-2"
+        style={{
+          borderBottom: "1px solid #aaaaaa9",
+        }}
+      >
         <div
           className="d-flex justify-content-between align-items-center flex-wrap gap-3"
           style={{
-            minWidth: isMobile ? "auto" : "500px",
+            width: isMobile ? "90%" : "700px",
+            maxWidth: "95vw",
+            margin: "0 auto",
+            transition: "width 0.3s ease",
           }}
         >
           <div className="d-flex first">
@@ -133,6 +141,11 @@ export function PuzzleGame(isMobile) {
           </div>
         </div>
       </Row>
+      <div
+        style={{
+          borderBottom: "1px solid #aaaaaa93",
+        }}
+      ></div>
       {/* === title === */}
       {!selectedPlateau && (
         <Row>

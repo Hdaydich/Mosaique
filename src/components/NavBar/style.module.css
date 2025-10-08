@@ -1,12 +1,10 @@
 .navbar {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
-  height: 90px; /* réduire la hauteur */
+  height: 90px;
   min-height: 50px;
   padding:0px;
+  background-color:transparent;
 }
 .navContainer {
   display: flex;
@@ -14,9 +12,6 @@
   align-items: center;
   width: 100%;
 }
-
-
-
 
 .icon {
   color: #555;
