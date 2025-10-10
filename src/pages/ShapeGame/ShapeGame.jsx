@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { CheckCircle, XCircle } from "react-bootstrap-icons";
+import {
+  CheckCircle,
+  XCircle,
+  ArrowRightCircle,
+  ArrowClockwise,
+} from "react-bootstrap-icons";
 import { Shapes } from "./Shapes";
+import { Button } from "../../components/Button/Button"; // ✅ ton bouton global
 import s from "./style.module.css";
 
 const SHAPES = ["circle", "square", "triangle", "star", "hexagon", "diamond"];
@@ -111,7 +117,6 @@ export function ShapeGame({
         display: "flex",
         alignItems: "center",
         gap: "6px",
-        marginBottom: isMobile ? "0px" : "0px",
       }}
     >
       {["facile", "medium", "hard"].map((lvl) => {
@@ -143,12 +148,12 @@ export function ShapeGame({
     </div>
   );
 
-  // Responsive container and shapes
+  // Responsive grid setup
   const { cols: colCount, size: baseShapeSize } = LEVEL_STYLE[level];
   const gap = 6;
   const containerMaxWidth = isMobile
-    ? window.innerWidth - 20
-    : window.innerWidth - 100;
+    ? window.innerWidth - 70
+    : window.innerWidth;
   const maxShapeSize = Math.min(
     baseShapeSize,
     Math.floor((containerMaxWidth - (colCount - 1) * gap) / colCount)
@@ -169,7 +174,7 @@ export function ShapeGame({
         <h2 className={s.title}>Jeu d'attention</h2>
       </Row>
 
-      <Row className="align-items-center mb-3">
+      <Row className="align-items-center mb-3 mt-3">
         <div
           className="d-flex justify-content-between align-items-center flex-wrap gap-3"
           style={{
@@ -192,16 +197,10 @@ export function ShapeGame({
       <Row className="justify-content-center mb-4">
         <Col>
           <Row className={s.gameContainer}>
-            <div
-              style={{
-                marginBottom: "0px",
-                marginTop: "10px",
-              }}
-            >
-              <Shapes shape={target} size={maxShapeSize} color="#0224bcff" />
+            <div style={{ marginBottom: "0px", marginTop: "10px" }}>
+              <Shapes shape={target} size={maxShapeSize} color="#05155aff" />
             </div>
             <div style={gridContainerStyle}>
-              {" "}
               {rows.map((row, rowIndex) =>
                 row.map((item, colIndex) => {
                   const key = `${rowIndex}-${colIndex}`;
@@ -235,36 +234,43 @@ export function ShapeGame({
         </Col>
       </Row>
 
-      <div className="d-flex flex-wrap justify-content-center gap-3 mt-4">
+      <div className="d-flex flex-wrap justify-content-center gap-3 mt-4 mb-3">
         {!checked ? (
-          <button className={s.confirmButton} onClick={checkAnswers}>
-            ✅ Confirmer
-          </button>
+          <Button
+            name="Confirmer"
+            icon={CheckCircle}
+            variant="confirmButtonSmall"
+            size={22}
+            action={checkAnswers}
+          />
         ) : isCorrect ? (
-          <button
-            className="btn btn-warning rounded-pill px-4 py-2"
-            onClick={nextLevel}
-          >
-            ⏭️ Suivant
-          </button>
+          <Button
+            name="Suivant"
+            icon={ArrowRightCircle}
+            variant="nextButton"
+            size={22}
+            action={nextLevel}
+          />
         ) : (
           <>
-            <button
-              className="btn btn-danger rounded-pill px-4 py-2"
-              onClick={() => {
+            <Button
+              name="Rejouer"
+              icon={ArrowClockwise}
+              variant="retryButton"
+              size={22}
+              action={() => {
                 setChecked(false);
                 setClickedPositions({});
                 setTimerActive(true);
               }}
-            >
-              🔄 Rejouer
-            </button>
-            <button
-              className="btn btn-primary rounded-pill px-4 py-2"
-              onClick={nextLevel}
-            >
-              ⏭️ Suivant
-            </button>
+            />
+            <Button
+              name="Suivant"
+              icon={ArrowRightCircle}
+              variant="nextButton"
+              size={22}
+              action={nextLevel}
+            />
           </>
         )}
       </div>

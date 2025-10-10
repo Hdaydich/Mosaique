@@ -207,6 +207,20 @@ export function SegmentColor(paragraph) {
         isSpecial = true;
         i += 1;
       }
+      // Nouvelle règle : consonne + chakl + consonne + consonne + chakl => segment = currentChar + testChaklCurrentChar, marquer comme Sukūn
+      else if (
+        consonne.includes(currentChar) &&
+        chaklTab.includes(testChaklCurrentChar) &&
+        consonne.includes(nextChar) &&
+        consonne.includes(testChaklNextChar) &&
+        chaklTab.includes(after) &&
+        after != "ْ" // Sukoon
+      ) {
+        syllable = currentChar + testChaklCurrentChar + nextChar;
+        color = colors.special; // même couleur que Sukūn
+        isSpecial = true;
+        i += 2; // avancer de 2 car on a pris current + chakl + next
+      }
 
       tempResult.push({ text: syllable, color, special: isSpecial });
     }
@@ -218,6 +232,7 @@ export function SegmentColor(paragraph) {
 
     const textClean = item.text.replace(/"/g, "").replace(/ـ/g, "-");
 
+    // Gestion des points avec <hr>
     if (points.includes(textClean)) {
       return (
         <React.Fragment key={index}>
@@ -233,8 +248,20 @@ export function SegmentColor(paragraph) {
       );
     }
 
+    // Ajout de borderLeft si deux segments successifs ont la même couleur
+    const prevItem = tempResult[index - 1];
+    const style = { color: item.color };
+
+    if (
+      prevItem &&
+      prevItem.color === item.color &&
+      item.color !== colors.consonne
+    ) {
+      style.borderRight = "1px solid #444444ac";
+    }
+
     return (
-      <span key={index} style={{ color: item.color }}>
+      <span key={index} style={style}>
         {textClean}
       </span>
     );

@@ -1,305 +1,197 @@
+.titleRow {
+  display: flex;
+  align-items: center; /* centre verticalement */
+  gap: 10px;          /* espace entre icône et texte */
+  font-size: 2rem;
+  font-weight: 500;
+  color: #424242;
+  justify-content: flex-start; /* ou center si tu veux centré horizontalement */
+}
+
 .title {
   font-size: 2rem;
-  color: #09b4f7;
-  font-weight: 700;
-  margin: 20px auto;
+  color: #424242;
+  font-weight: 500;
+  margin-bottom: 10px;
   text-align: center;
-}
-/* Container logo */
-.logoContainer {
-  padding-left: 30px;
-  max-height: 100vh;
-  text-align: center;
-  align-items: center;
-  background-color: transparent;
 
 }
 
-/* Container chakl */
-.ChakelContainer {
-  padding-right: 30px;
-  padding-top: 30px;
-}
-
-/* Zone texte (textarea ou output) */
-.textContainer {
-  border-radius: 20px;
-  margin: 0;
-  padding: 20px;
-  width: 100%;
-}
-
-/* Lignes principales */
-.outputFullRow,
-.inputRow,
-.rowContainer {
-  display: flex;
-  justify-content: center;
-  transition: all 0.5s ease;
-}
-
-.rowContainer.withOutput {
-  justify-content: flex-start;
-}
-
-/* Placeholder invisible */
-.whitespace {
-  text-align: center;
-  color: transparent;
-}
-
-
-
-/* Textarea */
-.textarea {
-  
-  letter-spacing: 0;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  word-break: break-word;
-  direction: rtl;
-  text-align: right;
-  width: 100%;
-  min-height: 100%;
-  font-size: 28px;
-    line-height: 3;
-    padding: 30px;
-  border: 2px solid white;
-  resize: none;
-  background-color: rgb(254 251 244);
-  border-radius: 12px;
-  margin: 0 auto;
-  overflow-y: hidden; /* pas de scroll auto */
-}
-
-.textarea:focus {
-  outline: none;
-  border-color: #00a8f0;
-  box-shadow: 0px 6px 15px rgba(0, 168, 240, 0.3);
-}
-
-/* Output div texte coloré */
-.outputDiv {
-    letter-spacing: 0;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  word-break: break-word;
-  direction: rtl;
-  text-align: right;
-  
-  font-size: 28px;
-    line-height: 3;
-    padding: 30px;
-  border: 2px solid white;
-  background-color: rgb(254 251 244);
-  border-radius: 12px;
-  margin: 0 auto;
-  width: 100%;
-  min-height: 100px;
-  overflow-y: hidden; /* pas de scroll */
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.outputDiv.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Chakra hover effect */
-.chakelImg:hover {
-  transform: scale(1.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-/* Bouton téléchargement */
-.downloadIcon {
-  color: #00a8f0;
-  font-size: 25px;
-  cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
-  align-items: center;
-  margin: 10px auto;
-}
-
-.downloadIcon:hover {
-  color: #ff6b81;
-}
-
-/* === Carrousel avec flèches PC === */
+/* --- CAROUSEL --- */
 .carouselWrapper {
   margin: 0px auto;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
-
-
 
 .carouselCenterContainer {
-  overflow-x: auto;                 /* scroll horizontal activé */
-  -webkit-overflow-scrolling: touch; /* scroll fluide iOS */
-  white-space: nowrap;               /* cartes alignées sur une ligne */
-  scrollbar-width: none;             /* Firefox : cacher scrollbar */
-}
-
-/* Chrome, Edge, Safari */
-.carouselCenterContainer::-webkit-scrollbar {
-  display: none;
-}
-
-
-.carouselAutoContainer {
   overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  width: 100%;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 15px;
+  padding: 10px 0;
+  scrollbar-width: none; /* Firefox */
 }
 
-.carouselAutoContainer::-webkit-scrollbar {
-  display: none;
+.carouselCenterContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .carouselAutoTrack {
-  padding-left: 10px;
   display: flex;
   gap: 15px;
 }
 
 .carouselCard {
-  flex: 0 0 calc(20% - 15px);
-  min-height: 80px;
-  max-height: 100px;
-  cursor: pointer;
-  border: 1px solid #eee;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  flex: 0 0 auto; /* largeur fixe pour carousel horizontal */
+  scroll-snap-align: start;
+  border-radius: 20px;
   text-align: center;
-  padding: 19px;
-  background: rgb(254 251 244);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: 10px;
+  padding: 18px 10px;
+  border: 1px solid #eee;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  background: rgb(254, 251, 244);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 140px; /* largeur minimale pour chaque carte */
 }
 
 .carouselCard:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+  box-shadow: 0px 6px 18px rgba(0, 168, 240, 0.15);
 }
 
 .carouselIcon {
-  font-size: 28px;
-  transition: transform 0.3s ease;
-}
-
-.carouselCard:hover .carouselIcon {
-  transform: scale(1.15);
+  font-size: 30px;
+  color: #00a8f0;
+  margin-bottom: 5px;
 }
 
 .carouselTitle {
   font-size: 16px;
-  font-weight: 500;
-  color: #333;
+  font-weight: 600;
+  color: #444;
 }
 
-/* Flèches gauche/droite */
+/* --- FLECHES --- */
+.carouselArrowWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .carouselArrow {
-  transform: translateY(-50%);
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
-  z-index: 2;
-  margin-top: 50px;
+  font-size: 28px;
+  color: #00a8f0;
+  border-radius: 50%;
+  padding: 0px 5px 5px 5px;
+  transition: all 0.3s ease;
 }
 
 .carouselArrow:hover {
-  color: #76d6f3;
-  font-size: 18px;
+  transform: scale(1.2);
+  background: #00a8f0;
+  color: white;
 }
 
-/* Responsive */
-@media only screen and (max-width: 991px) {
-  .ChakelContainer {
-    display: none;
-  }
+/* --- BOUTON AJOUT / RETOUR --- */
+.addButton {
+  background: linear-gradient(135deg, #00a8f0, #64d1ff);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 168, 240, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px auto;
+}
 
+.addButton:hover {
+  background: linear-gradient(135deg, #0096db, #56c2ff);
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 14px rgba(0, 168, 240, 0.4);
+}
+
+
+
+/* --- TEXTAREA & OUTPUT --- */
+.textarea,
+.outputDiv {
+  font-size: 28px;
+  line-height: 3;
+  padding: 30px;
+  border: 2px solid white;
+  border-radius: 18px;
+  background-color: rgb(254, 251, 244);
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.05);
+  direction: rtl;
+  text-align: right;
+  height: auto;
+  min-height: 80px;
+  resize: none;
+  overflow: hidden;
+}
+
+/* --- Responsive --- */
+@media only screen and (max-width: 991px) {
+  .carouselCard {
+    min-width: 120px;
+  }
+  .carouselTitle {
+    font-size: 14px;
+  }
   .textarea,
   .outputDiv {
-    font-size: 26px;
-    line-height: 3;
-    padding: 30px;
-    max-height: 80vh;
-    overflow-y: auto;
+    font-size: 24px;
+    padding: 25px;
   }
-
-  .whitespace {
-    display: none;
-  }
-
-  .carouselWrapper {
-    padding: 0; /* pas de place pour les flèches */
-  }
-
-  .carouselArrow {
-    display: none; /* cache les flèches */
-  }
-
-  .carouselCard {
-    flex: 0 0 calc(33% - 10px); /* 3 cartes visibles tablette */
-  }
-  .carouselAutoTrack {
-  padding-left: 0px;
-}
-.carouselCard {
-  min-width: 120px;
-  max-width: 150px;
-}
-
 }
 
 @media only screen and (max-width: 600px) {
   .carouselCard {
-    
-  min-width: 100px;
-  max-width: 120px;
-    flex: 0 0 calc(50% - 10px); /* 2 cartes visibles mobile */
-  }
-  .carouselIcon {
-    font-size: 30px;
+    min-width: 100px;
   }
   .carouselTitle {
     font-size: 12px;
   }
-  
-.carouselAutoTrack {
-  padding-left: 0px;
+  .textarea,
+  .outputDiv {
+    font-size: 20px;
+    padding: 20px;
+  }
 }
-}
-
-/* Masquer le scroll horizontal sur mobile */
-@media only screen and (max-width: 767px) {
-  .d-flex.overflow-hidden::-webkit-scrollbar {
+@media only screen and (max-width: 768px) {
+  /* Masquer les flèches sur mobile */
+  .carouselArrowWrapper,
+  .carouselArrow {
     display: none;
   }
-  .d-flex.overflow-hidden {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 20px auto;
+  /* Carousel prend toute la largeur */
+  .carouselCenterContainer {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* scroll smooth iOS */
+  }
+  .title {
+    font-size: 22px;
 }
 
-  .outputDiv {
-    min-height: auto; /* supprime la min-height fixe */
-    height: auto;     /* prend la hauteur du contenu */
-    overflow-y: visible; /* permet à la div de s'adapter */
-  }
-
 }
+
+
+

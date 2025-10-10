@@ -1,10 +1,12 @@
+
 .title {
   font-size: 2rem;
   color: #06b4c4;
   font-weight: 700;
-  padding-bottom: 30px;
+  margin-bottom: 20px;
+  padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #aaaaaa93;
+  border-bottom: 2px solid  #dbf1fba4;
 }
 
 /* --- Carousel --- */
@@ -13,9 +15,8 @@
   align-items: center;
   justify-content: space-evenly;
   margin-top: 20px;
-  width: 700px;
+  width: auto;
 }
-
 .carouselItems {
   display: flex;
   gap: 14px;
@@ -185,6 +186,14 @@
    .navButton {
     display: none;
   }
+  
+.CarouselIcon{
+  display: none;
+}
+ .CarouselContainer {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 }
 /* --- Mobile --- */
 @media only screen and (max-width: 767px) {
@@ -197,18 +206,7 @@
     width: 35px;
     height: 35px;
   }
-  .navButton {
-    display: none;
-  }
-  .gameArea {
-    margin-top: 20px;
-  }
 
-  .CarouselContainer {
-    width: 100%;
-    justify-content: flex-start;
-    padding-left: 15px;
-  }
 
   .miniGridContainer {
     flex: 0 0 auto;
@@ -220,13 +218,8 @@
     justify-content: space-evenly;
   }
 
-  .objectiveBoard {
-    max-width: 90vw;
-    margin: 10px auto;
-  }
-
   .title {
-  margin-bottom: 20px;
+  margin: 0px auto;
 }
 
 }

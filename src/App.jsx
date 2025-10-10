@@ -8,9 +8,17 @@ function App() {
       fluid
       style={{
         padding: "0px",
-        margintop: "0px",
+        marginTop: "0px",
       }}
     >
+      <div style={{ display: "none" }}>
+        <a href="/">Home</a>
+        <a href="/Logic">Logic</a>
+        <a href="/Parent">Parent</a>
+        <a href="/Reading">Reading</a>
+        <a href="/SpecificLearn">SpecificLearn</a>
+        <a href="/NotFound">NotFound</a>
+      </div>
       <Outlet />
     </Container>
   );

@@ -3,17 +3,15 @@
   color: #ff4081;
   font-weight: 700;
   margin-bottom: 20px;
-  padding-bottom: 30px;
+  padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #aaaaaa93;
+  border-bottom: 2px solid  #dbf1fba4;
 }
 
 
 .gameContainer {
   text-align: center;
   margin: 0px auto;
-  border-top: 1px solid #aaaaaa93;
-  border-bottom: 1px solid #aaaaaa93;
 
 }
 
@@ -38,7 +36,7 @@
 @media only screen and (max-width: 767px) {
 
   .title {
-  margin-bottom: 20px;
+  margin: 0px auto;
 }
 }
 

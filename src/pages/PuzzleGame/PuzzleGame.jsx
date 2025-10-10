@@ -7,6 +7,7 @@ import {
   ArrowRight,
 } from "react-bootstrap-icons";
 import { Col, Container, Row } from "react-bootstrap";
+import { Button } from "../../components/Button/Button"; // ✅ ton composant bouton réutilisable
 
 const colors = ["#FF6347", "#32CD32", "#1E90FF", "#FFD700"];
 const NUM_PLATEAUX = 25;
@@ -79,18 +80,12 @@ export function PuzzleGame({ isMobile }) {
   const scrollAmount = 250;
   const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: -scrollAmount,
-        behavior: "smooth",
-      });
+      carouselRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     }
   };
   const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
@@ -99,37 +94,33 @@ export function PuzzleGame({ isMobile }) {
       <Row>
         <h2 className={s.title}>Jeu de Logique</h2>
       </Row>
+      {/* <div style={{ borderBottom: "1px solid #aaaaaa93" }}></div> */}
 
-      <Row
-        className="align-items-center mb-2"
-        style={{
-          borderBottom: "1px solid #aaaaaa9",
-        }}
-      >
+      <Row className="align-items-center mb-3 ">
         <div
           className="d-flex justify-content-between align-items-center flex-wrap gap-3"
           style={{
-            width: isMobile ? "90%" : "700px",
-            maxWidth: "95vw",
+            minWidth: isMobile ? "auto" : "500px",
+            height: "60px",
             margin: "0 auto",
             transition: "width 0.3s ease",
           }}
         >
           <div className="d-flex first">
             {selectedPlateau && (
-              <button
-                className={s.backButton}
-                onClick={() => {
+              <Button
+                icon={ArrowLeft}
+                variant="backButtonSmall"
+                size={28}
+                action={() => {
                   setSelectedPlateau(null);
                   setTimerActive(false);
                   setTime(0);
                 }}
-                title="Retour aux plateaux"
-              >
-                <ArrowLeft />
-              </button>
+              />
             )}
           </div>
+
           <div className="d-flex last fw-bold gap-3">
             <div>
               <CheckCircle color="green" size={22} /> : {score}
@@ -141,24 +132,21 @@ export function PuzzleGame({ isMobile }) {
           </div>
         </div>
       </Row>
-      <div
-        style={{
-          borderBottom: "1px solid #aaaaaa93",
-        }}
-      ></div>
+
+      {/* <div style={{ borderBottom: "1px solid #aaaaaa93" }}></div> */}
+
       {/* === title === */}
       {!selectedPlateau && (
         <Row>
-          <h5 className="mt-5"> Choisissez votre mosaique :</h5>
+          <h5 className="mt-5"> Choisissez votre mosaïque :</h5>
         </Row>
       )}
+
       {/* === CAROUSEL === */}
       {!selectedPlateau && (
         <Row className={s.CarouselContainer}>
-          <Col lg={1}>
-            <button className={s.navButton} onClick={scrollLeft}>
-              <ArrowLeft />
-            </button>
+          <Col lg={1} className={s.CarouselIcon}>
+            <Button icon={ArrowLeft} variant="navButton" action={scrollLeft} />
           </Col>
           <Col lg={10}>
             <div className={s.carouselItems} ref={carouselRef}>
@@ -183,10 +171,12 @@ export function PuzzleGame({ isMobile }) {
               ))}
             </div>
           </Col>
-          <Col lg={1}>
-            <button className={s.navButton} onClick={scrollRight}>
-              <ArrowRight />
-            </button>
+          <Col lg={1} className={s.CarouselIcon}>
+            <Button
+              icon={ArrowRight}
+              variant="navButton"
+              action={scrollRight}
+            />
           </Col>
         </Row>
       )}
@@ -217,13 +207,6 @@ export function PuzzleGame({ isMobile }) {
                     border: "2px solid #ccc",
                   }}
                   onClick={() => handleTileClick(i)}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => {
-                    const droppedColor = e.dataTransfer.getData("color");
-                    const newGrid = [...playerGrid];
-                    newGrid[i] = droppedColor;
-                    setPlayerGrid(newGrid);
-                  }}
                 ></div>
               ))}
             </div>
@@ -244,34 +227,43 @@ export function PuzzleGame({ isMobile }) {
               ))}
             </div>
 
-            {/* Bouton confirmer */}
+            {/* Boutons de validation */}
             {!result && (
-              <button className={s.confirmButton} onClick={checkResult}>
-                ✅ Confirmer
-              </button>
+              <Row style={{ width: "50%", margin: "30px auto" }}>
+                <Button
+                  name="Confirmer"
+                  icon={CheckCircle}
+                  variant="confirmButtonSmall"
+                  size={20}
+                  action={checkResult}
+                />
+              </Row>
             )}
 
-            {/* Résultat */}
             {result && (
               <div className={s.modalOverlay}>
                 <div className={s.modalBox}>
                   <p>{result}</p>
                   <div className="d-flex justify-content-center gap-2 mt-3">
                     {lastResult === "error" && (
-                      <button
-                        className={s.newGameButton}
-                        onClick={() => {
+                      <Button
+                        name="Refaire"
+                        icon={ArrowLeft}
+                        variant="dangerButtonSmall"
+                        size={20}
+                        action={() => {
                           setPlayerGrid(Array(16).fill(null));
                           setResult(null);
                           setLastResult(null);
                         }}
-                      >
-                        🔄 Refaire
-                      </button>
+                      />
                     )}
-                    <button
-                      className={s.confirmButton}
-                      onClick={() => {
+                    <Button
+                      name="Suivant"
+                      icon={ArrowRight}
+                      variant="confirmButtonSmall"
+                      size={20}
+                      action={() => {
                         const nextIndex =
                           (miniGrids.indexOf(selectedPlateau) + 1) %
                           miniGrids.length;
@@ -282,9 +274,7 @@ export function PuzzleGame({ isMobile }) {
                         setTime(0);
                         setTimerActive(true);
                       }}
-                    >
-                      ➡️ Suivant
-                    </button>
+                    />
                   </div>
                 </div>
               </div>

@@ -101,8 +101,8 @@ export function SpecificLearn() {
       {!selectedTheme ? (
         <div
           style={{
-            width: isMobile ? "90%" : "60%",
-            margin: "50px auto",
+            width: isMobile ? "90%" : "50%",
+            margin: "0px auto",
             textAlign: "center",
           }}
         >
@@ -141,23 +141,24 @@ export function SpecificLearn() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: "10px",
-            width: "100%",
+            margin: isMobile ? "40px auto" : "0px auto",
             textAlign: "center",
           }}
         >
           {renderSidebar()}
           <div
+            className="shadow-lg"
             style={{
-              width: isMobile ? "100%" : "auto",
               maxWidth: "100%",
-              margin: "0 auto",
+              margin: isMobile ? "20px auto" : "0 auto",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               overflow: "hidden",
-              borderRadius: "18px",
-              padding: isMobile ? "10px" : "10px",
+              borderRadius: "30px",
+              backgroundColor: "#fff",
+              padding: "10px",
+              width: isMobile ? "90%" : "50%",
             }}
           >
             {React.cloneElement(selectedTheme.component, { isMobile })}
