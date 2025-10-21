@@ -2,7 +2,7 @@
 .button {
   font-weight: 700;
   border-radius: 40px;
-  padding: 10px ;
+  padding: 10px 20px ;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -25,13 +25,23 @@
   background: linear-gradient(135deg, #0096db, #56c2ff);
 }
 
+.errorButton {
+  background: linear-gradient(135deg, #cb1e03, #f12000);
+  color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.errorButton:hover {
+  background: linear-gradient(135deg, #cb1e03, #cb1e03);
+}
+
 .confirmButtonSmall {
-  background: linear-gradient(135deg, #ff66b2, #ff9f43);
+  background: linear-gradient(0deg, #17c300c9,#17c300,#17c300, #17c300c9);
   color: white;
 }
 
 .confirmButtonSmall:hover {
-  background: linear-gradient(135deg, #ff4da6, #ff7b00);
+  background: linear-gradient(0deg, #107e01c9,#107e01,#107e01, #107e01c9);
 }
 
 .backButtonSmall {

@@ -5,6 +5,7 @@ import s from "./style.module.css";
 import { ShapeGame } from "../ShapeGame/ShapeGame";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { PuzzleGame } from "../PuzzleGame/PuzzleGame";
+import { MemoryGame } from "../MemoryGame/MemoryGame";
 
 const themes = [
   {
@@ -25,7 +26,7 @@ const themes = [
     title: "Chiffres",
     subtitle: "Joue avec les chiffres et améliore tes calculs mentaux",
     icon: <Icon.CalculatorFill size={36} color="#27AE60" />,
-    component: <p>Jeu des chiffres 🔢</p>,
+    component: <MemoryGame />,
     bgc: "#f9ffccff",
   },
   {
@@ -150,7 +151,7 @@ export function SpecificLearn() {
             className="shadow-lg"
             style={{
               maxWidth: "100%",
-              margin: isMobile ? "20px auto" : "0 auto",
+              margin: isMobile ? "0px auto" : "0 auto",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

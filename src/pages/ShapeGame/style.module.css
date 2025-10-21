@@ -1,13 +1,3 @@
-.title {
-  font-size: 2rem;
-  color: #ff4081;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding: 10px;
-  text-align: center;
-  border-bottom: 2px solid  #dbf1fba4;
-}
-
 
 .gameContainer {
   text-align: center;
@@ -32,13 +22,7 @@
   background-color: #e91e63;
 }
 
-/* Mobile */
-@media only screen and (max-width: 767px) {
 
-  .title {
-  margin: 0px auto;
-}
-}
 
 
 

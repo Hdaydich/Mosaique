@@ -1,0 +1,18 @@
+
+.title {
+  font-size: 2rem;
+  color: #09bfdb;
+  font-weight: 700;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid  #dbf1fba4;
+}
+
+/* --- Mobile --- */
+@media only screen and (max-width: 767px) {
+
+  .title {
+  margin: 0px auto;
+}
+
+}

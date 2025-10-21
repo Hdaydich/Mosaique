@@ -5,9 +5,13 @@ import {
   CheckCircle,
   XCircle,
   ArrowRight,
+  Circle,
+  Check,
+  Repeat,
 } from "react-bootstrap-icons";
 import { Col, Container, Row } from "react-bootstrap";
-import { Button } from "../../components/Button/Button"; // ✅ ton composant bouton réutilisable
+import { Button } from "../../components/Button/Button";
+import { GameTitle } from "../../components/GameTitle/GameTitle";
 
 const colors = ["#FF6347", "#32CD32", "#1E90FF", "#FFD700"];
 const NUM_PLATEAUX = 25;
@@ -92,16 +96,15 @@ export function PuzzleGame({ isMobile }) {
   return (
     <Container>
       <Row>
-        <h2 className={s.title}>Jeu de Logique</h2>
+        <GameTitle name=" Jeu de Logique" />
       </Row>
-      {/* <div style={{ borderBottom: "1px solid #aaaaaa93" }}></div> */}
 
-      <Row className="align-items-center mb-3 ">
+      <Row className="align-items-center">
         <div
           className="d-flex justify-content-between align-items-center flex-wrap gap-3"
           style={{
             minWidth: isMobile ? "auto" : "500px",
-            height: "60px",
+            paddingTop: "10px",
             margin: "0 auto",
             transition: "width 0.3s ease",
           }}
@@ -111,7 +114,7 @@ export function PuzzleGame({ isMobile }) {
               <Button
                 icon={ArrowLeft}
                 variant="backButtonSmall"
-                size={28}
+                size={22}
                 action={() => {
                   setSelectedPlateau(null);
                   setTimerActive(false);
@@ -133,12 +136,10 @@ export function PuzzleGame({ isMobile }) {
         </div>
       </Row>
 
-      {/* <div style={{ borderBottom: "1px solid #aaaaaa93" }}></div> */}
-
       {/* === title === */}
       {!selectedPlateau && (
         <Row>
-          <h5 className="mt-5"> Choisissez votre mosaïque :</h5>
+          <h5 className="mt-3"> Choisissez votre mosaïque :</h5>
         </Row>
       )}
 
@@ -146,7 +147,7 @@ export function PuzzleGame({ isMobile }) {
       {!selectedPlateau && (
         <Row className={s.CarouselContainer}>
           <Col lg={1} className={s.CarouselIcon}>
-            <Button icon={ArrowLeft} variant="navButton" action={scrollLeft} />
+            <ArrowLeft size={24} onClick={scrollLeft} />
           </Col>
           <Col lg={10}>
             <div className={s.carouselItems} ref={carouselRef}>
@@ -172,11 +173,7 @@ export function PuzzleGame({ isMobile }) {
             </div>
           </Col>
           <Col lg={1} className={s.CarouselIcon}>
-            <Button
-              icon={ArrowRight}
-              variant="navButton"
-              action={scrollRight}
-            />
+            <ArrowRight size={24} onClick={scrollRight} />
           </Col>
         </Row>
       )}
@@ -232,9 +229,8 @@ export function PuzzleGame({ isMobile }) {
               <Row style={{ width: "50%", margin: "30px auto" }}>
                 <Button
                   name="Confirmer"
-                  icon={CheckCircle}
                   variant="confirmButtonSmall"
-                  size={20}
+                  size={24}
                   action={checkResult}
                 />
               </Row>
@@ -248,8 +244,8 @@ export function PuzzleGame({ isMobile }) {
                     {lastResult === "error" && (
                       <Button
                         name="Refaire"
-                        icon={ArrowLeft}
-                        variant="dangerButtonSmall"
+                        icon={Repeat}
+                        variant="errorButton"
                         size={20}
                         action={() => {
                           setPlayerGrid(Array(16).fill(null));

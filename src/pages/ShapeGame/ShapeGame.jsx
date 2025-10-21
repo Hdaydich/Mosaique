@@ -7,8 +7,9 @@ import {
   ArrowClockwise,
 } from "react-bootstrap-icons";
 import { Shapes } from "./Shapes";
-import { Button } from "../../components/Button/Button"; // ✅ ton bouton global
+import { Button } from "../../components/Button/Button";
 import s from "./style.module.css";
+import { GameTitle } from "../../components/GameTitle/GameTitle";
 
 const SHAPES = ["circle", "square", "triangle", "star", "hexagon", "diamond"];
 
@@ -49,7 +50,7 @@ export function ShapeGame({
   const [rows, setRows] = useState(buildRows(target, level));
   const [clickedPositions, setClickedPositions] = useState({});
   const [checked, setChecked] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [feedback, setFeedback] = useState({}); // ✅ stocke le résultat visuel de chaque case
 
   // Timer
   useEffect(() => {
@@ -65,13 +66,13 @@ export function ShapeGame({
     setRows(buildRows(newTarget, level));
     setClickedPositions({});
     setChecked(false);
-    setIsCorrect(false);
+    setFeedback({});
     setTime(0);
     setTimerActive(true);
   }, [level]);
 
   const handleClick = (rowIndex, colIndex) => {
-    if (checked) return;
+    if (checked) return; // empêche les clics après validation
     const key = `${rowIndex}-${colIndex}`;
     setClickedPositions((prev) => ({
       ...prev,
@@ -80,45 +81,46 @@ export function ShapeGame({
   };
 
   const checkAnswers = () => {
+    const newFeedback = {};
     let correct = true;
+
     rows.forEach((row, rowIndex) =>
       row.forEach((item, colIndex) => {
         const key = `${rowIndex}-${colIndex}`;
         const clicked = clickedPositions[key];
-        if (item.shape === target && !clicked) correct = false;
-        if (item.shape !== target && clicked) correct = false;
+
+        if (item.shape === target && clicked) {
+          newFeedback[key] = "correct"; // ✅ bien coché
+        } else if (item.shape === target && !clicked) {
+          newFeedback[key] = "missed"; // 🔴 non coché alors qu’il fallait
+          correct = false;
+        } else if (item.shape !== target && clicked) {
+          newFeedback[key] = "wrong"; // 🔴 mauvaise case cochée
+          correct = false;
+        }
       })
     );
-    setIsCorrect(correct);
+
+    setFeedback(newFeedback);
     setChecked(true);
     if (correct) setScore((s) => s + 1);
     else setFailScore((f) => f + 1);
     setTimerActive(false);
   };
 
-  const nextLevel = () => {
+  const replay = () => {
     const newTarget = randomFrom(SHAPES);
     setTarget(newTarget);
     setRows(buildRows(newTarget, level));
     setClickedPositions({});
     setChecked(false);
-    setIsCorrect(false);
+    setFeedback({});
     setTime(0);
     setTimerActive(true);
   };
 
-  const handleLevelSelect = (lvl) => {
-    if (lvl !== level) setLevel(lvl);
-  };
-
   const renderLevels = () => (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-      }}
-    >
+    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
       {["facile", "medium", "hard"].map((lvl) => {
         const active = lvl === level;
         const color =
@@ -130,7 +132,7 @@ export function ShapeGame({
         return (
           <div
             key={lvl}
-            onClick={() => handleLevelSelect(lvl)}
+            onClick={() => setLevel(lvl)}
             title={lvl}
             style={{
               width: active ? 26 : 20,
@@ -141,6 +143,7 @@ export function ShapeGame({
               transform: active ? "scale(1.2)" : "scale(1)",
               transition: "all 0.2s ease",
               border: "2px solid white",
+              boxShadow: active ? "0 0 10px rgba(0,0,0,0.3)" : "none",
             }}
           />
         );
@@ -148,7 +151,6 @@ export function ShapeGame({
     </div>
   );
 
-  // Responsive grid setup
   const { cols: colCount, size: baseShapeSize } = LEVEL_STYLE[level];
   const gap = 6;
   const containerMaxWidth = isMobile
@@ -164,25 +166,34 @@ export function ShapeGame({
     gridTemplateColumns: `repeat(${colCount}, ${maxShapeSize}px)`,
     gap: `${gap}px`,
     justifyContent: "center",
-    maxWidth: containerMaxWidth + "px",
     margin: "20px auto",
   };
 
   return (
     <Container>
       <Row>
-        <h2 className={s.title}>Jeu d'attention</h2>
+        <GameTitle name="Jeu d'attention" />
       </Row>
 
-      <Row className="align-items-center mb-3 mt-3">
+      {/* Barre de score + timer */}
+      <Row className="align-items-center mb-2 mt-1">
         <div
           className="d-flex justify-content-between align-items-center flex-wrap gap-3"
-          style={{
-            minWidth: isMobile ? "auto" : "500px",
-          }}
+          style={{ minWidth: isMobile ? "auto" : "500px" }}
         >
-          <div className="d-flex first">{renderLevels()}</div>
-          <div className="d-flex last fw-bold gap-3">
+          <div>{renderLevels()}</div>
+          <div
+            className={s.scorePanel}
+            style={{
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+              padding: "6px 15px",
+              borderRadius: "10px",
+              background: "#fff",
+              fontWeight: "bold",
+            }}
+          >
             <div>
               <CheckCircle color="green" size={22} /> : {score}
             </div>
@@ -194,47 +205,57 @@ export function ShapeGame({
         </div>
       </Row>
 
-      <Row className="justify-content-center mb-4">
+      {/* Grille du jeu */}
+      <Row className="justify-content-center mb-3">
         <Col>
-          <Row className={s.gameContainer}>
-            <div style={{ marginBottom: "0px", marginTop: "10px" }}>
-              <Shapes shape={target} size={maxShapeSize} color="#05155aff" />
-            </div>
-            <div style={gridContainerStyle}>
-              {rows.map((row, rowIndex) =>
-                row.map((item, colIndex) => {
-                  const key = `${rowIndex}-${colIndex}`;
-                  const clickedColor = clickedPositions[key];
-                  return (
-                    <div
-                      key={key}
-                      onClick={() => handleClick(rowIndex, colIndex)}
-                      style={{
-                        borderRadius: "12px",
-                        cursor: "pointer",
-                        transition: "all 0.2s",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: maxShapeSize,
-                        height: maxShapeSize,
-                      }}
-                    >
-                      <Shapes
-                        shape={item.shape}
-                        size={maxShapeSize - 1}
-                        color={clickedColor || "#ffffffff"}
-                      />
-                    </div>
-                  );
-                })
-              )}
-            </div>
-          </Row>
+          <div style={{ textAlign: "center", marginBottom: "10px" }}>
+            <Shapes shape={target} size={maxShapeSize} color="#05155aff" />
+          </div>
+
+          <div style={gridContainerStyle}>
+            {rows.map((row, rowIndex) =>
+              row.map((item, colIndex) => {
+                const key = `${rowIndex}-${colIndex}`;
+                const clickedColor = clickedPositions[key];
+                const state = feedback[key];
+
+                let Color = "transparent";
+                if (state === "correct") Color = "#00cb2f7e"; // vert
+                if (state === "wrong" || state === "missed")
+                  Color = "#f8071f96"; // rouge
+
+                return (
+                  <div
+                    key={key}
+                    onClick={() => handleClick(rowIndex, colIndex)}
+                    style={{
+                      borderRadius: "12px",
+                      cursor: checked ? "default" : "pointer",
+                      transition: "all 0.2s",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: maxShapeSize,
+                      height: maxShapeSize,
+                      background: "#fff",
+                      backgroundColor: Color,
+                    }}
+                  >
+                    <Shapes
+                      shape={item.shape}
+                      size={maxShapeSize - 1}
+                      color={clickedColor || "#ffffff"}
+                    />
+                  </div>
+                );
+              })
+            )}
+          </div>
         </Col>
       </Row>
 
-      <div className="d-flex flex-wrap justify-content-center gap-3 mt-4 mb-3">
+      {/* Boutons */}
+      <div className="d-flex flex-wrap justify-content-center gap-3 mt-3 mb-3">
         {!checked ? (
           <Button
             name="Confirmer"
@@ -243,33 +264,21 @@ export function ShapeGame({
             size={22}
             action={checkAnswers}
           />
-        ) : isCorrect ? (
-          <Button
-            name="Suivant"
-            icon={ArrowRightCircle}
-            variant="nextButton"
-            size={22}
-            action={nextLevel}
-          />
         ) : (
           <>
             <Button
               name="Rejouer"
               icon={ArrowClockwise}
-              variant="retryButton"
+              variant="errorButton"
               size={22}
-              action={() => {
-                setChecked(false);
-                setClickedPositions({});
-                setTimerActive(true);
-              }}
+              action={replay}
             />
             <Button
               name="Suivant"
               icon={ArrowRightCircle}
-              variant="nextButton"
+              variant="confirmButtonSmall"
               size={22}
-              action={nextLevel}
+              action={replay}
             />
           </>
         )}

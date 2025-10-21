@@ -169,7 +169,8 @@ export function Reading() {
                   fontSize: "1.8rem",
                   fontWeight: "500",
                   color: "#424242",
-                  justifyContent: "center", // <- centrer horizontalement
+                  justifyContent: "center",
+                  marginTop: "-40px",
                 }}
               >
                 <Button
