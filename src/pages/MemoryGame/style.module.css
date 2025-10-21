@@ -1,28 +1,23 @@
-/* === Structure générale === */
-.subtitle {
-  color: #555;
-  margin-bottom: 15px;
-}
-
+/* === Container général === */
 .memoryContainer {
   padding: 10px;
-  max-width: 100%;
-  overflow-x: hidden;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 
-/* === Boutons de niveaux === */
 .levelBtn {
   margin: 20px auto;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 12px;
   font-weight: bold;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
-  max-width: 150px;
+  font-size: 1rem;
+  min-width: 100px;
+  text-align: center;
 }
 
 .level1 {
@@ -44,57 +39,58 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* === Grilles === */
-.gridLevel1,
-.gridLevel2,
-.gridLevel3 {
+/* === Grilles par niveau === */
+.gridLevel1 {
   width: 100%;
-  max-width: 600px;
-  margin: 15px auto;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
   display: grid;
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
   justify-items: center;
-  align-items: center;
-  gap: 12px;
 }
 
-/* Layout desktop par défaut */
-.gridLevel1 {
-  grid-template-columns: repeat(3, 1fr);
-}
 .gridLevel2 {
-  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
 }
+
 .gridLevel3 {
-  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  justify-items: center;
 }
 
 /* === Cartes === */
 .card {
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  max-width: 90px;
+  width: 90px;
+  height: 90px;
   cursor: pointer;
   border-radius: 12px;
-  transition: transform 0.2s ease;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card:hover {
-  transform: scale(1.05);
+  perspective: 600px; /* pour animation flip future */
 }
 
 .card img,
 .card .back {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 10px;
-  padding: 8px;
-  box-shadow: 0 4px 10px rgba(78, 78, 78, 0.4);
+  object-fit: cover;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
 }
 
 .back {
@@ -102,15 +98,6 @@
 }
 
 /* === Message de victoire === */
-.winMessage {
-  margin-top: 20px;
-  font-size: 1.4rem;
-  color: #27ae60;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* --- Modal --- */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -123,90 +110,42 @@
   align-items: center;
   z-index: 1000;
 }
-
 .modalBox {
   background: #fff;
   padding: 20px 30px;
   border-radius: 15px;
   text-align: center;
   animation: fadeIn 0.4s ease;
+  max-width: 300px;
+  width: 90%;
 }
 
-/* === Animations === */
+/* === Score et timer === */
+.d-flex.last {
+  font-weight: bold;
+  gap: 15px;
+}
+
+/* === Animation fadeIn modal === */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* --- Responsive --- */
-
-/* ✅ Tablettes : légère adaptation */
-@media (max-width: 900px) {
-
-  
-  .levelBtn {
-  font-size: 12px;
+/* === Responsive === */
+@media (max-width: 950px) {
+  .gridLevel1 .card { width: 80px; height: 80px; }
+  .gridLevel2 .card { width: 70px; height: 70px; }
+  .gridLevel3 .card { width: 60px; height: 60px; }
+  .levelBtn { font-size: 0.9rem; padding: 8px 12px; min-width: 90px; }
 }
-  .gridLevel1,
-  .gridLevel2,
-  .gridLevel3 {
-    max-width: 100%;
+
+@media (max-width: 500px) {
+  .controls {
     gap: 10px;
-    padding: 0 5px;
+    flex-wrap: wrap;
   }
-
-  .gridLevel1 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .gridLevel2 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .gridLevel3 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .card {
-    max-width: none;
-  }
+  .gridLevel2 { grid-template-columns: repeat(3, 1fr); }
+  .gridLevel3 { grid-template-columns: repeat(4, 1fr); }
+  .card { width: 55px; height: 55px; }
 }
-
-/* ✅ iPhone / petits écrans : disposition précise */
-@media (max-width: 600px) {
-  /* Niveau 1 : 3 colonnes */
-  .gridLevel1 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* Niveau 2 : 3 colonnes × 4 lignes */
-  .gridLevel2 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* Niveau 3 : 4 colonnes × 5 lignes */
-  .gridLevel3 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .gridLevel1,
-  .gridLevel2,
-  .gridLevel3 {
-    gap: 10px;
-    padding: 0 5px;
-  }
-
-  .card {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-  }
-
-  .modalBox {
-    width: 90%;
-  }
-}
-

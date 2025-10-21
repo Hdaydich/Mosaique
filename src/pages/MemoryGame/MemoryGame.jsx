@@ -13,13 +13,12 @@ import pasterqueCerise from "../../assets/MemoryGameImg/pasterqueCerise.png";
 import orangePomme from "../../assets/MemoryGameImg/orangePomme.png";
 import raisonPomme from "../../assets/MemoryGameImg/raisonPomme.png";
 import orangePasteque from "../../assets/MemoryGameImg/orangePasteque.png";
+
 import {
   Repeat,
   ArrowRight,
   CheckCircle,
   XCircle,
-  Clock,
-  ArrowLeft,
 } from "react-bootstrap-icons";
 import s from "./style.module.css";
 import { Button } from "../../components/Button/Button";
@@ -53,6 +52,15 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
   const [flipped, setFlipped] = useState([]);
   const [matched, setMatched] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
+
+  // === Préchargement des images pour affichage instantané ===
+  useEffect(() => {
+    const allImages = Object.values(levels).flat();
+    allImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const generateCards = (lvl) => {
     const imgs = levels[lvl];
@@ -92,9 +100,10 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
         setFailScore((s) => s + 1);
       }
 
+      // retourne les cartes après 1s
       setTimeout(() => setFlipped([]), 1000);
     }
-  }, [flipped]);
+  }, [flipped, cards]);
 
   useEffect(() => {
     if (matched.length === levels[level].length) {
@@ -124,7 +133,7 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
   };
 
   return (
-    <Container fluid>
+    <Container fluid className={s.memoryContainer}>
       <Row>
         <GameTitle name="Jeu de Memoire" />
       </Row>
@@ -153,36 +162,38 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
         </div>
       </Row>
 
-      {/* Boutons niveaux */}
-      <Row >
-        <Col xs={4} md={4} lg={4}>
+      {/* Boutons niveaux centrés */}
+      <Row>
+        <Col xs={4} lg={4}>
+          {" "}
           <button
             className={`${s.levelBtn} ${s.level1} ${
               level === 1 ? s.active : ""
             }`}
             onClick={() => setLevel(1)}
           >
-            <span className={s.level}> Niveau 1</span>
+            Niveau 1
           </button>
         </Col>
-        <Col xs={4} md={4} lg={4}>
+        <Col xs={4} lg={4}>
+          {" "}
           <button
             className={`${s.levelBtn} ${s.level2} ${
               level === 2 ? s.active : ""
             }`}
             onClick={() => setLevel(2)}
           >
-            <span className={s.level}> Niveau 2</span>
+            Niveau 2
           </button>
         </Col>
-        <Col xs={4} md={4} lg={4}>
+        <Col xs={4} lg={4}>
           <button
             className={`${s.levelBtn} ${s.level3} ${
               level === 3 ? s.active : ""
             }`}
             onClick={() => setLevel(3)}
           >
-            <span className={s.level}> Niveau 3</span>
+            Niveau 3
           </button>
         </Col>
       </Row>
@@ -196,7 +207,7 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
             return (
               <div
                 key={card.id}
-                className={` ${s.card} ${isFlipped ? s.flipped : ""}`}
+                className={`${s.card} ${isFlipped ? s.flipped : ""}`}
                 onClick={() => handleClick(card.id)}
               >
                 {isFlipped ? (
@@ -211,56 +222,29 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
       </Row>
 
       {/* Message de victoire */}
-      <Row>
-        <div className={s.winMessage}>
-          {isFinished && (
-            // <span>🎉 Bravo ! Tu as terminé le niveau {level} !</span>
-            <div className={s.modalOverlay}>
-              <div className={s.modalBox}>
-                <span>🎉 Bravo ! Tu as terminé le niveau {level} !</span>
-                <div className="d-flex justify-content-center gap-2 mt-3">
-                  <Button
-                    name="Refaire"
-                    icon={Repeat}
-                    variant="errorButton"
-                    size={20}
-                    action={() => generateCards(level)}
-                  />
-
-                  <Button
-                    name="Suivant"
-                    icon={ArrowRight}
-                    variant="confirmButtonSmall"
-                    size={20}
-                    action={handleNextLevel}
-                  />
-                </div>
-              </div>
+      {isFinished && (
+        <div className={s.modalOverlay}>
+          <div className={s.modalBox}>
+            <span>🎉 Bravo ! Tu as terminé le niveau {level} !</span>
+            <div className="d-flex justify-content-center gap-2 mt-3">
+              <Button
+                name="Refaire"
+                icon={Repeat}
+                variant="errorButton"
+                size={20}
+                action={() => generateCards(level)}
+              />
+              <Button
+                name="Suivant"
+                icon={ArrowRight}
+                variant="confirmButtonSmall"
+                size={20}
+                action={handleNextLevel}
+              />
             </div>
-          )}
+          </div>
         </div>
-      </Row>
-
-      {/* Boutons de contrôle */}
-      <Row className="mt-3 mb-1" style={{ margin: "auto 10px" }}>
-        <Col className="d-flex justify-content-first ">
-          <Button
-            icon={Repeat}
-            variant="errorButton"
-            size={22}
-            action={() => generateCards(level)}
-          />
-        </Col>
-        <Col className="d-flex justify-content-end ">
-          <Button
-            icon={ArrowRight}
-            variant="confirmButtonSmall"
-            size={22}
-            action={handleNextLevel}
-          />
-        </Col>
-      </Row>
+      )}
     </Container>
   );
 }
-
