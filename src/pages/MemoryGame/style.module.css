@@ -154,6 +154,9 @@
 @media (max-width: 900px) {
 
   
+  .levelBtn {
+  font-size: 12px;
+}
   .gridLevel1,
   .gridLevel2,
   .gridLevel3 {
@@ -209,7 +212,4 @@
   .modalBox {
     width: 90%;
   }
-  .levelBtn {
-  font-size: 12px;
-}
 }
