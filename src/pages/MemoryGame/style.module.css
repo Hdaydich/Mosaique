@@ -10,14 +10,10 @@
   overflow-x: hidden;
 }
 
-.controls {
-  width: 100%;
-  margin: 20px auto;
-  justify-content: center;
-}
 
 /* === Boutons de niveaux === */
 .levelBtn {
+  margin: 20px auto;
   border: none;
   padding: 8px 16px;
   border-radius: 12px;
@@ -213,3 +209,4 @@
     width: 90%;
   }
 }
+
