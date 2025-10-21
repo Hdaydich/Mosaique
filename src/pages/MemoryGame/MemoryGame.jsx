@@ -124,7 +124,7 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <GameTitle name="Jeu de Memoire" />
       </Row>
@@ -214,7 +214,29 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
       <Row>
         <div className={s.winMessage}>
           {isFinished && (
-            <span>🎉 Bravo ! Tu as terminé le niveau {level} !</span>
+            // <span>🎉 Bravo ! Tu as terminé le niveau {level} !</span>
+            <div className={s.modalOverlay}>
+              <div className={s.modalBox}>
+                <span>🎉 Bravo ! Tu as terminé le niveau {level} !</span>
+                <div className="d-flex justify-content-center gap-2 mt-3">
+                  <Button
+                    name="Refaire"
+                    icon={Repeat}
+                    variant="errorButton"
+                    size={20}
+                    action={() => generateCards(level)}
+                  />
+
+                  <Button
+                    name="Suivant"
+                    icon={ArrowRight}
+                    variant="confirmButtonSmall"
+                    size={20}
+                    action={handleNextLevel}
+                  />
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </Row>
