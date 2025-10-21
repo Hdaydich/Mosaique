@@ -154,7 +154,7 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
       </Row>
 
       {/* Boutons niveaux */}
-      <Row className={s.controls}>
+      <Row >
         <Col xs={4} md={4} lg={4}>
           <button
             className={`${s.levelBtn} ${s.level1} ${
@@ -263,3 +263,4 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
     </Container>
   );
 }
+
