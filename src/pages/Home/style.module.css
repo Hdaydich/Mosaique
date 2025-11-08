@@ -125,7 +125,10 @@
   width: 90%;
   margin: 0px auto;
 }
-
+.activitiesSection {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 }
 
 
