@@ -102,7 +102,6 @@ export function PuzzleGame({ isMobile = false }) {
                   variant={level === "facile" ? "success" : "outlineSuccess"}
                   action={() => setLevel("facile")}
                 />
-                <Button />
               </Col>
               <Col>
                 <Button
@@ -110,7 +109,6 @@ export function PuzzleGame({ isMobile = false }) {
                   variant={level === "medium" ? "warning" : "outlineWarning"}
                   action={() => setLevel("medium")}
                 />
-                <Button />
               </Col>
               <Col>
                 <Button
