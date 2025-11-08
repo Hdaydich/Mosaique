@@ -50,6 +50,7 @@ export function SegmentColor(paragraph) {
     "ئ",
     "ء",
   ];
+
   const colors = {
     consonne: "#242424",
     alif: "#ff005d",
@@ -214,12 +215,12 @@ export function SegmentColor(paragraph) {
         consonne.includes(nextChar) &&
         consonne.includes(testChaklNextChar) &&
         chaklTab.includes(after) &&
-        after !== "ْ" // Sukoon
+        after !== "ْ" // <-- corrigé
       ) {
         syllable = currentChar + testChaklCurrentChar + nextChar;
         color = colors.special; // même couleur que Sukūn
         isSpecial = true;
-        i += 2; // avancer de 2 car on a pris current + chakl + next
+        i += 2;
       }
 
       tempResult.push({ text: syllable, color, special: isSpecial });

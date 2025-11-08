@@ -1,4 +1,4 @@
-// utils/exportToWord.js
+// utils/exportToWord.jsx
 import React from "react";
 import { saveAs } from "file-saver";
 import {
@@ -116,7 +116,7 @@ export const exportToWord = async (segments) => {
       new Paragraph({
         alignment: AlignmentType.RIGHT,
         spacing: { line: 400 },
-        children: children,
+        children,
       })
     );
 
@@ -244,14 +244,13 @@ export const exportToWord = async (segments) => {
 
   // Créer un tableau avec un espace fixe entre chaque image (via TextRun invisible)
   const imagesWithSpacing = [];
-  const spaceBetween = 10; //
+  const spaceBetween = 10; // nombre de hair spaces
   images.forEach((img, index) => {
     imagesWithSpacing.push(img);
     if (index < images.length - 1) {
-      // Ajouter un TextRun invisible pour créer un espace uniforme
       imagesWithSpacing.push(
         new TextRun({
-          text: "\u200A".repeat(spaceBetween), // hair space répétée
+          text: "\u200A".repeat(spaceBetween),
         })
       );
     }
@@ -263,7 +262,6 @@ export const exportToWord = async (segments) => {
         properties: {
           page: { margin: { top: 800, bottom: 1000, left: 1000, right: 1000 } },
         },
-
         children: [
           new Paragraph({
             alignment: AlignmentType.LEFT,
@@ -273,18 +271,17 @@ export const exportToWord = async (segments) => {
           // 4 images côte à côte centrées avec espace uniforme
           new Paragraph({
             alignment: AlignmentType.CENTER,
-            spacing: { befor: 0, after: 800 }, // réduit encore l'espace avant texte
+            spacing: { before: 0, after: 800 }, // correction du typo
             children: imagesWithSpacing,
             border: {
               bottom: {
                 color: "C0C0C0",
                 size: 6,
                 style: BorderStyle.SINGLE,
-                space: 400, // espace entre le texte et la bordure en twips
+                space: 400,
               },
             },
           }),
-
           // Texte exporté
           ...lines,
         ],
