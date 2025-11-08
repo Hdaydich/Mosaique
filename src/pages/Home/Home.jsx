@@ -3,12 +3,21 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { ItemList } from "../../components/ItemList/ItemList";
 import s from "./style.module.css";
 import kids from "../../assets/kids.png";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 export function Home() {
-  // Référence vers la section ItemList
+  const location = useLocation();
   const itemListRef = useRef(null);
 
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const section = document.getElementById(location.state.scrollTo);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   // Scroll fluide vers ItemList
   const scrollToItemList = () => {
     if (itemListRef.current) {
@@ -18,7 +27,6 @@ export function Home() {
 
   return (
     <Container className={s.mainContainer}>
-      {/* 🎨 HERO */}
       <Row className={`${s.hero} align-items-center`}>
         <Col xs={12} lg={6} className="text-center text-lg-start">
           <h1>🌈 Apprendre devient un jeu d’enfant</h1>
@@ -36,8 +44,8 @@ export function Home() {
         </Col>
       </Row>
 
-      {/* 🌟 ACTIVITÉS */}
-      <section ref={itemListRef} className={s.activitiesSection}>
+      {/*  ACTIVITÉS */}
+      <section id="activités" ref={itemListRef} className={s.activitiesSection}>
         <h1>Nos activités Mosaïque</h1>
         <p className={s.sectionText}>
           Explore les univers qui développent la curiosité, la mémoire et la
@@ -46,8 +54,8 @@ export function Home() {
         <ItemList />
       </section>
 
-      {/* 💚 VALEURS */}
-      <section className={s.valuesSection}>
+      {/* VALEURS */}
+      <section id="apropos" className={s.valuesSection}>
         <Row className="justify-content-center text-center g-4">
           {[
             {
