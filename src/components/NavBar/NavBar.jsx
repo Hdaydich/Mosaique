@@ -1,6 +1,5 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { PersonCircle } from "react-bootstrap-icons";
-import { Link } from "react-scroll";
 import s from "./style.module.css";
 import { Logo } from "../Logo/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
