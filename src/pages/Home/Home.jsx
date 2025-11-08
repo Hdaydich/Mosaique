@@ -10,14 +10,7 @@ export function Home() {
   const location = useLocation();
   const itemListRef = useRef(null);
 
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      const section = document.getElementById(location.state.scrollTo);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [location]);
+  
   // Scroll fluide vers ItemList
   const scrollToItemList = () => {
     if (itemListRef.current) {
@@ -95,3 +88,4 @@ export function Home() {
     </Container>
   );
 }
+
