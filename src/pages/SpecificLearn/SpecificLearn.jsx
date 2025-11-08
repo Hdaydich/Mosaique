@@ -109,7 +109,7 @@ export function SpecificLearn() {
                     cursor: "pointer",
                     border: "none",
                     boxShadow: "0 3px 8px rgba(0,0,0,0.15)",
-                    minHeight: isMobile ? "150px" : "220px",
+                    minHeight: isMobile ? "180px" : "220px",
                   }}
                   onClick={() => handleThemeSelect(t)}
                 >
@@ -153,3 +153,4 @@ export function SpecificLearn() {
     </Container>
   );
 }
+
