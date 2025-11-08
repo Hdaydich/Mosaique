@@ -145,7 +145,7 @@ export function ShapeGame({
       <Row>
         {/* Zone du jeu */}
         {isMobile && (
-          <>
+          <div style={{ margin: "0px auto", marginBottom: "20px" }}>
             <Row>
               <Card className={s.scoreCard}>
                 <Row>
@@ -191,7 +191,7 @@ export function ShapeGame({
                 </Row>
               </Card>
             </Row>
-          </>
+          </div>
         )}
 
         <Col xs={12} lg={9} className={s.gameCard}>
