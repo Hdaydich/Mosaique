@@ -137,7 +137,7 @@ export function PuzzleGame({ isMobile = false }) {
             <Row className=" align-items-start">
               {/* Modèle à reproduire */}
               <Col xs={12} md={6}>
-                <Card className={`${s.gridBox} ${s.modelGrid}`}>
+                <Card className={`${s.gridBox} ${s.modelGrid} mb-5`}>
                   <div
                     className={s.grid}
                     style={{
@@ -343,3 +343,4 @@ export function PuzzleGame({ isMobile = false }) {
     </Container>
   );
 }
+
