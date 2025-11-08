@@ -74,7 +74,10 @@ export function PuzzleGame({ isMobile = false }) {
   const containerWidth = isMobile
     ? window.innerWidth - 100 // petit padding autour
     : window.innerWidth / 4; // largeur fixe PC
-  const cellSize = Math.floor(containerWidth / size) - 8; // 6px gap
+
+  const cellSize = isMobile
+    ? Math.floor((containerWidth - 100) / size)
+    : Math.floor(containerWidth / size);
 
   return (
     <Container
@@ -128,10 +131,10 @@ export function PuzzleGame({ isMobile = false }) {
           </Card>
         </Col>
       </Row>
-      {isMobile ? (
-        <Row>
-          <Card className={s.gameCard} style={{ padding: "20px" }}>
-            <Row className="g-4 align-items-start">
+      <Row>
+        {isMobile ? (
+          <Card className={s.gameCard} style={{ width: "90%" }}>
+            <Row className=" align-items-start">
               {/* Modèle à reproduire */}
               <Col xs={12} md={6}>
                 <Card className={`${s.gridBox} ${s.modelGrid}`}>
@@ -139,8 +142,6 @@ export function PuzzleGame({ isMobile = false }) {
                     className={s.grid}
                     style={{
                       gridTemplateColumns: `repeat(${size}, ${cellSize}px)`,
-                      gap: "6px",
-                      justifyContent: "center",
                     }}
                   >
                     {gridModel.map((color, i) => (
@@ -160,19 +161,17 @@ export function PuzzleGame({ isMobile = false }) {
 
               {/* Zone joueur */}
               <Col xs={12}>
-                <div className="text-center mb-3 mt-3">
-                  <div className={s.colorGrid}>
-                    {colors.map((color) => (
-                      <div
-                        key={color}
-                        className={`${s.colorSwatch} ${
-                          selectedColor === color ? s.active : ""
-                        }`}
-                        style={{ backgroundColor: color }}
-                        onClick={() => setSelectedColor(color)}
-                      ></div>
-                    ))}
-                  </div>
+                <div className={s.colorGrid}>
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className={`${s.colorSwatch} ${
+                        selectedColor === color ? s.active : ""
+                      }`}
+                      style={{ backgroundColor: color }}
+                      onClick={() => setSelectedColor(color)}
+                    ></div>
+                  ))}
                 </div>
                 <Card className={s.gridBox}>
                   <div
@@ -208,26 +207,22 @@ export function PuzzleGame({ isMobile = false }) {
               </Col>
             </Row>
           </Card>
-        </Row>
-      ) : (
-        <Row>
+        ) : (
           <Card className={s.gameCard}>
             <Row className="align-items-start">
               {/* Zone joueur */}
               <Col lg={6}>
-                <div className="text-center mb-3 mt-3">
-                  <div className={s.colorGrid}>
-                    {colors.map((color) => (
-                      <div
-                        key={color}
-                        className={`${s.colorSwatch} ${
-                          selectedColor === color ? s.active : ""
-                        }`}
-                        style={{ backgroundColor: color }}
-                        onClick={() => setSelectedColor(color)}
-                      ></div>
-                    ))}
-                  </div>
+                <div className={s.colorGrid}>
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className={`${s.colorSwatch} ${
+                        selectedColor === color ? s.active : ""
+                      }`}
+                      style={{ backgroundColor: color }}
+                      onClick={() => setSelectedColor(color)}
+                    ></div>
+                  ))}
                 </div>
                 <Card className={s.gridBox}>
                   <div
@@ -265,7 +260,7 @@ export function PuzzleGame({ isMobile = false }) {
               <Col lg={6}>
                 <Card
                   className={`${s.gridBox} ${s.modelGrid}`}
-                  style={{ marginTop: "70px" }}
+                  style={{ marginTop: "58px" }}
                 >
                   <div
                     className={s.grid}
@@ -291,10 +286,9 @@ export function PuzzleGame({ isMobile = false }) {
               </Col>
             </Row>
           </Card>
-        </Row>
-      )}
+        )}
+      </Row>
       {/* ====== ZONE DE JEU ====== */}
-
       {/* ===== MODALE DE RÉSULTAT ===== */}
       <Modal
         show={showModal}
