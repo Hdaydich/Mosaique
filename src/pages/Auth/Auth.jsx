@@ -310,13 +310,13 @@ export const Auth = () => {
               <Col lg={12} style={{ textAlign: "center" }}>
                 <p>
                   Déjà un compte ?{" "}
-                  <a
-                    variant="link"
-                    className={s.loginLink}
+                  <button
+                    type="button"
+                    className={s.loginLink} // garde ton style actuel
                     onClick={() => setShowLoginModal(true)}
                   >
                     Se connecter
-                  </a>
+                  </button>
                 </p>
               </Col>
             </Row>

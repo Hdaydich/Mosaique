@@ -3,7 +3,7 @@
   width: 70%;
   background: linear-gradient(130deg, #dff7f7, #d9f7f7ea); /* bleu pastel vers turquoise */
   border-radius: 20px;
-  padding: 40px;
+  padding: 30px;
   margin-bottom: 30px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
@@ -27,7 +27,6 @@
   font-size: 1.3rem;
   font-weight: 700;
   color: #007a8c;
-  display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 20px;
@@ -176,7 +175,6 @@
   }
 .container {
   width: 90%;
-  padding: 30px;
 }
 .avatarLarge {
   width: 60%;
