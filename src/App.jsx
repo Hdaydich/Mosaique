@@ -7,6 +7,7 @@ import { SpecificLearn } from "./pages/SpecificLearn/SpecificLearn";
 import { Parent } from "./pages/Parent/Parent";
 import { ShapeGame } from "./pages/ShapeGame/ShapeGame";
 import { NotFound } from "./pages/NotFound/NotFound";
+import { Auth } from "./pages/Auth/Auth";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       {/* Layout avec Navbar pour les  pages */}
       <Route element={<ThemeLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/Authentification" element={<Auth />} />
         <Route path="/Logic" element={<Logic />} />
         <Route path="/Parent" element={<Parent />} />
         <Route path="/Reading" element={<Reading />} />

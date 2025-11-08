@@ -21,7 +21,7 @@ export function NavBar() {
   };
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" className="mb-2">
       <Container className="d-flex justify-content-between align-items-center">
         <Navbar.Brand href="/">
           <Logo
@@ -55,10 +55,14 @@ export function NavBar() {
             >
               Qui sommes-nous ?
             </button>
-
-            <Nav.Link href="/signup" className={s.icon}>
+            <button
+              onClick={() => {
+                navigate("/Authentification");
+              }}
+              className={s.icon}
+            >
               <PersonCircle size={22} />
-            </Nav.Link>
+            </button>
           </Nav>
         </Navbar.Collapse>
       </Container>

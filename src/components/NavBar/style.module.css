@@ -29,6 +29,8 @@
 .icon {
   color: #007a8c;
   transition: all 0.2s ease;
+  border: none;
+  background-color: transparent;
 }
 
 .icon:hover {
