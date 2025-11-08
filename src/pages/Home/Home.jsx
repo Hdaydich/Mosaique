@@ -10,7 +10,14 @@ export function Home() {
   const location = useLocation();
   const itemListRef = useRef(null);
 
-  
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const section = document.getElementById(location.state.scrollTo);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   // Scroll fluide vers ItemList
   const scrollToItemList = () => {
     if (itemListRef.current) {
@@ -19,7 +26,7 @@ export function Home() {
   };
 
   return (
-    <Container className={s.mainContainer}>
+    <Container>
       <Row className={`${s.hero} align-items-center`}>
         <Col xs={12} lg={6} className="text-center text-lg-start">
           <h1>🌈 Apprendre devient un jeu d’enfant</h1>
@@ -88,4 +95,3 @@ export function Home() {
     </Container>
   );
 }
-
