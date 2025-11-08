@@ -144,6 +144,56 @@ export function ShapeGame({
     >
       <Row>
         {/* Zone du jeu */}
+        {isMobile && (
+          <>
+            <Row>
+              <Card className={s.scoreCard}>
+                <Row>
+                  <Col>
+                    <CheckCircle color="green" size={22} /> : {score}
+                  </Col>
+                  <Col>
+                    <XCircle color="red" size={22} /> : {failScore}
+                  </Col>
+                  <Col>⏱️ {time}s</Col>
+                </Row>
+              </Card>
+            </Row>
+            <Row>
+              <Card className={s.scoreCard}>
+                <h6 className="mb-3 fw-bold">Niveaux</h6>
+                <Row>
+                  <Col xs={4}>
+                    <Button
+                      name="Niveau 1"
+                      variant={
+                        level === "facile" ? "success" : "outlineSuccess"
+                      }
+                      action={() => setLevel("facile")}
+                    />
+                  </Col>
+                  <Col xs={4}>
+                    <Button
+                      name="Niveau 2"
+                      variant={
+                        level === "medium" ? "warning" : "outlineWarning"
+                      }
+                      action={() => setLevel("medium")}
+                    />
+                  </Col>
+                  <Col xs={4}>
+                    <Button
+                      name="Niveau 3"
+                      variant={level === "hard" ? "danger" : "outlineDanger"}
+                      action={() => setLevel("hard")}
+                    />
+                  </Col>
+                </Row>
+              </Card>
+            </Row>
+          </>
+        )}
+
         <Col xs={12} lg={9} className={s.gameCard}>
           <Row>
             <Col className="mb-2 mt-1">
@@ -151,56 +201,6 @@ export function ShapeGame({
               <hr></hr>
             </Col>
           </Row>
-
-          {isMobile && (
-            <>
-              <Row>
-                <Card className={s.scoreCard}>
-                  <Row>
-                    <Col>
-                      <CheckCircle color="green" size={22} /> : {score}
-                    </Col>
-                    <Col>
-                      <XCircle color="red" size={22} /> : {failScore}
-                    </Col>
-                    <Col>⏱️ {time}s</Col>
-                  </Row>
-                </Card>
-              </Row>
-              <Row>
-                <Card className={s.scoreCard}>
-                  <h6 className="mb-3 fw-bold">Niveaux</h6>
-                  <Row>
-                    <Col xs={4}>
-                      <Button
-                        name="Niveau 1"
-                        variant={
-                          level === "facile" ? "success" : "outlineSuccess"
-                        }
-                        action={() => setLevel("facile")}
-                      />
-                    </Col>
-                    <Col xs={4}>
-                      <Button
-                        name="Niveau 2"
-                        variant={
-                          level === "medium" ? "warning" : "outlineWarning"
-                        }
-                        action={() => setLevel("medium")}
-                      />
-                    </Col>
-                    <Col xs={4}>
-                      <Button
-                        name="Niveau 3"
-                        variant={level === "hard" ? "danger" : "outlineDanger"}
-                        action={() => setLevel("hard")}
-                      />
-                    </Col>
-                  </Row>
-                </Card>
-              </Row>
-            </>
-          )}
 
           <Card className={s.gridBox}>
             <div style={{ textAlign: "center", marginBottom: "10px" }}>
