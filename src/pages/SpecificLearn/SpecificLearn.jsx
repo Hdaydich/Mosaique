@@ -32,7 +32,7 @@ const themes = [
     title: "Lettres",
     subtitle: "Amuse-toi avec les lettres et améliore ton vocabulaire.",
     icon: <Icon.TypeBold size={46} color="#F1C40F" />,
-    component: <p>Jeu des lettres ✍️</p>,
+    component: <MemoryGame />,
     bgc: "#d0fc8495",
   },
 ];
