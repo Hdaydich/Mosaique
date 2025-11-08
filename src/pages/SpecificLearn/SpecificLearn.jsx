@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import s from "./style.module.css";
@@ -39,9 +39,7 @@ const themes = [
 
 export function SpecificLearn() {
   const [selectedTheme, setSelectedTheme] = useState(null);
-  const [level, setLevel] = useState("facile");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const levelRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -51,10 +49,6 @@ export function SpecificLearn() {
 
   const handleThemeSelect = (theme) => {
     setSelectedTheme(theme);
-  };
-
-  const handleLevelSelect = (lvl) => {
-    setLevel(lvl);
   };
 
   const renderSidebar = () => (
