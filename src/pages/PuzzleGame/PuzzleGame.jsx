@@ -90,26 +90,36 @@ export function PuzzleGame({ isMobile = false }) {
       <Row className="justify-content-center mb-4">
         <Col lg={6}>
           <Card className={s.scoreCard}>
-            <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
-              Niveaux 🎯
-            </h6>
-            <div className="d-flex justify-content-center gap-2 flex-wrap">
-              <Button
-                name="Niveau 1"
-                variant={level === "facile" ? "success" : "outlineSuccess"}
-                action={() => setLevel("facile")}
-              />
-              <Button
-                name="Niveau 2"
-                variant={level === "medium" ? "warning" : "outlineWarning"}
-                action={() => setLevel("medium")}
-              />
-              <Button
-                name="Niveau 3"
-                variant={level === "hard" ? "danger" : "outlineDanger"}
-                action={() => setLevel("hard")}
-              />
-            </div>
+            <Row>
+              <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
+                Niveaux 🎯
+              </h6>
+            </Row>
+            <Row>
+              <Col>
+                <Button
+                  name="Niveau 1"
+                  variant={level === "facile" ? "success" : "outlineSuccess"}
+                  action={() => setLevel("facile")}
+                />
+                <Button />
+              </Col>
+              <Col>
+                <Button
+                  name="Niveau 2"
+                  variant={level === "medium" ? "warning" : "outlineWarning"}
+                  action={() => setLevel("medium")}
+                />
+                <Button />
+              </Col>
+              <Col>
+                <Button
+                  name="Niveau 3"
+                  variant={level === "hard" ? "danger" : "outlineDanger"}
+                  action={() => setLevel("hard")}
+                />
+              </Col>
+            </Row>
           </Card>
         </Col>
         <Col lg={6} className="mt-3">
@@ -343,4 +353,3 @@ export function PuzzleGame({ isMobile = false }) {
     </Container>
   );
 }
-
