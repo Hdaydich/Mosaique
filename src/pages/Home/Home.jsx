@@ -17,7 +17,7 @@ export function Home() {
   };
 
   return (
-    <Container className={s.mainContainer} >
+    <Container className={s.mainContainer}>
       {/* 🎨 HERO */}
       <Row className={`${s.hero} align-items-center`}>
         <Col xs={12} lg={6} className="text-center text-lg-start">
@@ -87,4 +87,3 @@ export function Home() {
     </Container>
   );
 }
-

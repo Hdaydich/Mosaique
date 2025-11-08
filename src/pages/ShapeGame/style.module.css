@@ -28,11 +28,12 @@
   width: 100%;
 }
 .gameCard {
-  padding: 5px;
+  padding: 20px auto;
+  width: 100%;
 }
 
 .scoreCard {
   padding: 20px auto; 
-  width: 90%;
+  width: 100%;
 }
 }

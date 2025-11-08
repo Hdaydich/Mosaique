@@ -139,6 +139,11 @@ export function MemoryGame({ level: initialLevel = 1, isMobile = false }) {
           <Row>
             <Card className={s.scoreCard}>
               <Row>
+                <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
+                  Score 🏆
+                </h6>
+              </Row>
+              <Row>
                 <Col>
                   <CheckCircle color="green" size={22} /> : {score}
                 </Col>

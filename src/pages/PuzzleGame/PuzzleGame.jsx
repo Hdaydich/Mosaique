@@ -87,40 +87,8 @@ export function PuzzleGame({ isMobile = false }) {
       }}
     >
       {/* ====== SCORE + TEMPS + NIVEAUX ====== */}
-      <Row className="justify-content-center mb-4">
-        <Col lg={6}>
-          <Card className={s.scoreCard}>
-            <Row>
-              <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
-                Niveaux 🎯
-              </h6>
-            </Row>
-            <Row>
-              <Col>
-                <Button
-                  name="Niveau 1"
-                  variant={level === "facile" ? "success" : "outlineSuccess"}
-                  action={() => setLevel("facile")}
-                />
-              </Col>
-              <Col>
-                <Button
-                  name="Niveau 2"
-                  variant={level === "medium" ? "warning" : "outlineWarning"}
-                  action={() => setLevel("medium")}
-                />
-              </Col>
-              <Col>
-                <Button
-                  name="Niveau 3"
-                  variant={level === "hard" ? "danger" : "outlineDanger"}
-                  action={() => setLevel("hard")}
-                />
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-        <Col lg={6} className="mt-3">
+      {isMobile ? (
+        <Row className="justify-content-center mb-4">
           <Card className={s.scoreCard}>
             <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
               Score 🏆
@@ -137,8 +105,93 @@ export function PuzzleGame({ isMobile = false }) {
               </Col>
             </Row>
           </Card>
-        </Col>
-      </Row>
+
+          <Card className={s.scoreCard}>
+            <Row>
+              <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
+                Niveaux 🎯
+              </h6>
+            </Row>
+            <Row>
+              <Col xs={4}>
+                <Button
+                  name="Niveau 1"
+                  variant={level === "facile" ? "success" : "outlineSuccess"}
+                  action={() => setLevel("facile")}
+                />
+              </Col>
+              <Col xs={4}>
+                <Button
+                  name="Niveau 2"
+                  variant={level === "medium" ? "warning" : "outlineWarning"}
+                  action={() => setLevel("medium")}
+                />
+              </Col>
+              <Col xs={4}>
+                <Button
+                  name="Niveau 3"
+                  variant={level === "hard" ? "danger" : "outlineDanger"}
+                  action={() => setLevel("hard")}
+                />
+              </Col>
+            </Row>
+          </Card>
+        </Row>
+      ) : (
+        <Row className="justify-content-center mb-4">
+          <Col lg={6}>
+            <Card className={s.scoreCard}>
+              <Row>
+                <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
+                  Niveaux 🎯
+                </h6>
+              </Row>
+              <Row>
+                <Col>
+                  <Button
+                    name="Niveau 1"
+                    variant={level === "facile" ? "success" : "outlineSuccess"}
+                    action={() => setLevel("facile")}
+                  />
+                </Col>
+                <Col>
+                  <Button
+                    name="Niveau 2"
+                    variant={level === "medium" ? "warning" : "outlineWarning"}
+                    action={() => setLevel("medium")}
+                  />
+                </Col>
+                <Col>
+                  <Button
+                    name="Niveau 3"
+                    variant={level === "hard" ? "danger" : "outlineDanger"}
+                    action={() => setLevel("hard")}
+                  />
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+          <Col lg={6} className="mt-3">
+            <Card className={s.scoreCard}>
+              <h6 className="fw-bold text-center border-bottom pb-2 mb-3">
+                Score 🏆
+              </h6>
+              <Row className="text-center">
+                <Col>
+                  <CheckCircle color="green" size={22} /> {score}
+                </Col>
+                <Col>
+                  <XCircle color="red" size={22} /> {failScore}
+                </Col>
+                <Col>
+                  <Stopwatch color="blue" size={22} /> {time}s
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+        </Row>
+      )}
+
       <Row>
         {isMobile ? (
           <Card className={s.gameCard} style={{ width: "90%" }}>
