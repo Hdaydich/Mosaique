@@ -125,13 +125,13 @@ export const Auth = () => {
               <Col lg={12} style={{ textAlign: "center" }}>
                 <p>
                   Déjà un compte ?{" "}
-                  <a
-                    variant="link"
+                  <button
+                    type="button"
                     className={s.loginLink}
                     onClick={() => setShowLoginModal(true)}
                   >
                     Se connecter
-                  </a>
+                  </button>
                 </p>
               </Col>
             </Row>
