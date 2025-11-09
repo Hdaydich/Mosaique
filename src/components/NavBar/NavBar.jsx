@@ -21,7 +21,7 @@ export function NavBar() {
   };
 
   return (
-    <Navbar expand="lg" >
+    <Navbar expand="lg">
       <Container className="d-flex justify-content-between align-items-center">
         <Navbar.Brand href="/">
           <Logo
@@ -69,4 +69,3 @@ export function NavBar() {
     </Navbar>
   );
 }
-
