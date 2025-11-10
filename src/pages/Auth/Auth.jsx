@@ -67,7 +67,10 @@ export function Auth() {
         <Col lg={8} md={10}>
           <div
             className={s.card}
-            style={{ width: !isLoginMode ? "auto" : "70%" }}
+            style={{
+              width: isLoginMode && !isMobile ? "70%" : "90%",
+              marginTop: isMobile ? "20px" : "0",
+            }}
           >
             <h2 className={s.pageTitle}>
               {isLoginMode ? "Se connecter" : "Créer un compte"}
@@ -167,17 +170,6 @@ export function Auth() {
                           <p className={s.error}>{errors.prenom}</p>
                         )}
                       </Form.Group>
-
-                      <Form.Group className={s.formGroup}>
-                        <Form.Label>Date de naissance</Form.Label>
-                        <Form.Control
-                          type="date"
-                          name="dateNaissance"
-                          value={formData.dateNaissance}
-                          onChange={handleChange}
-                        />
-                      </Form.Group>
-
                       <Form.Group className={s.formGroup}>
                         <Row className="align-items-center">
                           <Col xs={2} lg={2}>
@@ -208,6 +200,15 @@ export function Auth() {
                             />
                           </Col>
                         </Row>
+                      </Form.Group>
+                      <Form.Group className={s.formGroup}>
+                        <Form.Label>Date de naissance</Form.Label>
+                        <Form.Control
+                          type="date"
+                          name="dateNaissance"
+                          value={formData.dateNaissance}
+                          onChange={handleChange}
+                        />
                       </Form.Group>
                     </Col>
                   </Row>
