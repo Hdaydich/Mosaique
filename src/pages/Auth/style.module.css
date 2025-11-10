@@ -1,184 +1,177 @@
-/* === CONTAINER GLOBAL === */
-.container {
-  width: 70%;
-  background: linear-gradient(130deg, #dff7f7, #d9f7f7ea); /* bleu pastel vers turquoise */
-  border-radius: 20px;
-  padding: 30px;
+/* === CARTE PRINCIPALE === */
+.card {
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  background: #fcfcf4; /* plus clair, moins jaune */
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #e3e8dc;
   margin-bottom: 30px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
-/* === TITRE DE PAGE === */
+
+/* === TITRE === */
 .pageTitle {
-  padding-bottom: 20px;
+  background: linear-gradient(90deg, #d9f8ff, #d3f7f0);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  padding: 20px;
   text-align: center;
-}
-
-/* === SECTIONS FORM === */
-.cardSection {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 30px 32px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.119);
-}
-
-
-/* === TITRE DE SECTION === */
-.sectionTitle {
-  font-size: 1.3rem;
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #024343;
+  border-bottom: 1px solid rgba(0, 67, 67, 0.2);
   font-weight: 700;
-  color: #007a8c;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
+  letter-spacing: 0.5px;
 }
 
-/* === INPUTS ET FORM-CONTROL === */
-.form-control,
-.inputField,
-.form-select {
-  border-radius: 12px !important;
-  border: 1.5px solid #cfd9e4 !important;
-  padding: 12px 16px !important;
-  font-size: 1rem !important;
-  background-color: #fdfdfd !important;
-}
-
-.form-control:focus,
-.inputField:focus,
-.form-select:focus {
-  border-color: #1f89d4 !important;
-  background-color: #ffffff !important;
-}
-
-/* === LABELS === */
-.label {
-  font-weight: 600;
-  color: #33475b;
-  margin-bottom: 5px;
+/* === CORPS === */
+.cardBody {
+  padding: 0 40px;
 }
 
 /* === AVATAR === */
-.avatarLarge {
-  width: 100%;
+.avatarContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 45%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #dee9f7;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
-  background: white;
+  border: 3px solid #2a5d9f;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.avatarLarge:hover {
+.avatar:hover {
   transform: scale(1.05);
-  border-color: #1f89d4;
+  box-shadow: 0 0 12px rgba(42, 93, 159, 0.4);
 }
 
-/* === MESSAGES D'ERREUR === */
-.error {
-  color: #c62828;
-  font-size: 0.9rem;
-  margin-top: 4px;
+.avatarText {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+  font-style: italic;
 }
 
-/* === LIEN DE CONNEXION === */
-.loginLink {
-  color: #0015ff;
+/* === CHAMPS DE FORMULAIRE === */
+.formGroup {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
   font-weight: 600;
-  font-size: large;
-  cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  color: #2a5d9f; /* bleu doux */
+  margin-bottom: 6px;
+  font-size: 15px;
 }
 
-.loginLink:hover {
-  color: #000ea9;
+input,
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #cfd8dc;
+  background: #ffffff;
+  outline: none;
+  transition: all 0.25s ease;
+  font-size: 15px;
+  color: #333;
 }
 
-/* === BOUTONS === */
-.button {
-  font-weight: 600;
-  border-radius: 12px;
-  padding: 12px 20px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 1rem;
-  border: none;
-  transition: all 0.3s ease;
+input:focus,
+select:focus {
+  border-color: #2a5d9f;
+  box-shadow: 0 0 8px rgba(42, 93, 159, 0.25);
+}
+
+/* === SWITCH LOGIN / REGISTER === */
+.switchText {
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-top: 12px;
+  color: #333;
+  font-size: 15px;
 }
 
-.button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+.switchButton {
+  background: none;
+  border: none;
+  color: #007b8f;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
 }
 
-.confirmButtonSmall {
-  background: #1f89d4;
-  color: #ffffff;
-}
-.confirmButtonSmall:hover {
-  background: #146aa6;
+.switchButton:hover {
+  color: #005f6b;
 }
 
-/* === MODAL === */
-.customModal {
-  max-width: 460px;
-  overflow: hidden;
+/* === ERREUR === */
+.error {
+  color: #c0392b;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
 }
 
-.modalHeader {
-  background: linear-gradient(135deg, #dff7f7, #bbe4e4); /* bleu pastel vers turquoise */
-  color: #2a2a2a !important;
-  font-weight: 800;
-  padding: 16px 20px !important;
+/* === BOUTONS SEXE === */
+.genderButton {
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  transition: all 0.25s ease;
+  border: none;
+  font-size: 15px;
 }
 
-.modalBody {
-  background: #f7faff;
-  padding: 30px 26px;
-  border-top: 1px solid #e3edf8;
-  border-radius: 45px;
+/* 🌸 Fille */
+.pink {
+  background: #ff9ec4;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(255, 158, 196, 0.4);
+}
+.pink:hover {
+  background: #ff7cb1;
 }
 
-/* === ANIMATIONS FINES === */
-.cardSection,
-.modalBody {
-  animation: fadeIn 0.4s ease-in-out;
+.outlinePink {
+  background: transparent;
+  color: #ff9ec4;
+  border: 2px solid #ff9ec4;
+}
+.outlinePink:hover {
+  background: #fff3f8;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 💙 Garçon */
+.blue {
+  background: #6ec1ff;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(110, 193, 255, 0.4);
+}
+.blue:hover {
+  background: #4aa7ff;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 992px) {
-  .cardSection {
-    margin-top: 25px;
-    padding: 25px 20px;
-  }
-  .pageTitle {
-    font-size: 1.7rem;
-    padding: 0px;
-  }
-.container {
-  width: 90%;
+.outlineBlue {
+  background: transparent;
+  color: #6ec1ff;
+  border: 2px solid #6ec1ff;
 }
-.avatarLarge {
-  width: 60%;
-}
+.outlineBlue:hover {
+  background: #f0f9ff;
 }
 
-
+/* === TRANSITIONS GLOBALES === */
+button,
+input,
+select {
+  transition: all 0.2s ease-in-out;
+}

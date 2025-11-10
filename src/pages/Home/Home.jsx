@@ -4,11 +4,12 @@ import { ItemList } from "../../components/ItemList/ItemList";
 import s from "./style.module.css";
 import kids from "../../assets/kids.png";
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function Home() {
   const location = useLocation();
   const itemListRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -90,7 +91,14 @@ export function Home() {
       {/* 🚀 CALL TO ACTION */}
       <section className={s.ctaSection}>
         <h3>Prêt à rejoindre l’aventure Mosaïque ? 🌟</h3>
-        <Button className={s.ctaBtnLarge}>Commencer maintenant</Button>
+        <Button
+          className={s.ctaBtnLarge}
+          onClick={() => {
+            navigate("/Authentification");
+          }}
+        >
+          Commencer maintenant
+        </Button>
       </section>
     </Container>
   );

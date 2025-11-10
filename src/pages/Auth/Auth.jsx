@@ -1,24 +1,23 @@
 import { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button as BsButton } from "react-bootstrap";
 import s from "./style.module.css";
 import aviator from "../../assets/aviator.png";
-import { Container, Row, Col, Form, Modal } from "react-bootstrap";
-import { PersonFill } from "react-bootstrap-icons";
+import { GenderFemale, GenderMale } from "react-bootstrap-icons";
 import { Button } from "../../components/Button/Button";
 
-export const Auth = () => {
+export function Auth() {
+  const [isLoginMode, setIsLoginMode] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    photo: null,
     nom: "",
     prenom: "",
+    email: "",
+    password: "",
     dateNaissance: "",
     sexe: "",
+    photo: null,
   });
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [errors, setErrors] = useState({});
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -35,338 +34,251 @@ export const Auth = () => {
     }
   };
 
+  const handleGenderSelect = (gender) => {
+    setFormData({ ...formData, sexe: gender });
+  };
+
   const validate = () => {
     const errs = {};
     if (!formData.email.includes("@")) errs.email = "Email invalide";
-    const pwd = formData.password;
-    if (pwd.length < 8 || !/[A-Z]/.test(pwd) || !/[0-9]/.test(pwd)) {
-      errs.password =
-        "Le mot de passe doit avoir >8 caractères, 1 majuscule et 1 chiffre";
+    if (formData.password.length < 8)
+      errs.password = "Mot de passe ≥ 8 caractères";
+    if (!isLoginMode) {
+      if (!formData.nom) errs.nom = "Nom requis";
+      if (!formData.prenom) errs.prenom = "Prénom requis";
     }
-    if (!formData.nom) errs.nom = "Nom requis";
-    if (!formData.prenom) errs.prenom = "Prénom requis";
-    if (!formData.dateNaissance) errs.dateNaissance = "Date requise";
-    if (!formData.sexe) errs.sexe = "Sexe requis";
-    setErrors(errs);
-    return Object.keys(errs).length === 0;
+    return errs;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      alert("Compte créé avec succès !");
+    const validation = validate();
+    if (Object.keys(validation).length) {
+      setErrors(validation);
+    } else {
+      setErrors({});
+      alert(isLoginMode ? "Connexion réussie ✅" : "Compte créé 🎉");
     }
   };
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    alert("Connexion réussie !");
-    setShowLoginModal(false);
-  };
-
   return (
-    <Container className={s.container}>
-      <Row>
-        <h2 className={s.pageTitle}>Créer un compte</h2>
-      </Row>
+    <Container>
       <Row className="justify-content-center">
-        {/* --- Partie gauche : connexion --- */}
-        {!isMobile && (
-          <Col lg={5}>
-            <Form onSubmit={handleSubmit}>
-              <div
-                className={s.cardSection}
-                style={{ backgroundColor: "#ffea8a80" }}
-              >
-                <h4 className={s.sectionTitle}>
-                  <PersonFill /> Infos de connexion
-                </h4>
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                  {errors.email && <p className={s.error}>{errors.email}</p>}
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    type="password"
-                    placeholder="Mot de passe"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  {errors.password && (
-                    <p className={s.error}>{errors.password}</p>
-                  )}
-                </Form.Group>
-
-                <Form.Group className="mb-1">
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirmer le mot de passe"
-                  />
-                </Form.Group>
-              </div>
-              <div style={{ textAlign: "center", marginTop: "30px" }}>
-                <Button
-                  name="Confirmer"
-                  variant="warning"
-                  action={handleSubmit}
-                />
-              </div>
-            </Form>
-
-            <Row className="justify-content-center mt-2">
-              <Col lg={12} style={{ textAlign: "center" }}>
-                <p>
-                  Déjà un compte ?{" "}
-                  <button
-                    type="button"
-                    className={s.loginLink}
-                    onClick={() => setShowLoginModal(true)}
-                  >
-                    Se connecter
-                  </button>
-                </p>
-              </Col>
-            </Row>
-          </Col>
-        )}
-        {/* --- Partie droite : fiche enfant --- */}
-        <Col lg={7}>
-          <Form onSubmit={handleSubmit}>
-            <div
-              className={s.cardSection}
-              style={{ backgroundColor: "#ffea8a80" }}
-            >
-              <h4 className={s.sectionTitle}>
-                <PersonFill /> Fiche enfant
-              </h4>
-              <Row>
-                {isMobile && (
-                  <Col
-                    lg={4}
-                    className="d-flex flex-column align-items-center mb-3"
-                  >
-                    <img
-                      src={
-                        formData.photo
-                          ? URL.createObjectURL(formData.photo)
-                          : aviator
-                      }
-                      alt="Avatar"
-                      className={s.avatarLarge}
-                      onClick={() =>
-                        document.getElementById("photoInput").click()
-                      }
-                    />
-                    <Form.Control
-                      type="file"
-                      name="photo"
-                      id="photoInput"
-                      onChange={handleChange}
-                      style={{ display: "none" }}
-                    />
-                  </Col>
-                )}
-                <Col lg={8}>
-                  <Form.Group className="mb-3">
-                    <Form.Control
-                      type="text"
-                      placeholder="Nom"
-                      name="nom"
-                      value={formData.nom}
-                      onChange={handleChange}
-                    />
-                    {errors.nom && <p className={s.error}>{errors.nom}</p>}
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <Form.Control
-                      type="text"
-                      placeholder="Prénom"
-                      name="prenom"
-                      value={formData.prenom}
-                      onChange={handleChange}
-                    />
-                    {errors.prenom && (
-                      <p className={s.error}>{errors.prenom}</p>
-                    )}
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <Form.Label className={s.label}>
-                      Date de naissance
-                    </Form.Label>
-                    <Form.Control
-                      type="date"
-                      name="dateNaissance"
-                      value={formData.dateNaissance}
-                      onChange={handleChange}
-                    />
-                    {errors.dateNaissance && (
-                      <p className={s.error}>{errors.dateNaissance}</p>
-                    )}
-                  </Form.Group>
-
-                  <Form.Group className="mb-3">
-                    <Form.Select
-                      name="sexe"
-                      value={formData.sexe}
-                      onChange={handleChange}
+        <Col lg={8} md={10}>
+          <div
+            className={s.card}
+            style={{ width: !isLoginMode ? "auto" : "70%" }}
+          >
+            <h2 className={s.pageTitle}>
+              {isLoginMode ? "Se connecter" : "Créer un compte"}
+            </h2>
+            <div className={s.cardBody}>
+              <Form onSubmit={handleSubmit}>
+                {!isLoginMode ? (
+                  <Row>
+                    {/* === Colonne gauche : avatar + mail/mdp === */}
+                    <Col
+                      lg={6}
+                      style={{
+                        marginTop: "0px",
+                      }}
                     >
-                      <option value="">Garçon / Fille </option>
-                      <option value="homme">Garçon</option>
-                      <option value="femme">Fille</option>
-                    </Form.Select>
-                    {errors.sexe && <p className={s.error}>{errors.sexe}</p>}
-                  </Form.Group>
-                </Col>
+                      <div className={s.avatarContainer}>
+                        <img
+                          src={
+                            formData.photo
+                              ? URL.createObjectURL(formData.photo)
+                              : aviator
+                          }
+                          alt="avatar"
+                          className={s.avatar}
+                          onClick={() =>
+                            document.getElementById("photoInput").click()
+                          }
+                        />
+                        <input
+                          type="file"
+                          id="photoInput"
+                          name="photo"
+                          accept="image/*"
+                          onChange={handleChange}
+                          style={{ display: "none" }}
+                        />
+                        <p className={s.avatarText}>
+                          Cliquer pour ajouter une photo
+                        </p>
+                      </div>
 
-                {!isMobile && (
-                  <Col lg={4} className="d-flex flex-column align-items-center">
-                    <img
-                      src={
-                        formData.photo
-                          ? URL.createObjectURL(formData.photo)
-                          : aviator
-                      }
-                      alt="Avatar"
-                      className={s.avatarLarge}
-                      onClick={() =>
-                        document.getElementById("photoInput").click()
-                      }
-                    />
-                    <Form.Control
-                      type="file"
-                      name="photo"
-                      id="photoInput"
-                      onChange={handleChange}
-                      style={{ display: "none" }}
-                    />
-                  </Col>
+                      <Form.Group className={s.formGroup}>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="exemple@email.com"
+                        />
+                        {errors.email && (
+                          <p className={s.error}>{errors.email}</p>
+                        )}
+                      </Form.Group>
+
+                      <Form.Group className={s.formGroup}>
+                        <Form.Label>Mot de passe</Form.Label>
+                        <Form.Control
+                          type="password"
+                          name="password"
+                          value={formData.password}
+                          onChange={handleChange}
+                          placeholder="********"
+                        />
+                        {errors.password && (
+                          <p className={s.error}>{errors.password}</p>
+                        )}
+                      </Form.Group>
+                    </Col>
+
+                    <Col
+                      lg={6}
+                      style={{ marginTop: isMobile ? "0px" : "22px" }}
+                    >
+                      <Form.Group className={s.formGroup}>
+                        <Form.Label>Nom</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="nom"
+                          value={formData.nom}
+                          onChange={handleChange}
+                          placeholder="Votre nom"
+                        />
+                        {errors.nom && <p className={s.error}>{errors.nom}</p>}
+                      </Form.Group>
+
+                      <Form.Group className={s.formGroup}>
+                        <Form.Label>Prénom</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="prenom"
+                          value={formData.prenom}
+                          onChange={handleChange}
+                          placeholder="Votre prénom"
+                        />
+                        {errors.prenom && (
+                          <p className={s.error}>{errors.prenom}</p>
+                        )}
+                      </Form.Group>
+
+                      <Form.Group className={s.formGroup}>
+                        <Form.Label>Date de naissance</Form.Label>
+                        <Form.Control
+                          type="date"
+                          name="dateNaissance"
+                          value={formData.dateNaissance}
+                          onChange={handleChange}
+                        />
+                      </Form.Group>
+
+                      <Form.Group className={s.formGroup}>
+                        <Row className="align-items-center">
+                          <Col xs={2} lg={2}>
+                            <Form.Label>Sexe</Form.Label>
+                          </Col>
+
+                          <Col xs={3} lg={3}>
+                            <Button
+                              icon={GenderFemale}
+                              variant={
+                                formData.sexe === "fille"
+                                  ? "pink"
+                                  : "outlinePink"
+                              }
+                              action={() => handleGenderSelect("fille")}
+                            />
+                          </Col>
+
+                          <Col xs={3} lg={3}>
+                            <Button
+                              icon={GenderMale}
+                              variant={
+                                formData.sexe === "garçon"
+                                  ? "blue"
+                                  : "outlineBlue"
+                              }
+                              action={() => handleGenderSelect("garçon")}
+                            />
+                          </Col>
+                        </Row>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                ) : (
+                  <Row>
+                    <Form.Group className={s.formGroup}>
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="exemple@email.com"
+                      />
+                    </Form.Group>
+                    <Form.Group className={s.formGroup}>
+                      <Form.Label>Mot de passe</Form.Label>
+                      <Form.Control
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="********"
+                      />
+                    </Form.Group>
+                  </Row>
                 )}
-              </Row>
-            </div>
-          </Form>
-        </Col>
-
-        {isMobile && (
-          <Col lg={5}>
-            <Form onSubmit={handleSubmit}>
-              <div
-                className={s.cardSection}
-                style={{ backgroundColor: "#ffea8a80" }}
-              >
-                <h4 className={s.sectionTitle}>
-                  <PersonFill /> Infos de connexion
-                </h4>
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                  {errors.email && <p className={s.error}>{errors.email}</p>}
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    type="password"
-                    placeholder="Mot de passe"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  {errors.password && (
-                    <p className={s.error}>{errors.password}</p>
+                <Row>
+                  {!isLoginMode ? (
+                    <div style={{ margin: "0px auto", textAlign: "center" }}>
+                      <Button
+                        name="S’inscrire"
+                        variant="outlineSuccess"
+                        action={handleSubmit}
+                      />
+                      <p className={s.switchText}>
+                        Déjà un compte ?{" "}
+                        <BsButton
+                          variant="link"
+                          className={s.switchButton}
+                          onClick={() => setIsLoginMode(true)}
+                        >
+                          Se connecter
+                        </BsButton>
+                      </p>
+                    </div>
+                  ) : (
+                    <div style={{ margin: "0px auto", textAlign: "center" }}>
+                      <Button
+                        name="Se connecter"
+                        variant="outlineSuccess"
+                        action={handleSubmit}
+                      />
+                      <p className={s.switchText}>
+                        Pas encore de compte ?{" "}
+                        <BsButton
+                          variant="link"
+                          className={s.switchButton}
+                          onClick={() => setIsLoginMode(false)}
+                        >
+                          S’inscrire
+                        </BsButton>
+                      </p>
+                    </div>
                   )}
-                </Form.Group>
-
-                <Form.Group className="mb-1">
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirmer le mot de passe"
-                  />
-                </Form.Group>
-              </div>
-              <div style={{ textAlign: "center", marginTop: "30px" }}>
-                <Button
-                  name="Confirmer"
-                  variant="warning"
-                  action={handleSubmit}
-                />
-              </div>
-            </Form>
-
-            <Row className="justify-content-center mt-2">
-              <Col lg={12} style={{ textAlign: "center" }}>
-                <p>
-                  Déjà un compte ?{" "}
-                  <button
-                    type="button"
-                    className={s.loginLink} // garde ton style actuel
-                    onClick={() => setShowLoginModal(true)}
-                  >
-                    Se connecter
-                  </button>
-                </p>
-              </Col>
-            </Row>
-          </Col>
-        )}
-      </Row>
-
-      {/* --- Modal Se connecter --- */}
-      <Modal
-        show={showLoginModal}
-        onHide={() => setShowLoginModal(false)}
-        centered
-        dialogClassName={s.customModal}
-      >
-        <Modal.Header closeButton className={s.modalHeader}>
-          <Modal.Title>Connexion</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body className={s.modalBody}>
-          <Form onSubmit={handleLoginSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label className={s.label}>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Entrez votre email"
-                className={s.inputField}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label className={s.label}>Mot de passe</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Entrez votre mot de passe"
-                className={s.inputField}
-                required
-              />
-            </Form.Group>
-
-            <div style={{ textAlign: "center", marginTop: "25px" }}>
-              <Button
-                name="Se connecter"
-                variant="confirmButtonSmall"
-                action={handleLoginSubmit}
-              />
+                </Row>
+              </Form>
             </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
-};
+}

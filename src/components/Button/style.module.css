@@ -17,12 +17,8 @@
 
 .button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.12);
 }
 
-.button:active {
-  transform: scale(0.97);
-}
 
 /* === Boutons principaux (action) === */
 .addButton {
@@ -125,4 +121,49 @@
 .buttonIcon {
   font-size: 22px;
   opacity: 0.85;
+}
+
+
+/* === Choix du sexe === */
+
+/* 🌸 Fille sélectionnée */
+.pink {
+  background: #ff447c; /* rose clair doux */
+  color: #fff;
+  border: 2px solid #ff447c;
+}
+.pink:hover {
+  background: #ff447c;
+}
+
+/* 🌸 Fille non sélectionnée */
+.outlinePink {
+  background: transparent;
+  color: #ff447c;
+  border: 2px solid #ff447c;
+}
+.outlinePink:hover {
+    background: #ff447c; /* rose clair doux */
+  color: #fff;
+}
+
+/* 💙 Garçon sélectionné */
+.blue {
+  background: #169af2; /* bleu pastel doux */
+  color: #fff;
+  border: 2px solid #169af2;
+}
+.blue:hover {
+  background: #169af2;
+}
+
+/* 💙 Garçon non sélectionné */
+.outlineBlue {
+  background: transparent;
+  color: #169af2;
+  border: 2px solid #169af2;
+}
+.outlineBlue:hover {
+   background: #169af2; /* bleu pastel doux */
+  color: #fff;
 }
