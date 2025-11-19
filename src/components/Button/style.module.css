@@ -22,12 +22,14 @@
 
 /* === Boutons principaux (action) === */
 .addButton {
-  background: #0a9848;  /* Bleu foncé poudré */
-  color: #e9ffe6;       /* Texte clair */
+  background: transparent;  /* Bleu foncé poudré */
+  color: #262626;      
+  border: none;
+  box-shadow: none;
+  padding: 0px;
 }
 .addButton:hover {
-  background: #00c756;
-}
+  color: #008cff; }
 
 /* === Erreur / Alerte === */
 .errorButton {
@@ -49,8 +51,8 @@
 
 /* === Retour / neutre === */
 .backButtonSmall {
-  background: #4b4f58;  /* Gris bleu foncé */
-  color: #e7edf2;
+  background: #1f506f;  /* Bleu pétrole doux */
+  color: #ffffff;
 }
 .backButtonSmall:hover {
   background: #3d4149;
@@ -58,11 +60,15 @@
 
 /* === Téléchargement / action secondaire === */
 .downloadCuteButton {
-  background: #1f506f;  /* Bleu pétrole doux */
-  color: #d0f0fd;
+  color: #039af7;  /* Bleu pétrole doux */
+  background: transparent;
+  padding: 0px;
+  border: none;
+  box-shadow: none;
+
 }
 .downloadCuteButton:hover {
-  background: #1a4360;
+  color: #0036d8;  /* Bleu pétrole doux */
 }
 
 /* === Niveaux du jeu === */

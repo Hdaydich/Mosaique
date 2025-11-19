@@ -5,11 +5,13 @@
   width: auto;
   margin: 0px auto;
   padding: 20px;
+
 }
 
 .gridBox {
   background:transparent;
-  border: none;
+  border: none;  
+  
 }
 
 

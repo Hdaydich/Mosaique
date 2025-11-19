@@ -4,8 +4,8 @@ export function Button({
   name = "",
   icon: IconComponent,
   variant,
-  size = 24,
-  fontsize = 12,
+  size,
+  fontsize,
   action,
 }) {
   // Fonction wrapper pour s'assurer que l'action est bien appelée

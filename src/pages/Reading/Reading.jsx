@@ -1,140 +1,119 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { useState } from "react";
-import { SegmentColor } from "../../utils/SegmentColor";
-import { exportToWord } from "../../utils/exportToWord";
-import { PlusCircleFill, CloudArrowDownFill } from "react-bootstrap-icons";
 import s from "./style.module.css";
-import storiesData from "../../data/stories";
-import { Button } from "../../components/Button/Button";
-import { StoriesList } from "../../components/StoriesList/StoriesList";
-import { ReadingOutput } from "../../components/ReadingOutput/ReadingOutput";
-import fatha from "../../assets/fatha.png";
-import kasra from "../../assets/kasra.png";
-import dhamma from "../../assets/dhamma.png";
-import soukoun from "../../assets/skoun.png";
-import { Chakel } from "../../components/Chakel/Chakel";
+import { useState } from "react";
+import myStoriesData from "../../data/mesStories";
+import defaultStories from "../../data/stories";
+import readingBoy from "../../assets/readingBoy.png";
+import readingGirl from "../../assets/readingGirl.png";
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  Card,
+  Modal,
+  Form,
+} from "react-bootstrap";
 
 export function Reading() {
-  const [mode, setMode] = useState("list"); // "list" | "story"
-  const [segments, setSegments] = useState([]);
-  const [selectedStory, setSelectedStory] = useState(null);
+  const [isLogged, setIsLogged] = useState(false);
+  const [myStories, setMyStories] = useState(myStoriesData);
+  const [showModal, setShowModal] = useState(false);
+  const [newStoryTitle, setNewStoryTitle] = useState("");
 
-  // S'assurer que stories existe
-  const stories = storiesData || [];
-  const defaultStories = stories.filter((s) => !s.userCreated);
-  const myStories = stories.filter((s) => s.userCreated);
-
-  const handleSelectStory = (story) => {
-    setSelectedStory(story);
-    setSegments(SegmentColor(story?.text || ""));
-    setMode("story");
+  const addStory = () => {
+    if (newStoryTitle.trim() === "") return;
+    const newStory = { id: myStories.length + 1, title: newStoryTitle };
+    setMyStories([...myStories, newStory]);
+    setNewStoryTitle("");
+    setShowModal(false);
   };
 
-  // Liste des chakels
-  const chakels = [
-    { name: "الفَتْحَة", color: "#ff0073", img: fatha },
-    { name: "الكَسْرَة", color: "#009bee", img: kasra },
-    { name: "الضَمَّة", color: "#04cf1f", img: dhamma },
-    { name: "السُّكُون", color: "#962dc0", img: soukoun },
-  ];
-
   return (
-    <Container className={s.container}>
-      {/* === MODE LISTE DES CONTES === */}
-      {mode === "list" && (
-        <>
-          <Row>
-            <Col xs={12} md={6} lg={6}>
-              <div className={s.listBox}>
-                <StoriesList
-                  stories={defaultStories}
-                  title="📘 Contes par défaut"
-                  onSelect={handleSelectStory}
-                />
-              </div>
-            </Col>
-            <Col xs={12} md={6} lg={6}>
-              <div className={s.listBox}>
-                <StoriesList
-                  stories={myStories}
-                  title="✍️ Mes contes"
-                  onSelect={handleSelectStory}
-                />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <div className={s.centerButton}>
-              <Button
-                icon={PlusCircleFill}
-                name=" Ajouter un nouveau conte"
-                variant="confirmButtonSmall"
-                action={() => alert("Ajout de conte à venir")}
-              />
-            </div>
-          </Row>
-        </>
-      )}
+    <div className={s.pageWrapper}>
+      {/* ---- HERO BANNIÈRE ---- */}
+      <div className={s.heroBanner}>
+        <Container className="text-center">
+          <h1 className={s.heroTitle}>Bienvenue dans le monde des contes ✨</h1>
+          <p className={s.heroSubtitle}>
+            Découvre de magnifiques histoires ou crée les tiennes !
+          </p>
+          <Button
+            variant={isLogged ? "danger" : "success"}
+            onClick={() => setIsLogged(!isLogged)}
+          >
+            {isLogged ? "Se déconnecter" : "Se connecter"}
+          </Button>
+        </Container>
 
-      {/* === MODE CONTE CHOISI === */}
-      {mode === "story" && selectedStory && (
+        <img src={readingBoy} alt="Enfants apprenant" className={s.cloudLeft} />
+        <img
+          src={readingGirl}
+          alt="Enfants apprenant"
+          className={s.cloudRight}
+        />
+      </div>
+
+      <Container className="mt-5">
+        {/* ---- HISTOIRES PAR DÉFAUT ---- */}
+        <h2 className={s.sectionTitle}>📚 Histoires disponibles</h2>
         <Row>
-          {/* COLONNE GAUCHE */}
-          <Col lg={4}>
-            <Row className={s.listHalf}>
-              <StoriesList
-                stories={defaultStories}
-                title="📘 Contes par défaut"
-                onSelect={handleSelectStory}
-              />
-            </Row>
-            <Row>
-              <StoriesList
-                stories={myStories}
-                title="✍️ Mes contes"
-                onSelect={handleSelectStory}
-              />
-            </Row>
-          </Col>
+          {defaultStories.map((story) => (
+            <Col key={story.id} xs={12} md={6} lg={4} className="mb-4">
+              <Card className={s.storyCard}>
+                <Card.Body>
+                  <h5 className={s.storyTitle}>{story.title}</h5>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
 
-          {/* COLONNE DROITE */}
-          <Col lg={8}>
-            <Row className={s.chakelRow}>
-              {chakels.map((c, i) => (
-                <Col key={i} xs={3} className={s.chakelCol}>
-                  <Chakel
-                    name={c.name}
-                    color={c.color}
-                    img={c.img}
-                    size={22} // passer en number pour éviter problème
-                  />
+        {/* ---- HISTOIRES DE L’UTILISATEUR ---- */}
+        {isLogged && (
+          <>
+            <h2 className={s.sectionTitle}>🌟 Mes histoires</h2>
+            <Row>
+              {myStories.map((story) => (
+                <Col key={story.id} xs={12} md={6} lg={4} className="mb-4">
+                  <Card className={s.storyCard}>
+                    <Card.Body>
+                      <h5 className={s.storyTitle}>{story.title}</h5>
+                    </Card.Body>
+                  </Card>
                 </Col>
               ))}
             </Row>
-
-            <Row className={s.titleRow}>
-              <div className={s.title}>
-                <ReadingOutput
-                  segments={SegmentColor(selectedStory?.title || "")}
-                />
-              </div>
-            </Row>
-
-            <Row className={s.resultBox}>
-              <ReadingOutput segments={segments} />
-              <div className={s.showMoreLink}>▼</div>
-            </Row>
-
-            <div className={s.downloadBox}>
-              <Button
-                icon={CloudArrowDownFill}
-                variant="downloadCuteButton"
-                action={() => exportToWord(segments)}
-              />
+            <div className="text-center mb-5">
+              <Button className={s.addBtn} onClick={() => setShowModal(true)}>
+                ＋ Ajouter une histoire
+              </Button>
             </div>
-          </Col>
-        </Row>
-      )}
-    </Container>
+          </>
+        )}
+      </Container>
+
+      {/* ---- MODAL AJOUTER HISTOIRE ---- */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Ajouter une histoire</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Control
+            type="text"
+            placeholder="Titre de l'histoire"
+            value={newStoryTitle}
+            onChange={(e) => setNewStoryTitle(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Annuler
+          </Button>
+          <Button variant="primary" onClick={addStory}>
+            Ajouter
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }

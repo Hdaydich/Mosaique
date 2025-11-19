@@ -139,7 +139,7 @@ export function SpecificLearn() {
           {renderSidebar()}
           <div
             style={{
-              minWidth: isMobile ? "100%" : "70%",
+              minWidth: "100%",
               maxWidth: isMobile ? "100%" : "100%",
               margin: isMobile ? "20px auto" : "0px auto",
               justifyContent: "center",

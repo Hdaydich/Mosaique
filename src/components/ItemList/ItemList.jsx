@@ -15,7 +15,7 @@ export function ItemList() {
             title="Lecture en couleur"
             subtitle="Lis joyeusement"
             content="القراءة ممتعة وسهلة بالألوان"
-            bgc="#b1ffa1ff"
+            bgc="#abffd2ff"
             img={dys}
             direction="/reading"
           />

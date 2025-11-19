@@ -139,7 +139,7 @@ export function ShapeGame({
   return (
     <Container
       style={{
-        width: isMobile ? "100%" : "80%",
+        width: isMobile ? "100%" : "100%",
       }}
     >
       <Row>
@@ -206,79 +206,81 @@ export function ShapeGame({
               <hr></hr>
             </Col>
           </Row>
+          <Row>
+            {" "}
+            <Card className={s.gridBox}>
+              <div style={{ textAlign: "center", marginBottom: "10px" }}>
+                <Shapes shape={target} size={maxShapeSize} color="#05155aff" />
+              </div>
 
-          <Card className={s.gridBox}>
-            <div style={{ textAlign: "center", marginBottom: "10px" }}>
-              <Shapes shape={target} size={maxShapeSize} color="#05155aff" />
-            </div>
+              <div style={gridContainerStyle}>
+                {rows.map((row, rowIndex) =>
+                  row.map((item, colIndex) => {
+                    const key = `${rowIndex}-${colIndex}`;
+                    const clickedColor = clickedPositions[key];
+                    const state = feedback[key];
+                    let Color = "transparent";
+                    if (state === "correct") Color = "#00cb2f7e";
+                    if (state === "wrong" || state === "missed")
+                      Color = "#f8071f96";
 
-            <div style={gridContainerStyle}>
-              {rows.map((row, rowIndex) =>
-                row.map((item, colIndex) => {
-                  const key = `${rowIndex}-${colIndex}`;
-                  const clickedColor = clickedPositions[key];
-                  const state = feedback[key];
-                  let Color = "transparent";
-                  if (state === "correct") Color = "#00cb2f7e";
-                  if (state === "wrong" || state === "missed")
-                    Color = "#f8071f96";
+                    return (
+                      <div
+                        key={key}
+                        onClick={() => handleClick(rowIndex, colIndex)}
+                        style={{
+                          borderRadius: "12px",
+                          cursor: checked ? "default" : "pointer",
+                          transition: "all 0.2s",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: maxShapeSize,
+                          height: maxShapeSize,
+                          backgroundColor: Color,
+                        }}
+                      >
+                        <Shapes
+                          shape={item.shape}
+                          size={maxShapeSize - 1}
+                          color={clickedColor || "#ffffff"}
+                        />
+                      </div>
+                    );
+                  })
+                )}
+              </div>
 
-                  return (
-                    <div
-                      key={key}
-                      onClick={() => handleClick(rowIndex, colIndex)}
-                      style={{
-                        borderRadius: "12px",
-                        cursor: checked ? "default" : "pointer",
-                        transition: "all 0.2s",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: maxShapeSize,
-                        height: maxShapeSize,
-                        backgroundColor: Color,
-                      }}
-                    >
-                      <Shapes
-                        shape={item.shape}
-                        size={maxShapeSize - 1}
-                        color={clickedColor || "#ffffff"}
-                      />
-                    </div>
-                  );
-                })
-              )}
-            </div>
-
-            <div className="d-flex justify-content-center gap-3 mt-3">
-              {!checked ? (
-                <Button
-                  name="Confirmer"
-                  icon={CheckCircle}
-                  variant="confirmButtonSmall"
-                  size={22}
-                  action={checkAnswers}
-                />
-              ) : (
-                <>
+              <div className="d-flex justify-content-center gap-3 mt-3">
+                {!checked ? (
                   <Button
-                    name="Rejouer"
-                    icon={ArrowClockwise}
-                    variant="errorButton"
-                    size={22}
-                    action={replay}
-                  />
-                  <Button
-                    name="Suivant"
-                    icon={ArrowRightCircle}
+                    name="Confirmer"
+                    icon={CheckCircle}
                     variant="confirmButtonSmall"
                     size={22}
-                    action={replay}
+                    action={checkAnswers}
                   />
-                </>
-              )}
-            </div>
-          </Card>
+                ) : (
+                  <>
+                    <Button
+                      name="Rejouer"
+                      icon={ArrowClockwise}
+                      variant="errorButton"
+                      size={22}
+                      action={replay}
+                    />
+                    <Button
+                      name="Suivant"
+                      icon={ArrowRightCircle}
+                      variant="confirmButtonSmall"
+                      size={22}
+                      action={replay}
+                    />
+                  </>
+                )}
+              </div>
+            </Card>
+          </Row>
         </Col>
 
         {!isMobile && (
