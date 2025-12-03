@@ -1,0 +1,40 @@
+
+
+.chaklBar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.storyCard {
+  margin-top: 20px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+
+.storyTitle {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px ;
+  padding-bottom: 0px;
+}
+
+.storyText {
+  font-size: 2.2rem;
+  line-height: 2.2;
+  white-space: pre-line;
+  text-align: right;
+  color: #444;
+}

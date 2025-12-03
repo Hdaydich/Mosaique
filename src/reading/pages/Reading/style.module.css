@@ -1,0 +1,45 @@
+.pageWrap {
+  min-height: 100vh;
+}
+
+.heroBanner {
+  position: relative;
+  background: #dffccfa2;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  width: 80%;
+  padding:30px ;
+}
+
+.cloudLeft,
+.cloudRight {
+  position: absolute;
+  width: 120px;
+  opacity: 0.9;
+}
+.cloudLeft { left: -30px; bottom:-20px}
+.cloudRight { right: -40px; top:-20px }
+
+.horizontalScroll {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px;
+  height: 330px;
+
+}
+.horizontalScroll::-webkit-scrollbar { height: 6px; }
+.horizontalScroll::-webkit-scrollbar-thumb {
+  background: #f8c18e;
+  border-radius: 10px;
+}
+
+.btnAdd {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 28px;
+  padding: 0;
+}
+.childModal .modal-dialog {
+  min-width: 90%;   /* largeur plus grande */
+}

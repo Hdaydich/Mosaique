@@ -1,31 +1,33 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home/Home";
-import { ThemeLayout } from "./pages/ThemeLayout/ThemeLayout";
-import { Reading } from "./pages/Reading/Reading";
-import { Logic } from "./pages/Logic/Logic";
-import { SpecificLearn } from "./pages/SpecificLearn/SpecificLearn";
-import { Parent } from "./pages/Parent/Parent";
-import { ShapeGame } from "./pages/ShapeGame/ShapeGame";
-import { NotFound } from "./pages/NotFound/NotFound";
-import { Auth } from "./pages/Auth/Auth";
+import { Home } from "./shared/pages/Home/Home";
+import { ThemeLayout } from "./shared/pages/ThemeLayout/ThemeLayout";
+import { Reading } from "./reading/pages/Reading/Reading";
+import { Logic } from "./games/pages/Logic/Logic";
+import { SpecificLearn } from "./games/pages/SpecificLearn/SpecificLearn";
+import { Parent } from "./users/pages/Parent/Parent";
+import { NotFound } from "./shared/pages/NotFound/NotFound";
+import { Auth } from "./users/pages/Auth/Auth";
+import { ScrollToTop } from "./shared/components/ScrollToTop/ScrollToTop";
+import { StoryPage } from "./reading/pages/StoryPage/StoryPage";
 
 function App() {
   return (
-    <Routes>
-      {/* Layout avec Navbar pour les  pages */}
-      <Route element={<ThemeLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/Authentification" element={<Auth />} />
-        <Route path="/Logic" element={<Logic />} />
-        <Route path="/Parent" element={<Parent />} />
-        <Route path="/Reading" element={<Reading />} />
-        <Route path="/SpecificLearn" element={<SpecificLearn />} />
-        <Route path="/ShapeGame" element={<ShapeGame />} />
-      </Route>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<ThemeLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/Authentification" element={<Auth />} />
+          <Route path="/Logic" element={<Logic />} />
+          <Route path="/Parent" element={<Parent />} />
+          <Route path="/Reading" element={<Reading />} />
+          <Route path="/story/:source/:id" element={<StoryPage />} />
 
-      {/* Page 404 */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+          <Route path="/SpecificLearn" element={<SpecificLearn />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 
