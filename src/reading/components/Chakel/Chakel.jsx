@@ -18,16 +18,13 @@ export function Chakel({ name, color, img, onClick }) {
       >
         {/* Puce colorée */}
         <span
+          className={s.icon}
           style={{
-            width: "16px",
-            height: "16px",
-            borderRadius: "50%",
             backgroundColor: color,
-            display: "inline-block",
           }}
         ></span>
 
-        <span>{name}</span>
+        <span className={s.name}>{name}</span>
       </CardTitle>
       <CardImg variant="bottom" src={img} fluid />
     </Card>

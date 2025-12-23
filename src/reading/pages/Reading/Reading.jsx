@@ -61,7 +61,7 @@ export function Reading() {
       <Container className="mt-5 mb-5">
         <Row>
           {/* Histoires par défaut */}
-          <Col md={6}>
+          <Col xs={12} md={6} lg={6}>
             <Card
               className="p-3 border-1 shadow mb-4"
               style={{ backgroundColor: "#cffcf8c3", borderColor: "#e7e6e643" }}
@@ -87,7 +87,7 @@ export function Reading() {
           </Col>
 
           {/* Mes histoires créées */}
-          <Col md={6}>
+          <Col xs={12} md={6} lg={6}>
             <Card
               className="p-3 border-1 shadow"
               style={{ backgroundColor: "#f2fccfc3", borderColor: "#e7e6e643" }}

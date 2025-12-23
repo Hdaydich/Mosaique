@@ -1,6 +1,6 @@
 .pageContainer{
   width: 80%;
-  background-color:var( --primary-light);
+  background-color: var(--primary-light);
   border-radius: 20px;
 }
 
@@ -8,10 +8,12 @@
   position: sticky;
   top: 0;
   z-index: 300;
-  background-color: var( --primary-light);
+  border-bottom: 2px solid #ffffff;
+  padding:  0px;
+  padding-bottom: 10px;
+  background-color: var(--primary-light);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  padding: 10px 0px;
 }
 
 .sideBarMobile{
@@ -33,20 +35,19 @@
 }
 
 .storyCard {
-  width: 80%;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  
+  margin:50px auto;
+  width: 90%;
+  border-radius: 20px;
   border: none;
-  padding:  0px;
   overflow: hidden;
   text-align: right;
-  margin: 30px auto;
+  padding: 0px;
 }
 
 .storyCardHeader {
-  background-color: #ffffd6;
   text-align: center;
-  padding: 20px 0px;
+  padding: 20px 0px 10px;
 }
 
 .storyTitle {
@@ -56,17 +57,17 @@
 }
 
 .storyCardBody {
-  
-  background-color: #ffffd633;
+  background-color: var(--body);
   padding: 1.5rem;
   font-size: 36px;
   line-height: 1.6;
   color: #555;
+  padding: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 
-
-/* ================= MODAL ================= */
 .modalHeader {
   background-color: #e0f2fe;
   border-bottom: none;
@@ -100,14 +101,15 @@
   border-top: none;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
 .storyCard {
-  width: 100%;
-  margin-top: 10px;
+  width: 90%;
+  margin-top: 30px;
 }
 .pageContainer{
-  width: 95%;
+  width: 100%;
+  padding: 0px;
 }
 .sideBar {
   display:none;

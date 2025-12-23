@@ -11,10 +11,12 @@
 
   --white: #FFFFFF;
   --bg-soft: #F8FBFB;
+
+  --body:#f9fbfc;
 }
 Body {
   font-family: "Nunito", "Poppins", sans-serif;
-  background-color: #f9fbfc;
+  background-color: var(--body);
   color: #333;
 }
 textarea:focus {

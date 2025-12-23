@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Card, Row, Col, Modal, Form } from "react-bootstrap";
 import myStoriesData from "../../data/mesStories";
@@ -20,13 +20,23 @@ export function StoryPage() {
   const { source, id } = useParams();
   const navigate = useNavigate();
 
+  // ---------------- Hooks ----------------
   const [showModal, setShowModal] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newText, setNewText] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  // ✅ Toujours appeler useEffect avant tout return
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // ---------------- Data ----------------
   const stories = source === "mystories" ? myStoriesData : defaultStories;
   const story = stories?.find((s) => s.id.toString() === id);
+
   if (!story) return <p>Story not found</p>;
 
   const chaklList = [
@@ -36,6 +46,7 @@ export function StoryPage() {
     { name: "سكون", color: "#BA68C8", img: soukoun },
   ];
 
+  // ---------------- Handlers ----------------
   const handleSaveStory = () => {
     const newStory = { id: Date.now(), title: newTitle, text: newText };
     myStoriesData.push(newStory);
@@ -43,23 +54,26 @@ export function StoryPage() {
     navigate(`/story/mystories/${newStory.id}`);
   };
 
+  // ---------------- Render ----------------
   return (
     <Container fluid>
+      {/* Barre mobile */}
       {isMobile && (
         <Row className={s.sideBarMobile}>
           <Col xs={4}>
             <Button
               icon={ArrowLeft}
               variant="backButtonSmall"
-              size={isMobile ? 14 : 20}
+              size={16}
               action={() => navigate("/reading")}
             />
           </Col>
           <Col xs={4}>
+            {" "}
             <Button
               icon={PlusLg}
               variant="addButton"
-              size={isMobile ? 14 : 20}
+              size={16}
               action={() => setShowModal(true)}
             />
           </Col>
@@ -67,75 +81,71 @@ export function StoryPage() {
             <Button
               icon={Download}
               variant="downloadCuteButton"
-              size={isMobile ? 14 : 20}
+              size={16}
               action={() => exportToWord(SegmentColor(story.text), story.title)}
             />
           </Col>
         </Row>
       )}
+
       <Container className={s.pageContainer}>
-        <Row className={s.chaklContainer}>
-          <Row
-            style={{
-              width: isMobile ? "100%" : "60%",
-              margin: "0px auto",
-            }}
-          >
+        <div className={s.chaklContainer}>
+          <Row style={{ width: isMobile ? "100%" : "80%", margin: "0px auto" }}>
             {chaklList.map((chakl) => (
-              <Col xs={3} lg={3} key={chakl.name}>
-                <Chakel name={chakl.name} color={chakl.color} img={chakl.img} />
+              <Col xs={3} lg={3}>
+                <Chakel
+                  key={chakl.name}
+                  name={chakl.name}
+                  color={chakl.color}
+                  img={chakl.img}
+                />
               </Col>
             ))}
           </Row>
-        </Row>
+        </div>
+
+        {/* Sidebar desktop */}
+        {!isMobile && (
+          <div className={s.sideBar}>
+            <Button
+              icon={ArrowLeft}
+              variant="backButtonSmall"
+              size={18}
+              action={() => navigate("/reading")}
+            />
+            <Button
+              icon={PlusLg}
+              variant="addButton"
+              size={18}
+              action={() => setShowModal(true)}
+            />
+            <Button
+              icon={Download}
+              variant="downloadCuteButton"
+              size={18}
+              action={() => exportToWord(SegmentColor(story.text), story.title)}
+            />
+          </div>
+        )}
+
+        {/* Story Card */}
         <Row>
-          {/* Sidebar */}
-          <Col xs={12} md={1}>
-            <div className={s.sideBar}>
-              <Button
-                icon={ArrowLeft}
-                variant="backButtonSmall"
-                size={isMobile ? 14 : 20}
-                action={() => navigate("/reading")}
-              />
-              <Button
-                icon={PlusLg}
-                variant="addButton"
-                size={isMobile ? 14 : 20}
-                action={() => setShowModal(true)}
-              />
-              <Button
-                icon={Download}
-                variant="downloadCuteButton"
-                size={isMobile ? 14 : 20}
-                action={() =>
-                  exportToWord(SegmentColor(story.text), story.title)
-                }
-              />
-            </div>
-          </Col>
-
-          <Col xs={12} md={12}>
-            <Card className={s.storyCard}>
-              <Card.Header className={s.storyCardHeader}>
-                <h1 className={`${s.storyTitle} ${s.arabicText}`}>
-                  {SegmentColor(story.title)}
-                </h1>
-              </Card.Header>
-
-              <Card.Body className={`${s.storyCardBody} ${s.arabicText}`}>
-                {SegmentColor(story.text)}
-              </Card.Body>
-            </Card>
-          </Col>
+          <Card className={s.storyCard}>
+            <Card.Header className={s.storyCardHeader}>
+              <h1 className={s.storyTitle}>{SegmentColor(story.title)}</h1>
+            </Card.Header>
+            <Card.Body className={s.storyCardBody}>
+              {SegmentColor(story.text)}
+            </Card.Body>
+          </Card>
         </Row>
       </Container>
 
+      {/* Modal ajout story */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton className={s.modalHeader}>
           <Modal.Title>➕ Ajouter une nouvelle histoire</Modal.Title>
         </Modal.Header>
-
         <Modal.Body className={s.modalBody}>
           <Form>
             <Form.Group className="mb-3">
@@ -145,7 +155,6 @@ export function StoryPage() {
                 onChange={(e) => setNewTitle(e.target.value)}
               />
             </Form.Group>
-
             <Form.Group>
               <Form.Label>Texte</Form.Label>
               <Form.Control
@@ -157,7 +166,6 @@ export function StoryPage() {
             </Form.Group>
           </Form>
         </Modal.Body>
-
         <Modal.Footer className={s.modalFooter}>
           <Button name="Confirmer" variant="addButton" action={handleSaveStory}>
             Enregistrer

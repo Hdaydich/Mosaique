@@ -6,11 +6,16 @@
     max-width: 120px;        
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     align-items: center;
-    background-color: transparent;
+    background-color: var(--primary-light);
     width: 100%;
+    border-radius: 20px;
 }
 
-
+.icon{  width: 16px;
+            height:16px;
+            border-Radius: 50%;
+            display: inline-block;
+        }
 
 .CardContainer img {
     height: 80px;          
@@ -20,6 +25,10 @@
 @media only screen and (max-width: 991px) {
     .icon {
         display: none;
+    }
+
+    .name{
+        font-size: 16px;
     }
     .CardContainer {
     margin: 0px auto;
