@@ -3,19 +3,7 @@ import s from "./style.module.css";
 
 export function Chakel({ name, color, img, onClick }) {
   return (
-    <Card
-      className={`${s.CardContainer} border-0`}
-      onClick={onClick}
-      style={{
-        cursor: "pointer",
-        maxHeight: "130px",
-        height: "auto",
-        textAlign: "center",
-        boxShadow: "2px 0 6px rgba(0,0,0,0.1)",
-        backgroundColor: "white",
-        margin: "10px auto",
-      }}
-    >
+    <Card className={`${s.CardContainer} mt-2 border-0 `} onClick={onClick}>
       <CardTitle
         style={{
           display: "flex",

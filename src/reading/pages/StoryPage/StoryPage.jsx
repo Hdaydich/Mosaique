@@ -23,6 +23,7 @@ export function StoryPage() {
   const [showModal, setShowModal] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newText, setNewText] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const stories = source === "mystories" ? myStoriesData : defaultStories;
   const story = stories?.find((s) => s.id.toString() === id);
@@ -43,52 +44,92 @@ export function StoryPage() {
   };
 
   return (
-    <Container fluid className={s.pageContainer}>
-      <Row className={s.chaklContainer}>
-        <Row style={{ width: "60%", margin: "0px auto" }}>
-          {chaklList.map((chakl) => (
-            <Col xs={3} lg={3} key={chakl.name}>
-              <Chakel name={chakl.name} color={chakl.color} img={chakl.img} />
-            </Col>
-          ))}
-        </Row>
-      </Row>
-      <Row>
-        {/* Sidebar */}
-        <Col xs={12} md={1}>
-          <div className={s.sideBar}>
+    <Container fluid>
+      {isMobile && (
+        <Row className={s.sideBarMobile}>
+          <Col xs={4}>
             <Button
               icon={ArrowLeft}
               variant="backButtonSmall"
+              size={isMobile ? 14 : 20}
               action={() => navigate("/reading")}
             />
+          </Col>
+          <Col xs={4}>
             <Button
               icon={PlusLg}
               variant="addButton"
+              size={isMobile ? 14 : 20}
               action={() => setShowModal(true)}
             />
+          </Col>
+          <Col xs={4}>
             <Button
               icon={Download}
               variant="downloadCuteButton"
+              size={isMobile ? 14 : 20}
               action={() => exportToWord(SegmentColor(story.text), story.title)}
             />
-          </div>
-        </Col>
+          </Col>
+        </Row>
+      )}
+      <Container className={s.pageContainer}>
+        <Row className={s.chaklContainer}>
+          <Row
+            style={{
+              width: isMobile ? "100%" : "60%",
+              margin: "0px auto",
+            }}
+          >
+            {chaklList.map((chakl) => (
+              <Col xs={3} lg={3} key={chakl.name}>
+                <Chakel name={chakl.name} color={chakl.color} img={chakl.img} />
+              </Col>
+            ))}
+          </Row>
+        </Row>
+        <Row>
+          {/* Sidebar */}
+          <Col xs={12} md={1}>
+            <div className={s.sideBar}>
+              <Button
+                icon={ArrowLeft}
+                variant="backButtonSmall"
+                size={isMobile ? 14 : 20}
+                action={() => navigate("/reading")}
+              />
+              <Button
+                icon={PlusLg}
+                variant="addButton"
+                size={isMobile ? 14 : 20}
+                action={() => setShowModal(true)}
+              />
+              <Button
+                icon={Download}
+                variant="downloadCuteButton"
+                size={isMobile ? 14 : 20}
+                action={() =>
+                  exportToWord(SegmentColor(story.text), story.title)
+                }
+              />
+            </div>
+          </Col>
 
-        <Col xs={12} md={12}>
-          <Card className={s.storyCard}>
-            <Card.Header className={s.storyCardHeader}>
-              <h1 className={`${s.storyTitle} ${s.arabicText}`}>
-                {SegmentColor(story.title)}
-              </h1>
-            </Card.Header>
+          <Col xs={12} md={12}>
+            <Card className={s.storyCard}>
+              <Card.Header className={s.storyCardHeader}>
+                <h1 className={`${s.storyTitle} ${s.arabicText}`}>
+                  {SegmentColor(story.title)}
+                </h1>
+              </Card.Header>
 
-            <Card.Body className={`${s.storyCardBody} ${s.arabicText}`}>
-              {SegmentColor(story.text)}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+              <Card.Body className={`${s.storyCardBody} ${s.arabicText}`}>
+                {SegmentColor(story.text)}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton className={s.modalHeader}>

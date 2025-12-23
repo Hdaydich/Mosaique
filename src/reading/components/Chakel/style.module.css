@@ -1,12 +1,13 @@
 .CardContainer {
     cursor: pointer;
     height: auto;
-    padding: 5px;        
+    padding: 10px;        
     margin: 0 auto;         
     max-width: 120px;        
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     align-items: center;
     background-color: transparent;
+    width: 100%;
 }
 
 
@@ -15,9 +16,6 @@
     height: 80px;          
     object-fit: contain;
 }
-
-
-
 
 @media only screen and (max-width: 991px) {
     .icon {

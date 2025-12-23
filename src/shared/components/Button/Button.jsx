@@ -20,7 +20,7 @@ export function Button({
       onClick={handleClick}
       style={{
         fontSize: `${fontsize}px`,
-        padding: name ? " 10px 5px" : "5px 10px",
+        padding: name ? " 10px " : "5px 10px",
       }}
     >
       {IconComponent && <IconComponent size={size} />}

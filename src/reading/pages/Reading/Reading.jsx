@@ -37,7 +37,7 @@ export function Reading() {
               Lisez, créez et partagez vos propres contes !
             </p>
           </div>
-          <div className="text-center mt-4">
+          <div className="text-center mt-4 mb-2">
             <Button
               name="Ajouter une nouvelle histoire?"
               icon={PlusLg}
