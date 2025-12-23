@@ -66,8 +66,9 @@
 .cloudLeft { left: -30px; bottom:-40px}
 
 .heroBanner {
-  padding:50px auto ;
+  padding:50px 10px ;
   margin-bottom: 20px;
 }
 
 }
+
