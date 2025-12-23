@@ -1,4 +1,3 @@
-// utils/exportToWord.jsx
 import React from "react";
 import { saveAs } from "file-saver";
 import {
@@ -16,7 +15,12 @@ import img2 from "../assets/dhammaWord.png";
 import img3 from "../assets/kasraWord.png";
 import img4 from "../assets/fathaWord.png";
 
-export const exportToWord = async (segments) => {
+/**
+ * Exporte du texte (segments React) en Word avec logo et chakl
+ * @param {React.ReactNode} segments - le texte ou éléments React à exporter
+ * @param {string} storyTitle - titre de la story utilisé comme nom de fichier
+ */
+export const exportToWord = async (segments, storyTitle = "story") => {
   const DIACRITICS = new Set([
     "\u064B",
     "\u064C",
@@ -119,7 +123,6 @@ export const exportToWord = async (segments) => {
         children,
       })
     );
-
     currentRuns = [];
   };
 
@@ -221,7 +224,6 @@ export const exportToWord = async (segments) => {
   pushParagraph();
 
   // --- Logo + 4 images ---
-
   const responseLogo = await fetch(logoImg);
   const logoBuffer = await responseLogo.arrayBuffer();
   const logo = new ImageRun({
@@ -242,16 +244,13 @@ export const exportToWord = async (segments) => {
     loadImage(img1),
   ]);
 
-  // Créer un tableau avec un espace fixe entre chaque image (via TextRun invisible)
   const imagesWithSpacing = [];
-  const spaceBetween = 10; // nombre de hair spaces
+  const spaceBetween = 10;
   images.forEach((img, index) => {
     imagesWithSpacing.push(img);
     if (index < images.length - 1) {
       imagesWithSpacing.push(
-        new TextRun({
-          text: "\u200A".repeat(spaceBetween),
-        })
+        new TextRun({ text: "\u200A".repeat(spaceBetween) })
       );
     }
   });
@@ -268,10 +267,9 @@ export const exportToWord = async (segments) => {
             spacing: { after: 100 },
             children: [logo],
           }),
-          // 4 images côte à côte centrées avec espace uniforme
           new Paragraph({
             alignment: AlignmentType.CENTER,
-            spacing: { before: 0, after: 800 }, // correction du typo
+            spacing: { before: 0, after: 800 },
             children: imagesWithSpacing,
             border: {
               bottom: {
@@ -282,7 +280,6 @@ export const exportToWord = async (segments) => {
               },
             },
           }),
-          // Texte exporté
           ...lines,
         ],
       },
@@ -290,5 +287,8 @@ export const exportToWord = async (segments) => {
   });
 
   const blob = await Packer.toBlob(doc);
-  saveAs(blob, "Resultat.docx");
+
+  // --- NOM DU FICHIER basé sur le titre ---
+  const sanitizedTitle = storyTitle.replace(/[\\/:"*?<>|]+/g, "_"); // remplace caractères interdits
+  saveAs(blob, `${sanitizedTitle}.docx`);
 };

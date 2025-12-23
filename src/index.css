@@ -1,4 +1,17 @@
+:root {
+  --primary: #00A7B3;
+  --primary-dark: #007A8C;
+  --primary-light: #DFF7F7;
 
+  --success: #8FD55A;
+  --success-dark: #62A43A;
+
+  --text-dark: #444444;
+  --text-light: #6B6B6B;
+
+  --white: #FFFFFF;
+  --bg-soft: #F8FBFB;
+}
 Body {
   font-family: "Nunito", "Poppins", sans-serif;
   background-color: #f9fbfc;

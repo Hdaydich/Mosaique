@@ -1,174 +1,68 @@
-/* === Style global commun pour tous les boutons === */
 .button {
   font-weight: 600;
-  border-radius: 12px;
-  padding: 10px 18px;
+  border-radius: 40px;
   cursor: pointer;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  font-size: 16px;
   border: none;
-  transition: all 0.2s ease;
-  text-align: center;
+  transition: all 0.25s ease;
   box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
 .button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
 }
 
-
-/* === Boutons principaux (action) === */
+/* ------------------------
+   Boutons principaux
+------------------------ */
 .addButton {
-  background: #ffe6a1;  /* Bleu foncé poudré */
-  color: #262626;    
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-  padding: 10px;
+  background: #98ce6f; /* vert pastel */
+  color: #ffffff;
 }
 .addButton:hover {
-  background: #ffd768;  /* Bleu foncé poudré */}
-
-/* === Erreur / Alerte === */
-.errorButton {
-  background: #b21010;  /* Rouge foncé poudré */
-  color: #ffdada;       /* Texte clair */
-}
-.errorButton:hover {
-  background: rgb(184, 6, 6);
+  background: #62A43A; /* vert foncé doux */
 }
 
-/* === Confirmation / positif === */
-.confirmButtonSmall {
- background: #06ad22;  /* Bleu foncé poudré */
-  color: #e9ffe6;       /* Texte clair */
-}
-.confirmButtonSmall:hover {
-  background: rgb(44, 176, 14);
-}
-
-/* === Retour / neutre === */
-.backButtonSmall {
-  background: #1f506f;  /* Bleu pétrole doux */
+.add {
+  background: #22d69a; /* vert turquoise clair */
   color: #ffffff;
 }
-.backButtonSmall:hover {
-  background: #3d4149;
+.add:hover {
+  background: #16bb84; /* turquoise foncé */
 }
 
-/* === Téléchargement / action secondaire === */
 .downloadCuteButton {
-  color: #039af7;  /* Bleu pétrole doux */
-  background: transparent;
-  padding: 0px;
-  border: none;
-  box-shadow: none;
-
+  background: #0fd1d4; /* bleu turquoise doux */
+  color: #fff;
 }
 .downloadCuteButton:hover {
-  color: #0036d8;  /* Bleu pétrole doux */
+  background: #1ab8a9; /* bleu plus foncé */
 }
 
-/* === Niveaux du jeu === */
-
-/* ✅ Facile */
-.success {
-  background: #29c731;  /* Vert foncé */
-  color: #ffffff;
-}
-.success:hover {
-  background: rgb(14, 166, 27);
-}
-
-.outlineSuccess {
-  background: #29c731;  /* Vert foncé */
-  color: #ffffff;
-}
-.outlineSuccess:hover {
-  background: rgb(14, 166, 27);
-}
-
-/* ⚠️ Moyen */
-.warning {
-  background: #e9a30d;  /* Jaune foncé / doré */
-  color: #ffffff;
-}
-.warning:hover {
-  background: #d89e00;
-}
-
-.outlineWarning {
-  background: #e9a30d;  /* Jaune foncé / doré */
-  color: #ffffff;
-}
-.outlineWarning:hover {
-  background: #d89e00;
-}
-/* ❌ Difficile */
-.danger {
-  background: #dc0909;  /* Rouge foncé */
-  color: #ffffff;
-}
-.danger:hover {
-  background: #f10303;
-}
-
-.outlineDanger {
-  background: #dc0909;  /* Rouge foncé */
-  color: #ffffff;
-}
-.outlineDanger:hover {
-  background: #f10303;
-}
-
-/* === Icônes dans boutons === */
-.buttonIcon {
-  font-size: 22px;
-  opacity: 0.85;
-}
-
-
-/* === Choix du sexe === */
-
-/* 🌸 Fille sélectionnée */
-.pink {
-  background: #ff447c; /* rose clair doux */
-  color: #fff;
-  border: 2px solid #ff447c;
-}
-.pink:hover {
-  background: #ff447c;
-}
-
-/* 🌸 Fille non sélectionnée */
-.outlinePink {
-  background: transparent;
-  color: #ff447c;
-  border: 2px solid #ff447c;
-}
-.outlinePink:hover {
-    background: #ff447c; /* rose clair doux */
+.backButtonSmall {
+  background: #bbbbbb; /* gris doux */
   color: #fff;
 }
-
-/* 💙 Garçon sélectionné */
-.blue {
-  background: #169af2; /* bleu pastel doux */
-  color: #fff;
-  border: 2px solid #169af2;
-}
-.blue:hover {
-  background: #169af2;
+.backButtonSmall:hover {
+  background: #828282; /* gris foncé */
 }
 
-/* 💙 Garçon non sélectionné */
-.outlineBlue {
-  background: transparent;
-  color: #169af2;
-  border: 2px solid #169af2;
+/* ------------------------
+   Boutons niveau / difficulté
+------------------------ */
+.easy { 
+  background: #C2F5D8; /* vert pastel doux */
+  color: #007A8C; /* texte primaire foncé */
 }
-.outlineBlue:hover {
-   background: #169af2; /* bleu pastel doux */
-  color: #fff;
+
+.medium { 
+  background: #FFE4A3; /* jaune crème */
+  color: #E58C05; /* texte orange doux */
+}
+
+.hard { 
+  background: #FFB3B3; /* rose tendre */
+  color: #CB0202; /* texte rouge doux */
 }

@@ -4,18 +4,26 @@ import myStoriesData from "../../data/mesStories";
 import defaultStories from "../../data/stories";
 import readingBoy from "../../../assets/readingBoy.png";
 import readingGirl from "../../../assets/readingGirl.png";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Modal, Form } from "react-bootstrap";
 import { Button } from "../../../shared/components/Button/Button";
 import { StoryCard as OriginalStoryCard } from "../../components/StoryCard/StoryCard";
 import { useNavigate } from "react-router-dom";
+import { PlusLg } from "react-bootstrap-icons";
 
-// Optimisation StoryCard avec memo
 const StoryCard = memo(OriginalStoryCard);
 
 export function Reading() {
   const [myStories, setMyStories] = useState(myStoriesData);
   const navigate = useNavigate();
-
+  const [newTitle, setNewTitle] = useState("");
+  const [newText, setNewText] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const handleSaveStory = () => {
+    const newStory = { id: Date.now(), title: newTitle, text: newText };
+    myStoriesData.push(newStory);
+    setShowModal(false);
+    navigate(`/story/mystories/${newStory.id}`);
+  };
   return (
     <Container fluid className={s.pageWrap}>
       {/* HERO SECTION */}
@@ -30,8 +38,12 @@ export function Reading() {
             </p>
           </div>
           <div className="text-center p-1">
-            {" "}
-            <Button name="Ajouter une nouvelle histoire ?" variant="success" />
+            <Button
+              name="Ajouter une nouvelle histoire ?"
+              icon={PlusLg}
+              variant="add"
+              action={() => setShowModal(true)}
+            />
           </div>
           <img
             src={readingBoy}
@@ -109,6 +121,43 @@ export function Reading() {
             </Card>
           </Col>
         </Row>
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+          <Modal.Header closeButton className={s.modalHeader}>
+            <Modal.Title>➕ Ajouter une nouvelle histoire</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body className={s.modalBody}>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Titre</Form.Label>
+                <Form.Control
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Texte</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={newText}
+                  onChange={(e) => setNewText(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+
+          <Modal.Footer className={s.modalFooter}>
+            <Button
+              name="Confirmer"
+              variant="addButton"
+              action={handleSaveStory}
+            >
+              Enregistrer
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
     </Container>
   );

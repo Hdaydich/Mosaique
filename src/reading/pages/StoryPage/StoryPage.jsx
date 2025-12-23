@@ -1,24 +1,31 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Card, Button, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col, Modal, Form } from "react-bootstrap";
 import myStoriesData from "../../data/mesStories";
 import defaultStories from "../../data/stories";
 import { SegmentColor } from "../../SegmentColor";
 import { Chakel } from "../../components/Chakel/Chakel";
+import { exportToWord } from "../../exportToWord";
 
-import fatha from "../../../assets/fatha.png";
-import soukoun from "../../../assets/skoun.png";
-import dhama from "../../../assets/dhamma.png";
-import kasra from "../../../assets/kasra.png";
+import fatha from "../../../assets/Chakel/fatha.png";
+import soukoun from "../../../assets/Chakel/skoun.png";
+import dhama from "../../../assets/Chakel/dhamma.png";
+import kasra from "../../../assets/Chakel/kasra.png";
 
 import s from "./style.module.css";
+import { Button } from "../../../shared/components/Button/Button";
+import { ArrowLeft, PlusLg, Download } from "react-bootstrap-icons";
 
 export function StoryPage() {
   const { source, id } = useParams();
   const navigate = useNavigate();
 
-  const stories = source === "mystories" ? myStoriesData : defaultStories;
-  const story = stories.find((s) => s.id.toString() === id);
+  const [showModal, setShowModal] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const [newText, setNewText] = useState("");
 
+  const stories = source === "mystories" ? myStoriesData : defaultStories;
+  const story = stories?.find((s) => s.id.toString() === id);
   if (!story) return <p>Story not found</p>;
 
   const chaklList = [
@@ -28,78 +35,94 @@ export function StoryPage() {
     { name: "سكون", color: "#BA68C8", img: soukoun },
   ];
 
+  const handleSaveStory = () => {
+    const newStory = { id: Date.now(), title: newTitle, text: newText };
+    myStoriesData.push(newStory);
+    setShowModal(false);
+    navigate(`/story/mystories/${newStory.id}`);
+  };
+
   return (
-    <Container fluid style={{ padding: "0px", paddingBottom: "3rem" }}>
+    <Container fluid className={s.pageContainer}>
+      <Row className={s.chaklContainer}>
+        <Row style={{ width: "60%", margin: "0px auto" }}>
+          {chaklList.map((chakl) => (
+            <Col xs={3} lg={3} key={chakl.name}>
+              <Chakel name={chakl.name} color={chakl.color} img={chakl.img} />
+            </Col>
+          ))}
+        </Row>
+      </Row>
       <Row>
-        {/* Col pour la barre chakl sticky */}
-        <Col xs={12} md={2} lg={2}>
-          <Row>
-            <div style={{ marginLeft: "20px" }}>
-              <Button onClick={() => navigate(-1)} style={{ margin: "10px 0" }}>
-                ← Retour
-              </Button>
-            </div>
-          </Row>
-          <div
-            className="d-flex flex-column align-items-center gap-3"
-            style={{
-              position: "sticky",
-              top: "2rem",
-              margin: "10px 0px",
-              padding: "30px 20px",
-              backgroundColor: "#cffcf8c3",
-              borderTopRightRadius: "20px",
-              borderBottomRightRadius: "20px",
-            }}
-          >
-            {chaklList.map((chakl, idx) => (
-              <Chakel
-                key={idx}
-                name={chakl.name}
-                color={chakl.color}
-                img={chakl.img}
-              />
-            ))}
+        {/* Sidebar */}
+        <Col xs={12} md={1}>
+          <div className={s.sideBar}>
+            <Button
+              icon={ArrowLeft}
+              variant="backButtonSmall"
+              action={() => navigate("/reading")}
+            />
+            <Button
+              icon={PlusLg}
+              variant="addButton"
+              action={() => setShowModal(true)}
+            />
+            <Button
+              icon={Download}
+              variant="downloadCuteButton"
+              action={() => exportToWord(SegmentColor(story.text), story.title)}
+            />
           </div>
         </Col>
 
-        {/* Col pour la story */}
-        <Col xs={12} md={10} lg={10}>
-          <Card
-            style={{
-              margin: "0px auto",
-              width: "80%",
-              borderRadius: "20px",
-              boxShadow: "0 5px 20px rgba(0,0,0,0.06)",
-              borderColor: "#51515121",
-            }}
-          >
-            <Card.Header
-              style={{
-                backgroundColor: "#dffccfa2 ",
-                borderTopLeftRadius: "20px",
-                borderTopRightRadius: "20px",
-                borderBottom: "1px solid #51515121",
-              }}
-            >
-              <Card.Title className={s.storyTitle}>
-                <h1>{SegmentColor(story.title)}</h1>
-              </Card.Title>
+        <Col xs={12} md={12}>
+          <Card className={s.storyCard}>
+            <Card.Header className={s.storyCardHeader}>
+              <h1 className={`${s.storyTitle} ${s.arabicText}`}>
+                {SegmentColor(story.title)}
+              </h1>
             </Card.Header>
-            <Card.Body
-              style={{
-                backgroundColor: "#cffcdc21",
-                borderBottomLeftRadius: "20px",
-                borderBottomRightRadius: "20px",
-              }}
-            >
-              <Card.Text className={s.storyText}>
-                {SegmentColor(story.text)}
-              </Card.Text>
+
+            <Card.Body className={`${s.storyCardBody} ${s.arabicText}`}>
+              {SegmentColor(story.text)}
             </Card.Body>
           </Card>
         </Col>
       </Row>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton className={s.modalHeader}>
+          <Modal.Title>➕ Ajouter une nouvelle histoire</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className={s.modalBody}>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Titre</Form.Label>
+              <Form.Control
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Texte</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={6}
+                value={newText}
+                onChange={(e) => setNewText(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+
+        <Modal.Footer className={s.modalFooter}>
+          <Button name="Confirmer" variant="addButton" action={handleSaveStory}>
+            Enregistrer
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

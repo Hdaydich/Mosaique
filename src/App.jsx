@@ -22,7 +22,6 @@ function App() {
           <Route path="/Parent" element={<Parent />} />
           <Route path="/Reading" element={<Reading />} />
           <Route path="/story/:source/:id" element={<StoryPage />} />
-
           <Route path="/SpecificLearn" element={<SpecificLearn />} />
         </Route>
         <Route path="*" element={<NotFound />} />

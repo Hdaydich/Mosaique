@@ -3,7 +3,7 @@
     height: auto;
     padding: 5px;        
     margin: 0 auto;         
-    width: 150px;        
+    max-width: 120px;        
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     align-items: center;
     background-color: transparent;

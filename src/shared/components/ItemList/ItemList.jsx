@@ -15,7 +15,7 @@ export function ItemList() {
             title="Lecture en couleur"
             subtitle="Lis joyeusement"
             content="القراءة ممتعة وسهلة بالألوان"
-            bgc="#c2fbf6"
+            bgc="#C2F5D8"
             img={dys}
             direction="/Reading"
           />
@@ -26,7 +26,7 @@ export function ItemList() {
             title="Apprentissage"
             subtitle="Lettres et chiffres amusants"
             content="ألوان + حروف + أرقام = مرح"
-            bgc="#ffd575ff"
+            bgc="#FFE4A3"
             img={livre}
             direction="/SpecificLearn"
           />
@@ -37,7 +37,7 @@ export function ItemList() {
             title="Logique"
             subtitle="Défis et jeux"
             content="ألغاز + تفكير = ذكاء"
-            bgc="#f1ffa3ff"
+            bgc="#F6FFB8"
             img={jeux}
             direction="/Logic"
           />
@@ -48,7 +48,7 @@ export function ItemList() {
             title="Parent/Enfant"
             subtitle="Apprends et joue ensemble"
             content="تعلم ومرح مع العائلة"
-            bgc="#ff8989ff"
+            bgc="#FFB3B3"
             img={caring}
             direction="/Parent"
           />

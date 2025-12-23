@@ -1,132 +1,140 @@
 
-/* ===== HERO ===== */
+/* Subtle section background */
+.sectionBg {
+  background: var(--primary-light);
+  border-radius: 30px;
+  padding: 60px 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
 .hero {
-  background-color: #dff7f7;
-  padding: 30px 40px;
-  border-radius:60px;
+  padding: 40px;
+  background: var(--primary-light);
+  background-size: 300px;
+  border-radius: 40px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
+.heroTitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
 
 .heroText {
-  color: #444;
-  font-size: 1.2rem;
-  margin: 20px 0;
-  line-height: 1.6;
+  font-size: 18px;
+  color: var(--text-light);
+  max-width: 480px;
+  margin: 0 auto 25px auto;
 }
 
-.ctaBtn {
-  background-color: #00a7b3;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 25px;
-  font-weight: 600;
-  transition: 0.3s;
+.heroBtn {
+  margin-top: 10px;
 }
 
-.ctaBtn:hover {
-  background-color: #007a8c;
+.heroImgWrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .kidsImg {
-  max-width: 90%;
-  border-radius: 25px;
+  width: 85%;
+  max-width: 420px;
+  animation: float 4s ease-in-out infinite;
 }
 
+/* Floating gentle effect */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
 
-
-/* ===== ACTIVITIES ===== */
+/* ============================
+   ACTIVITÉS
+============================= */
 .activitiesSection {
+  margin-top: 80px;
   text-align: center;
-  padding: 70px 30px 50px;
 }
 
 .sectionTitle {
-  color: #007a8c;
+  font-size: 32px;
+  color: var(--primary-dark);
   font-weight: 700;
-  font-size: 2rem;
-}
-
-.sectionText {
-  color: #555;
-  max-width: 700px;
-  margin: 10px auto 30px;
-  line-height: 1.6;
-}
-
-
-
-/* ===== VALUES ===== */
-.valuesSection {
-  background-color: #dff7f7;
-  padding: 60px 20px;
-  border-radius: 60px 60px 0 0;
-}
-
-.valueCard {
-  border: none;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: transform 0.2s;
-}
-
-.valueCard:hover {
-  transform: translateY(-5px);
-}
-
-.cardIcon {
-  font-size: 2rem;
   margin-bottom: 10px;
 }
 
+.sectionText {
+  color: var(--text-light);
+  max-width: 500px;
+  margin: 0 auto 40px auto;
+}
+
+.valuesSection {
+  margin-top: 100px;
+}
+
+.valueCard {
+  padding: 20px;
+  border-radius: 14px;
+  border: none;
+  background: var(--white);
+  box-shadow: 0 4px 15px #00000010;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px #00000015;
+}
+
+.cardIcon {
+  font-size: 42px;
+  margin-top: 10px;
+}
+
 .valueTitle {
-  color: #007a8c;
-  font-weight: 700;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 10px;
 }
 
 .valueText {
-  color: #555;
-  font-size: 1rem;
-  line-height: 1.5;
+  color: var(--text-light);
 }
 
-/* ===== CTA FINAL ===== */
 .ctaSection {
   text-align: center;
-  padding: 70px 20px;
-  background-color: #dff7f7;
+  margin-top: 100px;
+  padding: 60px 20px;
+  background: var(--primary-light);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 10px 25px #00000010;
 }
 
-.ctaBtnLarge {
-  background-color: #00a7b3;
-  border: none;
-  border-radius: 40px;
-  padding: 15px 40px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: 0.3s;
-  margin-top: 20px;
-}
-
-.ctaBtnLarge:hover {
-  background-color: #007a8c;
-  transform: scale(1.05);
-}
-
-
-@media only screen and (max-width: 768px) {
-
-  .hero {
-  width: 90%;
-  margin: 0px auto;
-}
-.activitiesSection {
-  padding-left: 10px;
-  padding-right: 10px;
-}
+.ctaTitle {
+  color: var(--primary-dark);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
 
 
+@media (max-width: 992px) {
+  .heroTitle {
+    font-size: 32px;
+  }
+  .kidsImg {
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 26px;
+  }
+}
