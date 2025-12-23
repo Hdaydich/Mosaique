@@ -7,10 +7,10 @@ import { SegmentColor } from "../../SegmentColor";
 import { Chakel } from "../../components/Chakel/Chakel";
 import { exportToWord } from "../../exportToWord";
 
-import fatha from "../../../assets/Chakel/fatha.png";
-import soukoun from "../../../assets/Chakel/skoun.png";
-import dhama from "../../../assets/Chakel/dhamma.png";
-import kasra from "../../../assets/Chakel/kasra.png";
+import fatha from "../../../assets/chakel/fatha.png";
+import soukoun from "../../../assets/chakel/skoun.png";
+import dhama from "../../../assets/chakel/dhamma.png";
+import kasra from "../../../assets/chakel/kasra.png";
 
 import s from "./style.module.css";
 import { Button } from "../../../shared/components/Button/Button";
