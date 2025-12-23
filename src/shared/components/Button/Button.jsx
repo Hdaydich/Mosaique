@@ -20,11 +20,11 @@ export function Button({
       onClick={handleClick}
       style={{
         fontSize: `${fontsize}px`,
-        padding: name ? " 10px 20px" : "5px 10px",
+        padding: name ? " 10px 5px" : "5px 10px",
       }}
     >
-      {IconComponent && <IconComponent size={size} className={s.buttonIcon} />}
-      {name && <span style={{ padding: "0px 10px" }}>{name}</span>}
+      {IconComponent && <IconComponent size={size} />}
+      {name && <span style={{ padding: "0px 5px" }}>{name}</span>}
     </button>
   );
 }
