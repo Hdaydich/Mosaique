@@ -28,18 +28,18 @@ export function Reading() {
     <Container fluid className={s.pageWrap}>
       {/* HERO SECTION */}
       <Row className="justify-content-center">
-        <Col md={10} className={s.heroBanner}>
-          <div className="text-center p-4">
-            <h1 className="fw-bold">
+        <div className={s.heroBanner}>
+          <div className="text-center">
+            <h1 className={s.bannerTitle}>
               Des histoires magiques pour tous les enfants
             </h1>
             <p className="text-muted">
               Lisez, créez et partagez vos propres contes !
             </p>
           </div>
-          <div className="text-center p-1">
+          <div className="text-center mt-4">
             <Button
-              name="Ajouter une nouvelle histoire ?"
+              name="Ajouter une nouvelle histoire?"
               icon={PlusLg}
               variant="add"
               action={() => setShowModal(true)}
@@ -55,16 +55,15 @@ export function Reading() {
             alt="Enfant en train de lire"
             className={s.cloudRight}
           />
-        </Col>
+        </div>
       </Row>
 
-      {/* CONTENT */}
       <Container className="mt-5 mb-5">
         <Row>
           {/* Histoires par défaut */}
           <Col md={6}>
             <Card
-              className="p-3 border-1 shadow"
+              className="p-3 border-1 shadow mb-4"
               style={{ backgroundColor: "#cffcf8c3", borderColor: "#e7e6e643" }}
             >
               <h4 className="mb-3">✨ Histoires par défaut</h4>
