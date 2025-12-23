@@ -45,3 +45,15 @@
 .childModal .modal-dialog {
   min-width: 90%;   
 }
+
+@media (max-width: 768px) {
+
+  .cloudLeft,
+.cloudRight {
+  position: absolute;
+  width: 80px;
+  opacity: 0.9;
+}
+
+.cloudLeft { left: -30px; bottom:-30px}
+}
