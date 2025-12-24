@@ -19,8 +19,12 @@ export function Chakel({ name, color, img, onClick }) {
         <span className={s.icon} style={{ backgroundColor: color }} />
         <span className={s.name}>{name}</span>
       </Card.Title>
-
-      <Card.Img variant="bottom" src={img} alt={name} className={s.chakelImg} />
+<Card.Img
+  src={img}
+  alt={name}
+  className={s.chakelImg}
+/>
     </Card>
   );
 }
+
