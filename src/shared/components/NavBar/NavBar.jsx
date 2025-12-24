@@ -9,10 +9,8 @@ export function NavBar() {
   const navigate = useNavigate();
   const handleScrollToActivities = (id) => {
     if (location.pathname !== "/") {
-      // Si on n'est pas sur la home → redirige vers la home avec l'info de la section
       navigate("/", { state: { scrollTo: id } });
     } else {
-      // Si on est déjà sur la home → scrolle directement
       const section = document.getElementById(id);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
@@ -41,16 +39,16 @@ export function NavBar() {
               }}
               className={s.navLink}
             >
-              Acceuil
+              Accueil
             </button>
             <button
-              onClick={() => handleScrollToActivities("activités")}
+              onClick={() => handleScrollToActivities("activity")}
               className={s.navLink}
             >
               Activités
             </button>
             <button
-              onClick={() => handleScrollToActivities("apropos")}
+              onClick={() => handleScrollToActivities("about")}
               className={s.navLink}
             >
               Qui sommes-nous ?

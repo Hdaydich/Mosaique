@@ -1,12 +1,13 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { Item } from "../Item/Item";
 import s from "./style.module.css";
-import livre from "../../../assets/livre.png";
-import caring from "../../../assets/caring.png";
-import jeux from "../../../assets/jeux.png";
-import dys from "../../../assets/dys.png";
 
 export function ItemList() {
+  const livre = "/assets/livre.png";
+  const caring = "/assets/caring.png";
+  const jeux = "/assets/jeux.png";
+  const dys = "/assets/dys.png";
+
   return (
     <Container className={s.mainContainer}>
       <Row>

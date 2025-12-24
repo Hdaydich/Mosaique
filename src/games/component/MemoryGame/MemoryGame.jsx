@@ -1,18 +1,4 @@
 import { useState, useEffect } from "react";
-import bear1 from "../../../assets/MemoryGameImg/bear1.png";
-import bear2 from "../../../assets/MemoryGameImg/bear2.png";
-import bear3 from "../../../assets/MemoryGameImg/bear3.png";
-import pomme from "../../../assets/MemoryGameImg/pomme.png";
-import raisin from "../../../assets/MemoryGameImg/raisin.png";
-import pasteque from "../../../assets/MemoryGameImg/pasteque.png";
-import orange from "../../../assets/MemoryGameImg/orange.png";
-import cerise from "../../../assets/MemoryGameImg/cerise.png";
-import kiwi from "../../../assets/MemoryGameImg/kiwi.png";
-import ceriseRaisin from "../../../assets/MemoryGameImg/ceriseRaisin.png";
-import pasterqueCerise from "../../../assets/MemoryGameImg/pasterqueCerise.png";
-import orangePomme from "../../../assets/MemoryGameImg/orangePomme.png";
-import raisonPomme from "../../../assets/MemoryGameImg/raisonPomme.png";
-import orangePasteque from "../../../assets/MemoryGameImg/orangePasteque.png";
 
 import {
   Repeat,
@@ -24,10 +10,27 @@ import s from "./style.module.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { GameTitle } from "../GameTitle/GameTitle";
 import { Button } from "../../../shared/components/Button/Button";
+const bear1 = "/assets/MemoryGameImg/bear1.png";
+const bear2 = "/assets/MemoryGameImg/bear2.png";
+const bear3 = "/assets/MemoryGameImg/bear3.png";
 
+const pomme = "/assets/MemoryGameImg/pomme.png";
+const raisin = "/assets/MemoryGameImg/raisin.png";
+const pasteque = "/assets/MemoryGameImg/pasteque.png";
+const orange = "/assets/MemoryGameImg/orange.png";
+const cerise = "/assets/MemoryGameImg/cerise.png";
+const kiwi = "/assets/MemoryGameImg/kiwi.png";
+
+const ceriseRaisin = "/assets/MemoryGameImg/ceriseRaisin.png";
+const pastequeCerise = "/assets/MemoryGameImg/pastequeCerise.png";
+const orangePomme = "/assets/MemoryGameImg/orangePomme.png";
+const raisinPomme = "/assets/MemoryGameImg/raisinPomme.png";
+const orangePasteque = "/assets/MemoryGameImg/orangePasteque.png";
 const levels = {
   1: [bear1, bear2, bear3],
+
   2: [cerise, pasteque, pomme, orange, raisin, kiwi],
+
   3: [
     cerise,
     pasteque,
@@ -35,9 +38,9 @@ const levels = {
     orange,
     raisin,
     ceriseRaisin,
-    pasterqueCerise,
+    pastequeCerise,
     orangePomme,
-    raisonPomme,
+    raisinPomme,
     orangePasteque,
   ],
 };

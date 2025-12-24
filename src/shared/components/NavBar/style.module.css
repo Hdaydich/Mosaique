@@ -38,7 +38,6 @@
   transform: scale(1.2);
 }
 
-/* 📱 Hamburger menu */
 .navbar-toggler {
   background-color: #00b4d8 !important;
   border-radius: 8px;
@@ -47,5 +46,5 @@
 }
 
 .navbar-toggler-icon {
-  filter: invert(1); /* rend les lignes blanches visibles */
+  filter: invert(1); 
 }

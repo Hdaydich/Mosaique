@@ -1,5 +1,4 @@
 import s from "./style.module.css";
-import logo from "../../../assets/logo.png";
 export function Logo({
   subtitle,
   width = 100,
@@ -7,6 +6,8 @@ export function Logo({
   align = "center",
   marg = "auto",
 }) {
+  const logo = "/assets/logo.png";
+
   return (
     <div className={s.logoContainer} style={{ alignItems: align }}>
       <img

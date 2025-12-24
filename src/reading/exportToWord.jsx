@@ -9,11 +9,6 @@ import {
   ImageRun,
   BorderStyle,
 } from "docx";
-import logoImg from "../assets/logo.png";
-import img1 from "../assets/soukounWord.png";
-import img2 from "../assets/dhammaWord.png";
-import img3 from "../assets/kasraWord.png";
-import img4 from "../assets/fathaWord.png";
 
 /**
  * Exporte du texte (segments React) en Word avec logo et chakl
@@ -21,6 +16,12 @@ import img4 from "../assets/fathaWord.png";
  * @param {string} storyTitle - titre de la story utilisé comme nom de fichier
  */
 export const exportToWord = async (segments, storyTitle = "story") => {
+  const logoImg = "/assets/logo.png";
+  const img1 = "/assets/soukounWord.png";
+  const img2 = "/assets/dhammaWord.png";
+  const img3 = "/assets/kasraWord.png";
+  const img4 = "/assets/fathaWord.png";
+
   const DIACRITICS = new Set([
     "\u064B",
     "\u064C",

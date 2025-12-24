@@ -2,8 +2,6 @@ import { useState, memo } from "react";
 import s from "./style.module.css";
 import myStoriesData from "../../data/mesStories";
 import defaultStories from "../../data/stories";
-import readingBoy from "../../../assets/readingBoy.png";
-import readingGirl from "../../../assets/readingGirl.png";
 import { Container, Row, Col, Card, Modal, Form } from "react-bootstrap";
 import { Button } from "../../../shared/components/Button/Button";
 import { StoryCard as OriginalStoryCard } from "../../components/StoryCard/StoryCard";
@@ -13,6 +11,8 @@ import { PlusLg } from "react-bootstrap-icons";
 const StoryCard = memo(OriginalStoryCard);
 
 export function Reading() {
+  const readingBoy = "/assets/readingBoy.png";
+  const readingGirl = "/assets/readingGirl.png";
   const [myStories, setMyStories] = useState(myStoriesData);
   const navigate = useNavigate();
   const [newTitle, setNewTitle] = useState("");

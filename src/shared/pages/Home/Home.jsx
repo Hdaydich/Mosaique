@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import s from "./style.module.css";
 
-import kids from "../../../assets/kids.png";
 import { ItemList } from "../../components/ItemList/ItemList";
 import { Button } from "../../components/Button/Button";
 
@@ -10,6 +9,8 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  const kids = "/assets/kids.png";
+
   const itemListRef = useRef(null);
   const navigate = useNavigate();
 
@@ -46,7 +47,7 @@ export function Home() {
       </Row>
 
       {/* ACTIVITÉS */}
-      <section ref={itemListRef} className={s.activitiesSection}>
+      <section ref={itemListRef} id="activity" className={s.activitiesSection}>
         <h2 className={s.sectionTitle}>Nos activités Mosaïque</h2>
         <p className={s.sectionText}>
           Des univers ludiques conçus pour stimuler la curiosité et la mémoire.
@@ -56,7 +57,7 @@ export function Home() {
       </section>
 
       {/* VALEURS */}
-      <section className={s.ctaSection}>
+      <section id="about" className={s.ctaSection}>
         <Row className="justify-content-center text-center g-4">
           {[
             {
