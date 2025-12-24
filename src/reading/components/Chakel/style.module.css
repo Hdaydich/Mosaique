@@ -1,37 +1,47 @@
 .CardContainer {
-    cursor: pointer;
-    height: auto;
-    padding: 10px;        
-    margin: 0 auto;         
-    max-width: 120px;        
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    align-items: center;
-    background-color: var(--primary-light);
-    width: 100%;
-    border-radius: 20px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 auto;
+  max-width: 120px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--primary-light);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.icon{  width: 16px;
-            height:16px;
-            border-Radius: 50%;
-            display: inline-block;
-        }
-
-.CardContainer img {
-    height: 80px;          
-    object-fit: contain;
+/* point coloré */
+.icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
+/* ✅ IMAGE : une seule règle propre */
+.chakelImg {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  padding: 6px;
+  display: block;
+}
+
+/* mobile */
 @media only screen and (max-width: 991px) {
-    .icon {
-        display: none;
-    }
+  .icon {
+    display: none;
+  }
 
-    .name{
-        font-size: 16px;
-    }
-    .CardContainer {
-    margin: 0px auto;
-    padding: 0px;
-}
+  .name {
+    font-size: 16px;
+  }
+
+  .CardContainer {
+    padding: 6px;
+  }
 }
