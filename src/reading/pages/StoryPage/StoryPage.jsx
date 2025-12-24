@@ -39,13 +39,6 @@ export function StoryPage() {
 
   if (!story) return <p>Story not found</p>;
 
-  const chaklList = [
-    { name: "فتحة", color: "#ff009dff", img: fatha },
-    { name: "ضمة", color: "#07b00fff", img: dhama },
-    { name: "كسرة", color: "#4FC3F7", img: kasra },
-    { name: "سكون", color: "#BA68C8", img: soukoun },
-  ];
-
   // ---------------- Handlers ----------------
   const handleSaveStory = () => {
     const newStory = { id: Date.now(), title: newTitle, text: newText };
@@ -69,7 +62,6 @@ export function StoryPage() {
             />
           </Col>
           <Col xs={4}>
-            {" "}
             <Button
               icon={PlusLg}
               variant="addButton"
@@ -91,16 +83,18 @@ export function StoryPage() {
       <Container className={s.pageContainer}>
         <div className={s.chaklContainer}>
           <Row style={{ width: isMobile ? "100%" : "80%", margin: "0px auto" }}>
-            {chaklList.map((chakl) => (
-              <Col xs={3} lg={3}>
-                <Chakel
-                  key={chakl.name}
-                  name={chakl.name}
-                  color={chakl.color}
-                  img={chakl.img}
-                />
-              </Col>
-            ))}
+            <Col xs={3} lg={3}>
+              <Chakel name="فتحة" color="#ff009dff" img={fatha} />
+            </Col>
+            <Col xs={3} lg={3}>
+              <Chakel name="ضمة" color="#07b00fff" img={dhama} />
+            </Col>
+            <Col xs={3} lg={3}>
+              <Chakel name="كسرة" color="#4FC3F7" img={kasra} />
+            </Col>
+            <Col xs={3} lg={3}>
+              <Chakel name="سكون" color="#BA68C8" img={soukoun} />
+            </Col>
           </Row>
         </div>
 
