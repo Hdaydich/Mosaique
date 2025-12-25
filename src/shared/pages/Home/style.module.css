@@ -1,12 +1,4 @@
 
-/* Subtle section background */
-.sectionBg {
-  background: var(--primary-light);
-  border-radius: 30px;
-  padding: 60px 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
 .hero {
   padding: 40px;
   background: var(--primary-light);
@@ -137,4 +129,18 @@
   .sectionTitle {
     font-size: 26px;
   }
+.hero {
+  padding: 20px;
+  background-size: auto;
+  width: 95%;
+  margin: 0px auto;
+}
+
+.heroTitle {
+  font-size: 30px;
+}
+
+.heroText {
+  font-size: 18px;
+}
 }

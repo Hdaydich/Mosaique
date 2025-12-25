@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button as BsButton } from "react-bootstrap";
 import s from "./style.module.css";
-import aviator from "../../../assets/aviator.png";
 import { GenderFemale, GenderMale } from "react-bootstrap-icons";
 import { Button } from "../../../shared/components/Button/Button";
 
 export function Auth() {
+  const aviator = "/assets/aviator.png";
+
   const [isLoginMode, setIsLoginMode] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [formData, setFormData] = useState({
