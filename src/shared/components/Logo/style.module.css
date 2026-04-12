@@ -1,25 +1,50 @@
 .logoContainer {
   display: flex;
-  flex-direction: column; /* logo au-dessus du texte */
-  padding: 10px;
-  padding-bottom: 10px;
+  align-items: center;
+  gap: 5px; 
+  padding: 5px  0;
 }
 
-.subtitle {
-  margin-bottom: 15px;
-  font-family: "Arial", sans-serif; /* ou ta police préférée */
-  font-weight:lighter;
+.logoImage {
+  width: 60px; 
+  height: 60px;
+  object-fit: contain;
 }
 
- @media only screen and (max-width: 991px) {
-.logoContainer {
-align-items: left;
+.logoTxt {
+  display: flex;
+  flex-direction: column;
 }
-        }
+
+.logoTitle {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--primary-dark);
+  margin: 0;
+}
+
+.logoSlog {
+  font-size: 12px;
+  margin: 2px auto;
+  color:var(--accent-bleu);
+  line-height: 1.3;
+}
 
 
- @media only screen and (max-width: 600px) {
-.logoContainer {
-align-items: center;
+@media (max-width: 780px) {
+
+.logoImage {
+  width: 40px; 
+  height: 40px;
 }
-        }
+
+
+.logoTitle {
+  font-size: 20px;
+}
+
+.logoSlog {
+  font-size: 10px;
+  margin: 2px 0 0 0;
+}
+}

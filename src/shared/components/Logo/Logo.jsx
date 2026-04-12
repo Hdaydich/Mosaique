@@ -1,30 +1,15 @@
 import s from "./style.module.css";
-export function Logo({
-  subtitle,
-  width = 100,
-  police = 12,
-  align = "center",
-  marg = "auto",
-}) {
-  const logo = "/assets/logo.png";
 
+export function Logo() {
+  const logo = "/favicon.png";
   return (
-    <div className={s.logoContainer} style={{ alignItems: align }}>
-      <img
-        src={logo}
-        style={{
-          maxWidth: width,
-          height: "auto",
-          alignitems: align,
-          margin: marg,
-        }}
-        alt="Mosaique"
-      />
-      {subtitle && (
-        <span className={s.subtitle} style={{ fontSize: police }}>
-          <i>{subtitle}</i>
-        </span>
-      )}
+    <div className={s.logoContainer}>
+      <img src={logo} alt="Logo Mosaique" className={s.logoImage} />
+
+      <div className={s.logoTxt}>
+        <h1 className={s.logoTitle}>M O S A I Q U E</h1>
+        <p className={s.logoSlog}>Chaque enfant, une pièce unique</p>
+      </div>
     </div>
   );
 }

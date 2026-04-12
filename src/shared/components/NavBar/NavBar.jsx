@@ -19,14 +19,10 @@ export function NavBar() {
   };
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" className={s.navbar}>
       <Container className="d-flex justify-content-between align-items-center">
         <Navbar.Brand href="/">
-          <Logo
-            subtitle="Chaque enfant, une pièce unique"
-            width={120}
-            police={9}
-          />
+          <Logo />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" className={s.toggler} />

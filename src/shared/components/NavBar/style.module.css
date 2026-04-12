@@ -3,6 +3,7 @@
  padding: 0px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease;
+  margin-bottom: 20px;
 }
 
 /* 🔗 Liens du menu */
@@ -27,7 +28,7 @@
 
 /* 👤 Icône du profil */
 .icon {
-  color: #007a8c;
+  color:var(--success-dark);
   transition: all 0.2s ease;
   border: none;
   background-color: transparent;

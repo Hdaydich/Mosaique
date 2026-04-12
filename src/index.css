@@ -1,9 +1,10 @@
 :root {
-  --primary: #00A7B3;
+  /* Couleurs principales */
+  --primary: #05b7c4;
   --primary-dark: #007A8C;
   --primary-light: #DFF7F7;
 
-  --success: #8FD55A;
+  --success: #56d84d;
   --success-dark: #62A43A;
 
   --text-dark: #444444;
@@ -11,14 +12,23 @@
 
   --white: #FFFFFF;
   --bg-soft: #F8FBFB;
+  --body: #f9fbfc;
 
-  --body:#f9fbfc;
+  /* Couleurs enfant-friendly pastel vives */
+  --accent-orange: #f8943d;  /* boutons, highlights */
+  --accent-pink: #ff6fb7;    /* hover boutons / cartes */
+  --accent-yellow: #FFD93D;  /* étoiles, badges, glow */
+  --accent-purple: #cb51f8;  /* icônes, éléments interactifs */
+  --accent-bleu: #329fc7;   /* petites touches vertes */
 }
-Body {
-  font-family: "Nunito", "Poppins", sans-serif;
+
+/* ============================ GENERAL ============================ */
+body {
   background-color: var(--body);
-  color: #333;
+  font-family: "Poppins", "Nunito", sans-serif;
+  color: var(--text-dark);
 }
+
 textarea:focus {
   outline: none;
   border-color: transparent; /* Facultatif, si tu veux enlever un changement de couleur */

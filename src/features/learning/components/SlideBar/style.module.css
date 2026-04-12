@@ -1,0 +1,185 @@
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardFloat {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.mainContainer {
+  width: 95%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   CARDS
+========================= */
+.sectionBlock {
+  --card-radius: 20px;
+  height: 120px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: none;
+  opacity: 0;
+  animation: fadeUp 0.5s ease-in-out forwards, cardFloat 4s ease-in-out infinite;
+  animation-delay: calc(var(--delay) * 0.15s);
+
+  background: linear-gradient(135deg, var(--primary-light), var(--bg-soft));
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sectionBlock:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   HEADER
+========================= */
+.headerContainer {
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;  
+  background: linear-gradient(
+    135deg,
+#f9ffcf,
+    #fbffb5
+  );
+  width: 100%;
+  padding: 15px auto 10px;
+}
+
+.headerContainer h3 {
+  margin: 0;
+  padding: 0px;
+  font-size: 20px;
+  font-weight: lighter;
+  color: var(--primary-dark);
+}
+
+/* =========================
+   BODY
+========================= */
+.bodyContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: var(--bg-soft);
+  width: 100%;
+  max-height: 100px;
+}
+
+/* =========================
+   IMAGES
+========================= */
+.imgContainer {
+  width: auto;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 ;
+}
+
+.itemImage {
+  width: auto;
+  max-width: 100%;
+  height:  auto;
+  max-height: 70px;
+  object-fit: cover;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-bottom-left-radius: var(--card-radius);
+  border-bottom-right-radius: var(--card-radius);
+}
+
+/* =========================
+   ICONS
+========================= */
+.iconWrapper {
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  animation: iconPulse 3s ease-in-out infinite;
+}
+
+.iconWrapper:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   ICON COLORS
+========================= */
+/* Couleurs par opération */
+.plus { background: linear-gradient(135deg,#7ee8a5,#4cd964); color:white; }
+.minus { background: linear-gradient(135deg,#ffd86f,#ff9f43); color:white; }
+.multiply { background: linear-gradient(135deg,#ff9ab5,#ff6f91); color:white; }
+.divide { background: linear-gradient(135deg,#8ff4f4,#0ecdcd); color:white; }
+
+/* =========================
+   TEXTES
+========================= */
+.title {
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--text-light);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 991px) {
+  .mainContainer { width: 100%; }
+  .sectionBlock { min-height: 100px; }
+  .headerContainer h3 { font-size: 16px; }
+}
+
+@media (max-width: 731px) {
+  .mainContainer { width: 80%; }
+}
+
+@media (max-width: 480px) {
+  .bodyContainer { gap: 6px; padding: 5px; }
+  .itemImage { height: 40px; }
+}

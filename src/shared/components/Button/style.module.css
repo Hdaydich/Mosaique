@@ -2,6 +2,7 @@
   font-weight: 600;
   border-radius: 40px;
   cursor: pointer;
+  display: flex; /* nécessaire pour align-items et justify-content */
   align-items: center;
   justify-content: center;
   border: none;
@@ -18,51 +19,51 @@
    Boutons principaux
 ------------------------ */
 .addButton {
-  background: #98ce6f; /* vert pastel */
-  color: #ffffff;
+  background: var(--success); /* vert pastel */
+  color: var(--white);
 }
 .addButton:hover {
-  background: #62A43A; /* vert foncé doux */
+  background: var(--success-dark); /* vert plus foncé */
 }
 
 .add {
-  background: #22d69a; /* vert turquoise clair */
-  color: #ffffff;
+  background: var(--success);
+  color: var(--white);
 }
 .add:hover {
-  background: #16bb84; /* turquoise foncé */
+  background: var(--success-dark);
 }
 
 .downloadCuteButton {
-  background: #0fd1d4; /* bleu turquoise doux */
-  color: #fff;
+  background: var(--accent-bleu); /* turquoise doux */
+  color: var(--white);
 }
 .downloadCuteButton:hover {
-  background: #1ab8a9; /* bleu plus foncé */
+  background: #007bbf; /* un peu plus foncé que accent-bleu */
 }
 
 .backButtonSmall {
-  background: #bbbbbb; /* gris doux */
-  color: #fff;
+  background: #bbbbbb; /* on peut garder gris neutre */
+  color: var(--white);
 }
 .backButtonSmall:hover {
-  background: #828282; /* gris foncé */
+  background: #828282;
 }
 
 /* ------------------------
    Boutons niveau / difficulté
 ------------------------ */
 .easy { 
-  background: #C2F5D8; /* vert pastel doux */
-  color: #007A8C; /* texte primaire foncé */
+  background: #DFF7F7; /* couleur claire type primaire-light */
+  color: var(--primary-dark);
 }
 
 .medium { 
-  background: #FFE4A3; /* jaune crème */
-  color: #E58C05; /* texte orange doux */
+  background: var(--accent-yellow); /* jaune pastel vif */
+  color: var(--primary-dark);
 }
 
 .hard { 
-  background: #FFB3B3; /* rose tendre */
-  color: #CB0202; /* texte rouge doux */
+  background: var(--accent-pink); /* rose pastel vif */
+  color: var(--primary-dark);
 }
