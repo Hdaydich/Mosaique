@@ -1,0 +1,154 @@
+
+.pageContainer {
+  width: 80%;
+  background-color: var(--primary-light);
+  border-radius: 20px;
+  margin: 50px auto;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding-bottom: 40px;
+}
+
+.chaklContainer {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background-color: var(--primary-light);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* Bordure inférieure dégradée avec longueur personnalisée */
+.chaklContainer::after {
+  content: "";
+  display: block;
+  height: 2px; /* épaisseur de la bordure */
+  width: 90%;  /* longueur visible de la bordure */
+  margin: 0 auto; /* centrer la bordure */
+  background: linear-gradient(to right, transparent, var(--body), transparent);
+  border-radius: 1px; /* optionnel, adoucit les bords */
+}
+
+
+.sideBarMobile {
+  align-items: center;
+  margin: 0 auto 10px;
+  width: 40%;
+  border-radius: 16px;
+}
+
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+
+  background: rgba(255, 255, 255, 0.4);
+  padding: 8px;
+  border-radius: 16px;
+}
+
+.storyCard {
+  margin: 0px auto;
+  width: 90%;
+  border-radius: 20px;
+  border: none;
+  overflow: hidden;
+  text-align: right;
+  padding: 0px;
+  border: 1px solid  #f0e6b79c;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.storyCardHeader {
+  text-align: center;
+  padding: 20px 0px 10px;
+  background-color:  #f0e6b79c;
+  border:none;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.12);
+
+}
+
+.storyTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.storyCardBody {
+  padding: 20px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.8;
+  color: #555;
+  background-color:  #f3eccd73;
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+}
+
+.modalHeader {
+  background-color: #e0f2fe;
+  border-bottom: none;
+}
+
+.modalBody {
+  background-color: #f8faff;
+  font-size: 1rem;
+}
+
+.modalBody label {
+  font-weight: 600;
+}
+
+.modalFooter {
+  background-color: #f8faff;
+  border-top: none;
+}
+
+.previewBox {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  direction: rtl;
+  text-align: right;
+
+  box-shadow:
+    inset 0 0 0 2px #bae6fd,
+    0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.previewBox h5 {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .storyCard {
+    width: 90%;
+    margin-top: 0px;
+  }
+
+  .pageContainer {
+    width: 100%;
+    padding: 0px;
+    margin: 0px auto;
+  }
+
+  .sideBar {
+    display: none;
+  }
+
+}

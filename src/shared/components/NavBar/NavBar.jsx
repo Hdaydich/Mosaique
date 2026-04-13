@@ -1,0 +1,65 @@
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { PersonCircle } from "react-bootstrap-icons";
+import s from "./style.module.css";
+import { Logo } from "../Logo/Logo";
+import { useLocation, useNavigate } from "react-router-dom";
+
+export function NavBar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleScrollToActivities = (id) => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+    } else {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  return (
+    <Navbar expand="lg" className={s.navbar}>
+      <Container className="d-flex justify-content-between align-items-center">
+        <Navbar.Brand href="/">
+          <Logo />
+        </Navbar.Brand>
+
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className={s.toggler} />
+
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto d-flex flex-column flex-lg-row align-items-center gap-3 gap-lg-4">
+            <button
+              onClick={() => {
+                navigate("/");
+              }}
+              className={s.navLink}
+            >
+              Accueil
+            </button>
+            <button
+              onClick={() => handleScrollToActivities("activity")}
+              className={s.navLink}
+            >
+              Activités
+            </button>
+            <button
+              onClick={() => handleScrollToActivities("about")}
+              className={s.navLink}
+            >
+              Qui sommes-nous ?
+            </button>
+            <button
+              onClick={() => {
+                navigate("/Authentification");
+              }}
+              className={s.icon}
+            >
+              <PersonCircle size={22} />
+            </button>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
